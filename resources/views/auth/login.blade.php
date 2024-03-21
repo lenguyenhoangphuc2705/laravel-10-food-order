@@ -87,7 +87,7 @@
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
                                             <label>email</label>
-                                            <input type="email" placeholder="Email" required>
+                                            <input type="email" placeholder="Email" required value="{{ old('email') }}">
                                         </div>
                                     </div>
                                     <div class="col-xl-12">
@@ -110,7 +110,7 @@
                                             <a href="forgot_password.html">Forgot Password ?</a>
                                         </div>
                                     </div>
-            
+
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
                                             <button type="submit" class="common_btn">login</button>
@@ -120,7 +120,7 @@
                             </form>
                             <p class="or"><span>or</span></p>
 
-                            <p class="create_account">Dont’t have an aceount ? <a href="sign_up.html">Create Account</a>
+                            <p class="create_account">Dont’t have an aceount ? <a href="{{ route('register') }}">Create Account</a>
                             </p>
                         </div>
                     </div>
