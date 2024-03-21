@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{{asset('admin/assets/modules/bootstrap/css/bootstrap.min.css')}}">
   <link rel="stylesheet" href="{{asset('admin/assets/modules/fontawesome/css/all.min.css')}}">
 
-
+  <link rel="stylesheet" href="{{asset('admin/assets/css/toastr.min.css')}}">
 
   <!-- Template CSS -->
   <link rel="stylesheet" href="{{asset('admin/assets/css/style.css')}}">
@@ -29,7 +29,7 @@
   <div id="app">
     <div class="main-wrapper main-wrapper-1">
       <div class="navbar-bg"></div>
-      
+
       @include('admin.layouts.sidebar')
 
       <!-- Main Content -->
@@ -41,7 +41,7 @@
           Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
         </div>
         <div class="footer-right">
-          
+
         </div>
       </footer>
     </div>
@@ -54,13 +54,26 @@
   <script src="{{asset('admin/assets/modules/bootstrap/js/bootstrap.min.js')}}"></script>
   <script src="{{asset('admin/assets/modules/nicescroll/jquery.nicescroll.min.js')}}"></script>
   <script src="{{asset('admin/assets/js/stisla.js')}}"></script>
-  
 
 
+  <script src="{{ asset('admin/assets/js/toastr.min.js') }}"></script>
 
-  
+
   <!-- Template JS File -->
   <script src="{{asset('admin/assets/js/scripts.js')}}"></script>
   <script src="{{asset('admin/assets/js/custom.js')}}"></script>
+
+ <!-- show dynamic validation message-->
+ <script>
+    toastr.options.progressBar = true;
+    @if ($errors->any())
+        @foreach ($errors->all() as $error)
+            toastr.error("{{ $error }}")
+        @endforeach
+    @endifư
+</script>
+
+
+
 </body>
 </html>
