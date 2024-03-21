@@ -70,9 +70,9 @@
                 ==============================-->
 
 
-    <!--=========================
-                    SIGNIN START
-                ==========================-->
+   <!--=========================
+        SIGNIN START
+    ==========================-->
     <section class="fp__signin" style="background: url(images/login_bg.jpg);">
         <div class="fp__signin_overlay pt_125 xs_pt_95 pb_100 xs_pb_70">
             <div class="container">
@@ -81,15 +81,16 @@
                         <div class="fp__login_area">
                             <h2>Welcome back!</h2>
                             <p>sign in to continue</p>
-                            <form action= "{{ route('login') }}" method ="POST">
+                            <form action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <div class="row">
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
                                             <label>email</label>
-                                            <input type="email" placeholder="Email" required value="{{ old('email') }}">
+                                            <input type="email" name="email" placeholder="Email" required value="{{ old('email') }}">
                                         </div>
                                     </div>
+
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
                                             <label>password</label>
@@ -97,12 +98,11 @@
                                         </div>
                                     </div>
 
-
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput fp__login_check_area">
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value=""
-                                                    id="flexCheckDefault" name="remember>
+                                                    id="flexCheckDefault" name="remember">
                                                 <label class="form-check-label" for="flexCheckDefault">
                                                     Remeber Me
                                                 </label>
@@ -129,6 +129,6 @@
         </div>
     </section>
     <!--=========================
-                    SIGNIN END
-                ==========================-->
+        SIGNIN END
+    ==========================-->
 @endsection
