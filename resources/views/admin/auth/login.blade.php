@@ -46,7 +46,7 @@
 
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>Login</h4>
+                                <h4>Đăng nhập</h4>
                             </div>
 
                             <div class="card-body">
@@ -58,37 +58,37 @@
                                         <input id="email" type="email" class="form-control" name="email"
                                             tabindex="1" required autofocus value="{{ old('email') }}">
                                         <div class="invalid-feedback">
-                                            Please fill in your email
+                                           Vui lòng nhập email của bạn!
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <div class="d-block">
-                                            <label for="password" class="control-label">Password</label>
+                                            <label for="password" class="control-label">Mật Khẩu</label>
                                             <div class="float-right">
                                                 <a href="auth-forgot-password.html" class="text-small">
-                                                    Forgot Password?
+                                                   Quên mật khẩu
                                                 </a>
                                             </div>
                                         </div>
                                         <input id="password" type="password" class="form-control" name="password"
                                             tabindex="2" required>
                                         <div class="invalid-feedback">
-                                            please fill in your password
+                                           Vui lòng nhập mật khẩu của bạn!
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
+                                    {{-- <div class="form-group">
                                         <div class="custom-control custom-checkbox">
                                             <input type="checkbox" name="remember" class="custom-control-input"
                                                 tabindex="3" id="remember-me">
                                             <label class="custom-control-label" for="remember-me">Remember Me</label>
                                         </div>
-                                    </div>
+                                    </div> --}}
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                            Login
+                                            Đăng nhập
                                         </button>
                                     </div>
                                 </form>
@@ -99,7 +99,7 @@
                         </div>
 
                         <div class="simple-footer">
-                            Copyright Websolutionus
+
                         </div>
                     </div>
                 </div>
