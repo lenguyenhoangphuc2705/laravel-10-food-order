@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
+  <title>General Dashboard &mdash; Stisla</title>
+
+  <!-- General CSS Files -->
+  <link rel="stylesheet" href="<?php echo e(asset('admin/assets/modules/bootstrap/css/bootstrap.min.css')); ?>">
+  <link rel="stylesheet" href="<?php echo e(asset('admin/assets/modules/fontawesome/css/all.min.css')); ?>">
+
+  <link rel="stylesheet" href="<?php echo e(asset('admin/assets/css/toastr.min.css')); ?>">
+
+  <!-- Template CSS -->
+  <link rel="stylesheet" href="<?php echo e(asset('admin/assets/css/style.css')); ?>">
+  <link rel="stylesheet" href="<?php echo e(asset('admin/assets/css/components.css')); ?>">
+<!-- Start GA -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-94034622-3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-94034622-3');
+</script>
+<!-- /END GA --></head>
+
+<body>
+  <div id="app">
+    <div class="main-wrapper main-wrapper-1">
+      <div class="navbar-bg"></div>
+
+      <?php echo $__env->make('admin.layouts.sidebar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+      <!-- Main Content -->
+      <div class="main-content">
+        <?php echo $__env->yieldContent('content'); ?>
+      </div>
+      <footer class="main-footer">
+        <div class="footer-left">
+          Copyright &copy; 2018 <div class="bullet"></div> Design By <a href="https://nauval.in/">Muhamad Nauval Azhar</a>
+        </div>
+        <div class="footer-right">
+
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- General JS Scripts -->
+  <script src="<?php echo e(asset('admin/assets/modules/jquery.min.js')); ?>"></script>
+  <script src="<?php echo e(asset('admin/assets/modules/popper.js')); ?>"></script>
+  <script src="<?php echo e(asset('admin/assets/modules/tooltip.j')); ?>s"></script>
+  <script src="<?php echo e(asset('admin/assets/modules/bootstrap/js/bootstrap.min.js')); ?>"></script>
+  <script src="<?php echo e(asset('admin/assets/modules/nicescroll/jquery.nicescroll.min.js')); ?>"></script>
+  <script src="<?php echo e(asset('admin/assets/js/stisla.js')); ?>"></script>
+
+
+  <script src="<?php echo e(asset('admin/assets/js/toastr.min.js')); ?>"></script>
+  <script src="<?php echo e(asset('admin/assets/modules/upload-preview/assets/js/jquery.uploadPreview.min.js')); ?>"></script>
+
+  <!-- Template JS File -->
+  <script src="<?php echo e(asset('admin/assets/js/scripts.js')); ?>"></script>
+  <script src="<?php echo e(asset('admin/assets/js/custom.js')); ?>"></script>
+
+ <!-- show dynamic validation message-->
+ <script>
+    toastr.options.progressBar = true;
+    <?php if($errors->any()): ?>
+        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+            toastr.error("<?php echo e($error); ?>")
+        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+    <?php endif; ?>
+</script>
+
+<script>
+    $.uploadPreview({
+        input_field: "#image-upload", // Default: .image-upload
+        preview_box: "#image-preview", // Default: .image-preview
+        label_field: "#image-label", // Default: .image-label
+        label_default: "Choose File", // Default: Choose File
+        label_selected: "Change File", // Default: Change File
+        no_label: false, // Default: false
+        success_callback: null // Default: null
+    });
+</script>
+
+<?php echo $__env->yieldPushContent('scripts'); ?>
+
+</body>
+</html>
+<?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/admin/layouts/master.blade.php ENDPATH**/ ?>
