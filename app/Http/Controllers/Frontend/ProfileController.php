@@ -21,4 +21,8 @@ class ProfileController extends Controller
 
         return redirect()->back();
     }
+
+    function updatePassword(Request $request)  {
+       dd($request->all());
+    }
 }
