@@ -12,10 +12,9 @@
 
             </div>
             <div class="card-body">
-                <form action="">
+                <form action="{{ route('admin.slider.store') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
 
-                    
-                    
                     <div class="form-group">
                         <label>Image</label>
                         <div id="image-preview" class = "image-preview">
@@ -26,26 +25,32 @@
                     
                     <div class="form-group">
                         <label>Offer</label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="offer" class="form-control">
                     </div>
 
                     <div class="form-group">
                         <label>Title</label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="title" class="form-control">
                     </div>
 
                     <div class="form-group">
+                        <label>Sub_Title</label>
+                        <input type="text" name="sub_title" class="form-control">
+                    </div>
+                    
+
+                    <div class="form-group">
                         <label>Short Description</label>
-                        <textarea name="" class="form-control"></textarea>
+                        <textarea name="short_description" class="form-control"></textarea>
                     </div>
                     
                     <div class="form-group">
                         <label>Button Link</label>
-                        <input type="text" class="form-control">
+                        <input type="text" name="button_link" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>Status</label>
-                        <select name="" class="form-control" id="">
+                        <select name="status" class="form-control" id="">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
