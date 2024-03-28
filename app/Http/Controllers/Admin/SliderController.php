@@ -63,7 +63,7 @@ class SliderController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) : View
+    public function edit(string $id): View
     {
         $slider = Slider::findOrFail($id);
         return view('admin.slider.edit', compact('slider'));
@@ -72,11 +72,11 @@ class SliderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(SliderUpdateRequest $request, string $id) : RedirectResponse
+    public function update(SliderUpdateRequest $request, string $id): RedirectResponse
     {
         $slider = Slider::findOrFail($id);
         //Handle Image Upload
-        $imagePath = $this->uploadImage($request, 'image',$slider->image);
+        $imagePath = $this->uploadImage($request, 'image', $slider->image);
 
         $slider->image = !empty($imagePath) ? $imagePath : $slider->image;
         $slider->offer = $request->offer;
@@ -87,7 +87,7 @@ class SliderController extends Controller
         $slider->status = $request->status;
         $slider->save();
 
-        
+
         toastr()->success('Update Successfully');
         return to_route('admin.slider.index');
     }
@@ -99,8 +99,9 @@ class SliderController extends Controller
     {
         try {
             $slider = Slider::findOrFail($id);
-        $slider->delete();
-        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            $this->removeImage($slider->image);
+            $slider->delete();
+            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
         } catch (\Exception $e) {
             return response(['status' => 'success', 'message' => $e->getMessage()]);
         }
