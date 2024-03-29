@@ -8,23 +8,20 @@
 
         <div class="card card-primary">
             <div class="card-header">
-                <h4>All Slider</h4>
+                <h4>All Sliders</h4>
                 <div class="card-header-action">
                     <a href="{{ route('admin.slider.create') }}" class="btn btn-primary">
-                        Create New
+                        Create new
                     </a>
                 </div>
-            </div> 
+            </div>
             <div class="card-body">
                 {{ $dataTable->table() }}
-
             </div>
         </div>
-
     </section>
 @endsection
 
 @push('scripts')
-{{ $dataTable ->scripts(attributes: ['type' => 'module']) }}
-    
+    {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
 @endpush
