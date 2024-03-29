@@ -5,7 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
+
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
     <title>FoodPark || Restaurant Template</title>
+
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="<?php echo e(asset('frontend/css/all.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('frontend/css/bootstrap.min.css')); ?>">
@@ -17,7 +20,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('frontend/css/jquery.exzoom.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('frontend/css/toastr.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('frontend/css/style.css')); ?>">
-    <link rel="stylesheet" href="<?php echo e(asset('frontend/ss/responsive.css')); ?>c">
+    <link rel="stylesheet" href="<?php echo e(asset('frontend/css/responsive.css')); ?>">
     <!-- <link rel="stylesheet" href="css/rtl.css"> -->
 </head>
 
@@ -87,44 +90,60 @@
     <!--jquery library js-->
     <script src="<?php echo e(asset('frontend/js/jquery-3.6.0.min.js')); ?>"></script>
     <!--bootstrap js-->
-    <script src="<?php echo e(asset('frontend/js/jquery-3.6.0.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/js/bootstrap.bundle.min.js')); ?>"></script>
     <!--font-awesome js-->
-    <script src="<?php echo e(asset('frontend/js/jquery.waypoints.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/js/Font-Awesome.js')); ?>"></script>
     <!-- slick slider -->
-    <script src="<?php echo e(asset('frontend/js/jquery.waypoints.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/js/slick.min.js')); ?>"></script>
     <!-- isotop js -->
-    <script src="<?php echo e(asset('frontend/js/jquery.waypoints.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/js/isotope.pkgd.min.js')); ?>"></script>
     <!-- simplyCountdownjs -->
-    <script src="<?php echo e(asset('frontend/js/jquery.waypoints.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/js/simplyCountdown.js')); ?>"></script>
     <!-- counter up js -->
     <script src="<?php echo e(asset('frontend/js/jquery.waypoints.min.js')); ?>"></script>
-    <script src="<?php echo e(asset('frontend/js/jquery.waypoints.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/js/jquery.countup.min.js')); ?>"></script>
     <!-- nice select js -->
-    <script src="<?php echo e(asset('frontend/js/jquery.waypoints.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/js/jquery.nice-select.min.js')); ?>"></script>
     <!-- venobox js -->
-    <script src="<?php echo e(asset('frontend/js/jquery.waypoints.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/js/venobox.min.js')); ?>"></script>
     <!-- sticky sidebar js -->
-    <script src="<?php echo e(asset('frontend/js/jquery.waypoints.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/js/sticky_sidebar.js')); ?>"></script>
     <!-- wow js -->
-    <script src="<?php echo e(asset('frontend/js/jquery.waypoints.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/js/wow.min.js')); ?>"></script>
     <!-- ex zoom js -->
-    <script src="<?php echo e(asset('frontend/js/jquery.waypoints.min.js')); ?>"></script>
+    <script src="<?php echo e(asset('frontend/js/jquery.exzoom.js')); ?>"></script>
 
     <script src="<?php echo e(asset('frontend/js/toastr.min.js')); ?>"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!--main/custom js-->
     <script src="<?php echo e(asset('frontend/js/main.js')); ?>"></script>
 
 
-  <!-- show dynamic validation message-->
+    <!-- show dynamic validation message-->
     <script>
         toastr.options.progressBar = true;
+
         <?php if($errors->any()): ?>
             <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                 toastr.error("<?php echo e($error); ?>")
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
         <?php endif; ?>
+
+        // Set csrf at ajax header
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $(document).ready(function() {
+            $('.button-click').click();
+        })
     </script>
+
+    <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 
 </html>
