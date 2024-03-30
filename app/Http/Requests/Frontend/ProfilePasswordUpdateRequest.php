@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests\Admin;
+namespace App\Http\Requests\Frontend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -29,9 +29,8 @@ class ProfilePasswordUpdateRequest extends FormRequest
 
     function messages() : array {
         return [
-            'current_password.current_password' => 'Mật khẩu hiện tại không đúng'
+            'current_password.current_password' => 'Mật khẩu hiện tại không đúng',
+
         ];
     }
-
-
 }

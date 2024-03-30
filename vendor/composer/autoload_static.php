@@ -234,12 +234,12 @@ class ComposerStaticInit9aca3d6374c253d336e8816430c01958
         ),
         'Yajra\\DataTables\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
+            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
             1 => __DIR__ . '/..' . '/yajra/laravel-datatables-editor/src',
-            2 => __DIR__ . '/..' . '/yajra/laravel-datatables-fractal/src',
-            3 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
+            2 => __DIR__ . '/..' . '/yajra/laravel-datatables-export/src',
+            3 => __DIR__ . '/..' . '/yajra/laravel-datatables-fractal/src',
             4 => __DIR__ . '/..' . '/yajra/laravel-datatables-html/src',
-            5 => __DIR__ . '/..' . '/yajra/laravel-datatables-export/src',
+            5 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
         ),
         'Whoops\\' => 
         array (
@@ -660,6 +660,7 @@ class ComposerStaticInit9aca3d6374c253d336e8816430c01958
 
     public static $classMap = array (
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
+        'App\\DataTables\\SliderDataTable' => __DIR__ . '/../..' . '/app/DataTables/SliderDataTable.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Admin\\AdminAuthController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminAuthController.php',
         'App\\Http\\Controllers\\Admin\\AdminDashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/Admin/AdminDashboardController.php',
@@ -691,9 +692,11 @@ class ComposerStaticInit9aca3d6374c253d336e8816430c01958
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\Admin\\ProfilePasswordUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/ProfilePasswordUpdateRequest.php',
         'App\\Http\\Requests\\Admin\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/ProfileUpdateRequest.php',
+        'App\\Http\\Requests\\Admin\\SliderCreateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/SliderCreateRequest.php',
+        'App\\Http\\Requests\\Admin\\SliderUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Admin/SliderUpdateRequest.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
         'App\\Http\\Requests\\Frontend\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Frontend/ProfileUpdateRequest.php',
-        'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
+        'App\\Http\\Requests\\SliderUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/SliderUpdateRequest.php',
         'App\\Models\\Slider' => __DIR__ . '/../..' . '/app/Models/Slider.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
@@ -874,6 +877,7 @@ class ComposerStaticInit9aca3d6374c253d336e8816430c01958
         'Cron\\HoursField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/HoursField.php',
         'Cron\\MinutesField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MinutesField.php',
         'Cron\\MonthField' => __DIR__ . '/..' . '/dragonmantank/cron-expression/src/Cron/MonthField.php',
+        'Database\\Factories\\SliderFactory' => __DIR__ . '/../..' . '/database/factories/SliderFactory.php',
         'Database\\Factories\\UserFactory' => __DIR__ . '/../..' . '/database/factories/UserFactory.php',
         'Database\\Seeders\\DatabaseSeeder' => __DIR__ . '/../..' . '/database/seeders/DatabaseSeeder.php',
         'Database\\Seeders\\UserSeeder' => __DIR__ . '/../..' . '/database/seeders/UserSeeder.php',

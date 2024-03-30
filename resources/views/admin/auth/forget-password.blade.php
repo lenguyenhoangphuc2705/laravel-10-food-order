@@ -12,7 +12,7 @@
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap-social/bootstrap-social.css') }}">
-    <link rel="stylesheet" href="{{asset('admin/assets/css/toastr.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/css/toastr.min.css') }}">
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('admin/assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/components.css') }}">
@@ -22,10 +22,9 @@
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {
-            dataLayer.push(arguments) asset;
+            dataLayer.push(arguments);
         }
-        admin /
-            gtag('js', new Date());
+        gtag('js', new Date());
 
         gtag('config', 'UA-94034622-3');
     </script>
@@ -46,11 +45,11 @@
 
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>Đăng nhập</h4>
+                                <h4>Forget Password</h4>
                             </div>
 
                             <div class="card-body">
-                                <form action="{{ route('login') }}" method="POST" class="needs-validation"
+                                <form method="POST" action="{{ route('password.email') }}" class="needs-validation"
                                     novalidate="">
                                     @csrf
                                     <div class="form-group">
@@ -58,48 +57,24 @@
                                         <input id="email" type="email" class="form-control" name="email"
                                             tabindex="1" required autofocus value="{{ old('email') }}">
                                         <div class="invalid-feedback">
-                                           Vui lòng nhập email của bạn!
+                                            Please fill in your email
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <div class="d-block">
-                                            <label for="password" class="control-label">Mật Khẩu</label>
-                                            <div class="float-right">
-                                                <a href="{{ route("admin.forget-password") }}" class="text-small">
-                                                   Quên mật khẩu
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <input id="password" type="password" class="form-control" name="password"
-                                            tabindex="2" required>
-                                        <div class="invalid-feedback">
-                                           Vui lòng nhập mật khẩu của bạn!
-                                        </div>
-                                    </div>
-
-                                    {{-- <div class="form-group">
-                                        <div class="custom-control custom-checkbox">
-                                            <input type="checkbox" name="remember" class="custom-control-input"
-                                                tabindex="3" id="remember-me">
-                                            <label class="custom-control-label" for="remember-me">Remember Me</label>
-                                        </div>
-                                    </div> --}}
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                            Đăng nhập
+                                            Send Reset Link
                                         </button>
                                     </div>
                                 </form>
-
 
 
                             </div>
                         </div>
 
                         <div class="simple-footer">
-
+                            Copyright websolutionus
                         </div>
                     </div>
                 </div>
@@ -117,24 +92,23 @@
     <script src="{{ asset('admin/assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
-    <link rel="stylesheet" href="{{asset('admin/assets/css/toastr.min.css')}}">
+    <script src="{{ asset('admin/assets/js/toastr.min.js') }}"></script>
     <!-- Page Specific JS File -->
 
     <!-- Template JS File -->
     <script src="{{ asset('admin/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('admin/assets/js/custom.js') }}"></script>
 
+    <!-- show dynamic validation message-->
+    <script>
+        toastr.options.progressBar = true;
 
- <!-- show dynamic validation message-->
- <script>
-    toastr.options.progressBar = true;
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-            toastr.error("{{ $error }}")
-        @endforeach
-    @endif
-</script>
-
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                toastr.error("{{ $error }}")
+            @endforeach
+        @endif
+    </script>
 </body>
 
 </html>

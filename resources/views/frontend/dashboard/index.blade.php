@@ -1,6 +1,8 @@
+
 @extends('frontend.layouts.master')
+
 @section('content')
-    <!--=============================
+<!--=============================
         BREADCRUMB START
     ==============================-->
     <section class="fp__breadcrumb" style="background: url(images/counter_bg.jpg);">
@@ -34,9 +36,10 @@
                                 <div class="dasboard_header_img">
                                     <img src="{{ auth()->user()->avatar }}" alt="user" class="img-fluid w-100">
                                     <label for="upload"><i class="far fa-camera"></i></label>
-                                    <form id="avatar_form" >
-                                        <input type="file" id="upload" hidden name="avatar">
+                                    <form action="" id="avatar_form">
+                                        <input type="file" id="upload" name="avatar" hidden>
                                     </form>
+                                    
                                 </div>
                                 <h2>{{ auth()->user()->name }}</h2>
                             </div>
@@ -71,15 +74,12 @@
                                     aria-controls="v-pills-settings" aria-selected="false"><span><i
                                             class="fas fa-user-lock"></i></span> Change Password </button>
 
-
-
+                                
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
-
-
-                                        <button class="nav-link" type="button" onclick="event.preventDefault();
-                                        this.closest('form').submit();"><span> <i class="fas fa-sign-out-alt"></i>
-                                    </span> Logout</button>
+                                        <button class="nav-link" onclick="event.preventDefault();
+                                        this.closest('form').submit();" type="button"><span> <i class="fas fa-sign-out-alt"></i>
+                                        </span> Logout</button>
                                     </form>
                             </div>
                         </div>
@@ -117,39 +117,37 @@
                                         </div>
 
                                         <div class="fp_dash_personal_info">
-                                            <h4>Parsonal Information
+                                            <h4>Thông tin cá nhân
                                                 <a class="dash_info_btn">
-
-                                                    <span class="edit">Edit</span>
-                                                    <span class="cancel">cancel</span>
+                                                    <span class="edit">Chỉnh sửa</span>
+                                                    <span class="cancel">Hủy</span>
                                                 </a>
                                             </h4>
 
                                             <div class="personal_info_text">
-                                                <p><span>Name:</span> {{ auth()->user()->name }}</p>
+                                                <p><span>Họ tên:</span> {{ auth()->user()->name }}</p>
                                                 <p><span>Email:</span> {{ auth()->user()->email }}</p>
+                                        
                                             </div>
 
                                             <div class="fp_dash_personal_info_edit comment_input p-0">
                                                 <form method="POST" action="{{ route('profile.update') }}">
                                                     @csrf
-                                                    @method('PUT')
+                                                    @method("PUT")
                                                     <div class="row">
                                                         <div class="col-12">
                                                             <div class="fp__comment_imput_single">
                                                                 <label>name</label>
-                                                                <input type="text" placeholder="Name" name="name"
-                                                                value="{{ auth()->user()->name }}">
+                                                                <input type="text" placeholder="Name" name = "name" value="{{ auth()->user()->name }}">
                                                             </div>
                                                         </div>
                                                         <div class="col-xl-12 col-lg-12">
                                                             <div class="fp__comment_imput_single">
                                                                 <label>email</label>
-                                                                <input type="email" placeholder="Email" name="email"
-                                                                value="{{ auth()->user()->email }}">
+                                                                <input type="email" placeholder="Email" name="email" value="{{ auth()->user()->email }}">
                                                             </div>
                                                         </div>
-
+                                                        
                                                         <div class="col-xl-12">
 
                                                             <button type="submit" class="common_btn">submit</button>
@@ -1141,40 +1139,7 @@
                                     </div>
                                 </div>
 
-                                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
-                                    aria-labelledby="v-pills-settings-tab">
-                                    <div class="fp_dashboard_body fp__change_password">
-                                        <div class="fp__review_input">
-                                            <h3>change password</h3>
-                                            <div class="comment_input pt-0">
-                                                <form>
-                                                    <div class="row">
-                                                        <div class="col-xl-6">
-                                                            <div class="fp__comment_imput_single">
-                                                                <label>Current Password</label>
-                                                                <input type="password" placeholder="Current Password">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-6">
-                                                            <div class="fp__comment_imput_single">
-                                                                <label>New Password</label>
-                                                                <input type="password" placeholder="New Password">
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xl-12">
-                                                            <div class="fp__comment_imput_single">
-                                                                <label>confirm Password</label>
-                                                                <input type="password" placeholder="Confirm Password">
-                                                            </div>
-                                                            <button type="submit"
-                                                                class="common_btn mt_20">submit</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                               @include('frontend.dashboard.change-password')
 
                             </div>
                         </div>
@@ -1268,8 +1233,8 @@
     </div>
     <!-- CART POPUT END -->
     <!--=========================
-        DASHBOARD END
-    ==========================-->
+        DASHBOARD END 
+    ==========================--
 @endsection
 
 @push('scripts')
@@ -1278,10 +1243,9 @@
             $('#upload').on('change', function(){
                 let form = $('#avatar_form')[0];
                 let formData = new FormData(form);
-
                 $.ajax({
-                    method: 'POST',
-                    url: "{{ route('profile.avatar.update') }}",
+                    method:'POST',
+                    url: "{{ route("profile.avatar.update") }}",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -1291,7 +1255,7 @@
                         }
                     },
                     error: function(error){
-                        console.error(response);
+                        console.error(error);
                     }
                 })
             })

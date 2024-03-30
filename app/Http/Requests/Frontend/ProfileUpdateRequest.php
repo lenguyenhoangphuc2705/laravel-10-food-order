@@ -17,14 +17,24 @@ class ProfileUpdateRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max.60'],
-            'email' => ['required', 'email', 'unique:user,email', auth()->user()->id]
+            'name' => ['required', 'max:60'],
+            'email' => ['required', 'email', 'unique:users,email,' . auth()->user()->id]
+        ];
+    }
 
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Họ tên không được để trống',
+            'name.max' => 'Họ tên không được vượt quá 60 ký tự',
+            'email.required' => 'Email không được để trống',
+            'email.email' => 'Email không đúng định dạng',
+            'email.unique' => 'Email đã tồn tại trong hệ thống',
         ];
     }
 }
