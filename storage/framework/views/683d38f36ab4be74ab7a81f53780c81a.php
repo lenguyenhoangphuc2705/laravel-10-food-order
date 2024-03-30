@@ -22,10 +22,9 @@
         window.dataLayer = window.dataLayer || [];
 
         function gtag() {
-            dataLayer.push(arguments) asset;
+            dataLayer.push(arguments);
         }
-        admin /
-            gtag('js', new Date());
+        gtag('js', new Date());
 
         gtag('config', 'UA-94034622-3');
     </script>
@@ -46,11 +45,11 @@
 
                         <div class="card card-primary">
                             <div class="card-header">
-                                <h4>Đăng nhập</h4>
+                                <h4>Forget Password</h4>
                             </div>
 
                             <div class="card-body">
-                                <form action="<?php echo e(route('login')); ?>" method="POST" class="needs-validation"
+                                <form method="POST" action="<?php echo e(route('password.email')); ?>" class="needs-validation"
                                     novalidate="">
                                     <?php echo csrf_field(); ?>
                                     <div class="form-group">
@@ -58,42 +57,24 @@
                                         <input id="email" type="email" class="form-control" name="email"
                                             tabindex="1" required autofocus value="<?php echo e(old('email')); ?>">
                                         <div class="invalid-feedback">
-                                           Vui lòng nhập email của bạn!
+                                            Please fill in your email
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <div class="d-block">
-                                            <label for="password" class="control-label">Mật Khẩu</label>
-                                            <div class="float-right">
-                                                <a href="<?php echo e(route("admin.forget-password")); ?>" class="text-small">
-                                                   Quên mật khẩu
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <input id="password" type="password" class="form-control" name="password"
-                                            tabindex="2" required>
-                                        <div class="invalid-feedback">
-                                           Vui lòng nhập mật khẩu của bạn!
-                                        </div>
-                                    </div>
-
-                                    
 
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary btn-lg btn-block" tabindex="4">
-                                            Đăng nhập
+                                            Send Reset Link
                                         </button>
                                     </div>
                                 </form>
-
 
 
                             </div>
                         </div>
 
                         <div class="simple-footer">
-
+                            Copyright websolutionus
                         </div>
                     </div>
                 </div>
@@ -111,25 +92,24 @@
     <script src="<?php echo e(asset('admin/assets/js/stisla.js')); ?>"></script>
 
     <!-- JS Libraies -->
-    <link rel="stylesheet" href="<?php echo e(asset('admin/assets/css/toastr.min.css')); ?>">
+    <script src="<?php echo e(asset('admin/assets/js/toastr.min.js')); ?>"></script>
     <!-- Page Specific JS File -->
 
     <!-- Template JS File -->
     <script src="<?php echo e(asset('admin/assets/js/scripts.js')); ?>"></script>
     <script src="<?php echo e(asset('admin/assets/js/custom.js')); ?>"></script>
 
+    <!-- show dynamic validation message-->
+    <script>
+        toastr.options.progressBar = true;
 
- <!-- show dynamic validation message-->
- <script>
-    toastr.options.progressBar = true;
-    <?php if($errors->any()): ?>
-        <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            toastr.error("<?php echo e($error); ?>")
-        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-    <?php endif; ?>
-</script>
-
+        <?php if($errors->any()): ?>
+            <?php $__currentLoopData = $errors->all(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $error): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                toastr.error("<?php echo e($error); ?>")
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+        <?php endif; ?>
+    </script>
 </body>
 
 </html>
-<?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/admin/auth/login.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/admin/auth/forget-password.blade.php ENDPATH**/ ?>

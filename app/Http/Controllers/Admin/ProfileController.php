@@ -31,7 +31,7 @@ use FileUploadTrait;
         $user->avatar = isset($imagePath) ? $imagePath: $user->avatar;
         $user->save();
 
-        toastr('Updated Successfully!', 'success');
+        toastr()->success('Cập nhật thông tin cá nhân thành công');
 
         return redirect()->back();
     }
@@ -41,7 +41,7 @@ use FileUploadTrait;
         $user = Auth::user();
         $user->password = bcrypt($request->password);
         $user->save();
-        toastr()->success('Password Updated Successfully');
+        toastr()->success('Cập nhật mật khẩu thành công');
 
 
       return redirect()->back();
