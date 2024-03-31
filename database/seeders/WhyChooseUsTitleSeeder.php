@@ -7,7 +7,7 @@ use Faker\Provider\Lorem;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class WhyChooseUsSeeder extends Seeder
+class WhyChooseUsTitleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
