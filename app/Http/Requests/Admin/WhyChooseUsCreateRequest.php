@@ -28,4 +28,16 @@ class WhyChooseUsCreateRequest extends FormRequest
             'status' => ['required', 'boolean']
         ];
     }
+
+    public function messages(): array
+    {
+        return [
+            'title.required'=>'Tiêu đề không được để trống',
+            'title.max'=>'Tiêu đề không được nhập quá 255 ký tự',
+            'short_description.required'=>'Mô tả ngắn không được để trống',
+            'short_description.max'=>'Mô tả ngắn không được quá 255 ký tự'
+
+        ];
+    }
+
 }

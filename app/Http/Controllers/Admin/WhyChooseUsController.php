@@ -20,9 +20,8 @@ class WhyChooseUsController extends Controller
     public function index(WhyChooseUsDataTable $dataTable)
     {
         $keys = ['why_choose_top_title', 'why_choose_main_title', 'why_choose_sub_title'];
-        $titles =SectionTitle::whereIn('key', $keys)-> pluck('value','key');
+        $titles = SectionTitle::whereIn('key', $keys)->pluck('value','key');
         return $dataTable->render('admin.why-choose-us.index', compact('titles'));
-
     }
 
     /**
@@ -64,7 +63,7 @@ class WhyChooseUsController extends Controller
         $whyChooseUs = WhyChooseUs::findOrFail($id);
         $whyChooseUs->update($request->validated());
 
-        toastr()->success('Created Successfully');
+        toastr()->success('Cập nhật thành công!');
 
         return to_route('admin.why-choose-us.index');
     }
@@ -103,7 +102,7 @@ class WhyChooseUsController extends Controller
         try{
             $whyChooseUs = WhyChooseUs::findOrFail($id);
             $whyChooseUs->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully']);
+            return response(['status' => 'success', 'message' => 'Xóa thành công!']);
         }catch(\Exception $e){
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }

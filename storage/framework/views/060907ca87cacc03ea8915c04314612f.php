@@ -1,10 +1,8 @@
-@extends('frontend.layouts.master')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
  <!--=============================
         BANNER START
     ==============================-->
-    @include('frontend.home.components.slider')
+    <?php echo $__env->make('frontend.home.components.slider', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!--=============================
         BANNER END
     ==============================-->
@@ -13,7 +11,7 @@
     <!--=============================
         WHY CHOOSE START
     ==============================-->
-    @include('frontend.home.components.why-choose')
+    <?php echo $__env->make('frontend.home.components.why-choose', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <!--=============================
         WHY CHOOSE END
     ==============================-->
@@ -22,10 +20,10 @@
     <!--=============================
         OFFER ITEM START
     ==============================-->
-    @include('frontend.home.components.offer-item')
+    <?php echo $__env->make('frontend.home.components.offer-item', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <!-- CART POPUT START -->
-    {{-- @include('frontend.home.components.cart-popup') --}}
+    
     <!-- CART POPUT END -->
     <!--=============================
         OFFER ITEM END
@@ -35,7 +33,7 @@
     <!--=============================
         MENU ITEM START
     ==============================-->
-    {{-- @include('frontend.home.components.menu-item') --}}
+    
     <!--=============================
         MENU ITEM END
     ==============================-->
@@ -44,7 +42,7 @@
     <!--=============================
         ADD SLIDER START
     ==============================-->
-    {{-- @include('frontend.home.components.ad-slider') --}}
+    
     <!--=============================
         ADD SLIDER END
     ==============================-->
@@ -53,7 +51,7 @@
     <!--=============================
         TEAM START
     ==============================-->
-    {{-- @include('frontend.home.components.team') --}}
+    
     <!--=============================
         TEAM END
     ==============================-->
@@ -62,7 +60,7 @@
     <!--=============================
         DOWNLOAD APP START
     ==============================-->
-    {{-- @include('frontend.home.components.app-download') --}}
+    
     <!--=============================
         DOWNLOAD APP END
     ==============================-->
@@ -71,7 +69,7 @@
     <!--=============================
        TESTIMONIAL  START
     ==============================-->
-    {{-- @include('frontend.home.components.testimonial') --}}
+    
     <!--=============================
         TESTIMONIAL END
     ==============================-->
@@ -80,7 +78,7 @@
     <!--=============================
         COUNTER START
     ==============================-->
-    {{-- @include('frontend.home.components.counter') --}}
+    
     <!--=============================
         COUNTER END
     ==============================-->
@@ -89,10 +87,12 @@
     <!--=============================
         BLOG 2 START
     ==============================-->
-    {{-- @include('frontend.home.components.blog') --}}
+    
     <!--=============================
         BLOG 2 END
     ==============================-->
 
 
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('frontend.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/frontend/home/index.blade.php ENDPATH**/ ?>
