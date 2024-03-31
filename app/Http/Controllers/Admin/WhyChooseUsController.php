@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\WhyChooseUsDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\WhyChooseUsCreateRequest;
 use App\Models\SectionTitle;
+use App\Models\WhyChooseUs;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Redirect;
 
 class WhyChooseUsController extends Controller
 {
@@ -32,9 +36,13 @@ class WhyChooseUsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(WhyChooseUsCreateRequest $request) : RedirectResponse
     {
-        //
+        WhyChooseUs::create($request->validated());
+
+        toastr()->success('Thêm mới thành công');
+
+        return to_route('admin.why-choose-us.index');
     }
 
     /**
