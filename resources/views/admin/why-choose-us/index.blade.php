@@ -15,7 +15,9 @@
                       <h4>Why Choose Us Section Titles..</h4>
                     </div>
                     <div class="accordion-body collapse" id="panel-body-1" data-parent="#accordion" style="">
-                      <form>
+                      <form action="{{ route('admin.why-choose-title.update') }}" method="POST">
+                        @csrf
+                        @method('PUT')
                         <div class="form-group">
                             <label for="">Top Title</label>
                             <input type="text" class="form-control" name="why_choose_top_title" value="{{ @$titles['why_choose_top_title'] }}">
