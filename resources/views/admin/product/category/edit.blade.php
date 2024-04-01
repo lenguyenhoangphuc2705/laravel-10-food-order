@@ -8,25 +8,23 @@
 
         <div class="card card-primary">
             <div class="card-header">
-                <h4>Thêm mới danh mục</h4>
+                <h4>Cập nhật danh mục</h4>
 
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.category.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.category.update', $category->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
-
-
+                    @method('PUT')
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" name="name" class="form-control">
+                        <input type="text" name="name" class="form-control" value="{{ $category->name }}">
                     </div>
 
                     <div class="form-group">
                         <label>Show At Home</label>
                         <select name="show_at_home" class="form-control" id="">
-                            <option value="1">Yes</option>
-                            <option selected value="0">No</option>
+                            <option @selected($category->show_at_home == 1) value="1">Yes</option>
+                            <option @selected($category->show_at_home == 0) value="0">No</option>
                         </select>
                     </div>
 
@@ -34,12 +32,12 @@
                     <div class="form-group">
                         <label>Status</label>
                         <select name="status" class="form-control" id="">
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
+                            <option @selected($category->status == 1) value="1">Active</option>
+                            <option @selected($category->status == 0) value="0">Inactive</option>
                         </select>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Tạo mới</button>
+                    <button type="submit" class="btn btn-primary">Cập nhật</button>
 
                 </form>
             </div>
