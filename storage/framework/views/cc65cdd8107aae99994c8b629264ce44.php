@@ -8,7 +8,7 @@
             <div class="card-header">
                 <h4>All Categories</h4>
                 <div class="card-header-action">
-                    <a href="<?php echo e(route('admin.slider.create')); ?>" class="btn btn-primary">
+                    <a href="<?php echo e(route('admin.category.create')); ?>" class="btn btn-primary">
                         Create new
                     </a>
                 </div>

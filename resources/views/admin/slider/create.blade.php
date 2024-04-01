@@ -8,7 +8,7 @@
 
         <div class="card card-primary">
             <div class="card-header">
-                <h4>Update Slider</h4>
+                <h4>Create Slider</h4>
 
             </div>
             <div class="card-body">
@@ -22,7 +22,7 @@
                             <input type="file" name="image" id="image-upload" />
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label>Offer</label>
                         <input type="text" name="offer" class="form-control">
@@ -37,13 +37,13 @@
                         <label>Sub_Title</label>
                         <input type="text" name="sub_title" class="form-control">
                     </div>
-                    
+
 
                     <div class="form-group">
                         <label>Short Description</label>
                         <textarea name="short_description" class="form-control"></textarea>
                     </div>
-                    
+
                     <div class="form-group">
                         <label>Button Link</label>
                         <input type="text" name="button_link" class="form-control">
