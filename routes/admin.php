@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\ProductController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -30,4 +31,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
      /* Product  Category Route*/
 Route::resource('category', CategoryController::class);
 
+  /* Product  Category Route*/
+  Route::resource('product',ProductController::class );
 });
