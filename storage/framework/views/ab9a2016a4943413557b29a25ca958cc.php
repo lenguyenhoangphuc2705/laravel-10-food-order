@@ -10,9 +10,9 @@
 
             </div>
             <div class="card-body">
-                <form action="<?php echo e(route('admin.product.store')); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?php echo e(route('admin.product.update', $product->id)); ?>" method="POST" enctype="multipart/form-data">
                     <?php echo csrf_field(); ?>
-
+                    <?php echo method_field('PUT'); ?>
                     <div class="form-group">
                         <label>Image</label>
                         <div id="image-preview" class="image-preview">

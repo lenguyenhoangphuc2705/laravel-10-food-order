@@ -12,9 +12,9 @@
 
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.product.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
-
+                    @method('PUT')
                     <div class="form-group">
                         <label>Image</label>
                         <div id="image-preview" class="image-preview">
