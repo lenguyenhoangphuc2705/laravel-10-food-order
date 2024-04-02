@@ -1,15 +1,15 @@
 <?php $__env->startSection('content'); ?>
     <section class="section">
         <div class="section-header">
-            <h1>Products</h1>
+            <h1>Sản Phẩm</h1>
         </div>
 
         <div class="card card-primary">
             <div class="card-header">
-                <h4>All Products</h4>
+                <h4>Tất cả sản phẩm</h4>
                 <div class="card-header-action">
-                    <a href="<?php echo e(route('admin.category.create')); ?>" class="btn btn-primary">
-                        Create new
+                    <a href="<?php echo e(route('admin.product.create')); ?>" class="btn btn-primary">
+                        Thêm mới
                     </a>
                 </div>
             </div>
