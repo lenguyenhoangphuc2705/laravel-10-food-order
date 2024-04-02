@@ -3,14 +3,14 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Danh mục sản phẩm</h1>
+            <h1>Sản Phẩm</h1>
         </div>
 
         <div class="card card-primary">
             <div class="card-header">
-                <h4>Tất cả các danh mục</h4>
+                <h4>Tất cả sản phẩm</h4>
                 <div class="card-header-action">
-                    <a href="{{ route('admin.category.create') }}" class="btn btn-primary">
+                    <a href="{{ route('admin.product.create') }}" class="btn btn-primary">
                         Thêm mới
                     </a>
                 </div>
