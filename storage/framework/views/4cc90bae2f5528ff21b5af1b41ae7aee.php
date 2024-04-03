@@ -1,7 +1,7 @@
 <?php $__env->startSection('content'); ?>
     <section class="section">
         <div class="section-header">
-            <h1> Kích thước sản phẩm (<?php echo e($product->name); ?>)</h1>
+            <h1> Biến thể sản phẩm  (<?php echo e($product->name); ?>)</h1>
         </div>
 
         <div>
@@ -11,7 +11,7 @@
             <div class="col-md-6">
                 <div class="card card-primary">
                     <div class="card-header">
-                        <h4>Thêm kích thước</h4>
+                        <h4>Thêm kích thước sản phẩm</h4>
 
                     </div>
                     <div class="card-body">
@@ -48,6 +48,7 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
+                                    <th>No.</th>
                                     <th>Name</th>
                                     <th>Price</th>
                                     <th>Action</th>
@@ -56,6 +57,7 @@
                             <tbody>
                                 <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
+                                        <td><?php echo e(++$loop->index); ?></td>
                                         <td><?php echo e($size->name); ?></td>
                                         <td><?php echo e($size->price); ?></td>
                                         <td>
@@ -114,23 +116,25 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
+                                    <th>No.</th>
                                     <th>Name</th>
                                     <th>Price</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <?php $__currentLoopData = $options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $option): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
-                                        <td><?php echo e($size->name); ?></td>
-                                        <td><?php echo e($size->price); ?></td>
+                                        <td><?php echo e(++$loop->index); ?></td>
+                                        <td><?php echo e($option->name); ?></td>
+                                        <td><?php echo e($option->price); ?></td>
                                         <td>
-                                            <a href='<?php echo e(route('admin.product-size.destroy', $size->id)); ?>'
+                                            <a href='<?php echo e(route('admin.product-option.destroy', $option->id)); ?>'
                                                 class='btn btn-danger delete-item mx-2'><i class='fas fa-trash'></i></a>
                                         </td>
                                     </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                <?php if(count($sizes) === 0): ?>
+                                <?php if(count($options) === 0): ?>
                                     <tr>
                                         <td colspan='3' class="text-center">No data found!</td>
                                     </tr>

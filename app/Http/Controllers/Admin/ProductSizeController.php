@@ -21,10 +21,11 @@ class ProductSizeController extends Controller
     {
         $product = Product::findOrFail($productId);
         $sizes = ProductSize::where('product_id', $product->id)->get();
-          return view('admin.product.product-size.index', compact('product','sizes'));
+        $options = ProductOption::where('product_id', $product->id)->get();
+          return view('admin.product.product-size.index', compact('product','sizes','options'));
     }
 
-    
+
     public function store(Request $request) : RedirectResponse
     {
         $request->validate([
