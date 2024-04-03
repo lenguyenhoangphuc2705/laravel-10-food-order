@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductGalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -33,4 +34,9 @@ Route::resource('category', CategoryController::class);
 
   /* Product  Category Route*/
   Route::resource('product',ProductController::class );
+
+/* Product  Gallery Route*/
+Route::get('product-gallery/{product}', [ProductGalleryController::class, 'index'])->name('product-gallery.show-index');
+Route::resource('product-gallery',ProductGalleryController::class );
+
 });
