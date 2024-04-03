@@ -6,6 +6,8 @@ use App\Http\Controllers\Admin\ProductGalleryController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\ProductOptionController;
+use App\Http\Controllers\Admin\ProductSizeController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\WhyChooseUsController;
@@ -39,4 +41,10 @@ Route::resource('category', CategoryController::class);
 Route::get('product-gallery/{product}', [ProductGalleryController::class, 'index'])->name('product-gallery.show-index');
 Route::resource('product-gallery',ProductGalleryController::class );
 
+/* Product  Size Route*/
+Route::get('product-size/{product}', [ProductSizeController::class, 'index'])->name('product-size.show-index');
+Route::resource('product-size',ProductSizeController::class );
+
+/* Product  Option Route*/
+Route::resource('product-option',ProductOptionController::class );
 });
