@@ -43,7 +43,33 @@
         </div>
 
         <div class="card card-primary">
-            
+            <div class="card-body">
+             <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <tr>
+                        <td><?php echo e($size->name); ?></td>
+                        <td><?php echo e($size->price); ?></td>
+                        <td>
+                            <a href='<?php echo e(route('admin.product-size.destroy', $size->id)); ?>' class='btn btn-danger delete-item mx-2'><i class='fas fa-trash'></i></a>
+                        </td>
+                    </tr>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    <?php if(count($sizes) === 0): ?>
+                    <tr >
+                        <td colspan='3' class="text-center">No data found!</td>
+                    </tr>
+                    <?php endif; ?>
+                </tbody>
+             </table>
+            </div>
         </div>
     </section>
 <?php $__env->stopSection(); ?>
