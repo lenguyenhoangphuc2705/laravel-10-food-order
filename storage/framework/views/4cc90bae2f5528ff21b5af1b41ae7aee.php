@@ -7,73 +7,143 @@
         <div>
             <a href="<?php echo e(route('admin.product.index')); ?>" class="btn btn-primary my-3">Trở về</a>
         </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h4>Thêm kích thước</h4>
 
-        <div class="card card-primary">
-            <div class="card-header">
-                <h4>Thêm kích thước</h4>
+                    </div>
+                    <div class="card-body">
 
+                        <form action="<?php echo e(route('admin.product-size.store')); ?>" method="POST" enctype="multipart/form-data">
+                            <?php echo csrf_field(); ?>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Name</label>
+                                        <input type="text" name="name" id=" " class="form-control">
+                                        <input type="hidden" value="<?php echo e($product->id); ?>" name="product_id">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Price</label>
+                                        <input type="text" name="price" id="" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="card card-primary">
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <tr>
+                                        <td><?php echo e($size->name); ?></td>
+                                        <td><?php echo e($size->price); ?></td>
+                                        <td>
+                                            <a href='<?php echo e(route('admin.product-size.destroy', $size->id)); ?>'
+                                                class='btn btn-danger delete-item mx-2'><i class='fas fa-trash'></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php if(count($sizes) === 0): ?>
+                                    <tr>
+                                        <td colspan='3' class="text-center">No data found!</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-            <div class="card-body">
+            <div class="col-md-6">
+                <div class="card card-primary">
+                    <div class="card-header">
+                        <h4>Thêm tùy chọn sản phẩm</h4>
 
-                   <form action="<?php echo e(route('admin.product-size.store')); ?>" method="POST" enctype="multipart/form-data">
-                   <?php echo csrf_field(); ?>
-
-                   <div class="row">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Name</label>
-                            <input type="text" name="name" id=" "   class="form-control">
-                            <input type="hidden" value="<?php echo e($product->id); ?>" name="product_id">
-                        </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label for="">Price</label>
-                            <input type="text" name="price" id=""   class="form-control">
-                        </div>
-                    </div>
-                   </div>
+                    <div class="card-body">
 
-                    <div class="form-group">
-                       <button type="submit" class="btn btn-primary">Thêm mới</button>
-                    </div>
-                   </form>
+                        <form action="<?php echo e(route('admin.product-option.store')); ?>" method="POST" enctype="multipart/form-data">
+                            <?php echo csrf_field(); ?>
 
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Name</label>
+                                        <input type="text" name="name" id=" " class="form-control">
+                                        <input type="hidden" value="<?php echo e($product->id); ?>" name="product_id">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="">Price</label>
+                                        <input type="text" name="price" id="" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Thêm mới</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+
+                <div class="card card-primary">
+                    <div class="card-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <tr>
+                                        <td><?php echo e($size->name); ?></td>
+                                        <td><?php echo e($size->price); ?></td>
+                                        <td>
+                                            <a href='<?php echo e(route('admin.product-size.destroy', $size->id)); ?>'
+                                                class='btn btn-danger delete-item mx-2'><i class='fas fa-trash'></i></a>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <?php if(count($sizes) === 0): ?>
+                                    <tr>
+                                        <td colspan='3' class="text-center">No data found!</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="card card-primary">
-            <div class="card-body">
-             <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php $__currentLoopData = $sizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $size): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <tr>
-                        <td><?php echo e($size->name); ?></td>
-                        <td><?php echo e($size->price); ?></td>
-                        <td>
-                            <a href='<?php echo e(route('admin.product-size.destroy', $size->id)); ?>' class='btn btn-danger delete-item mx-2'><i class='fas fa-trash'></i></a>
-                        </td>
-                    </tr>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                    <?php if(count($sizes) === 0): ?>
-                    <tr >
-                        <td colspan='3' class="text-center">No data found!</td>
-                    </tr>
-                    <?php endif; ?>
-                </tbody>
-             </table>
-            </div>
-        </div>
+
     </section>
 <?php $__env->stopSection(); ?>
-
-
 
 <?php echo $__env->make('admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/admin/product/product-size/index.blade.php ENDPATH**/ ?>
