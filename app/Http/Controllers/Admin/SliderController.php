@@ -101,9 +101,9 @@ class SliderController extends Controller
             $slider = Slider::findOrFail($id);
             $this->removeImage($slider->image);
             $slider->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'success', 'message' => 'Xóa thành công!']);
         } catch (\Exception $e) {
-            return response(['status' => 'success', 'message' => 'something went wrong!']);
+            return response(['status' => 'success', 'message' => 'Đã xảy ra sự cố!']);
         }
     }
 }

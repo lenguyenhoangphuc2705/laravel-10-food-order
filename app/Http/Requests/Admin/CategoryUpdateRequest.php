@@ -27,4 +27,12 @@ class CategoryUpdateRequest extends FormRequest
             'status' => ['required', 'boolean'],
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'name.required'=> 'Tên không được để trống',
+            'name.max'=> 'Tên không được dài quá 255 ký tự',
+            'name.unique'=> 'Tên danh mục đã tồn tại',
+        ];
+    }
 }

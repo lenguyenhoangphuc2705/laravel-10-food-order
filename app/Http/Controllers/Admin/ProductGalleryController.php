@@ -24,7 +24,7 @@ class ProductGalleryController extends Controller
         return view('admin.product.gallery.index', compact('product','images'));
     }
 
-    
+
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
@@ -64,7 +64,7 @@ class ProductGalleryController extends Controller
 
             return response(['status' => 'success', 'message' => 'Xóa thành công!']);
         }catch(\Exception $e){
-            return response(['status' => 'error', 'message' => 'something went wrong!']);
+            return response(['status' => 'error', 'message' => 'Đã xảy ra sự cố!']);
         }
     }
 }

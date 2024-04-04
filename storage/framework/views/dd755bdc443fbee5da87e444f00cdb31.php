@@ -1,6 +1,4 @@
-@extends('admin.layouts.master')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <section class="section">
         <div class="section-header">
             <h1>Thanh trượt</h1>
@@ -12,9 +10,9 @@
 
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.slider.update', $slider->id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
+                <form action="<?php echo e(route('admin.slider.update', $slider->id)); ?>" method="POST" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
+                    <?php echo method_field('PUT'); ?>
                     <div class="form-group">
                         <label>Hình ảnh</label>
                         <div id="image-preview" class = "image-preview">
@@ -25,35 +23,34 @@
 
                     <div class="form-group">
                         <label>Lời đề nghị</label>
-                        <input type="text" name="offer" class="form-control" value="{{ $slider->offer }}">
+                        <input type="text" name="offer" class="form-control" value="<?php echo e($slider->offer); ?>">
                     </div>
 
                     <div class="form-group">
                         <label>Tiêu đề</label>
-                        <input type="text" name="title" class="form-control" value="{{ $slider->title }}">
+                        <input type="text" name="title" class="form-control" value="<?php echo e($slider->title); ?>">
                     </div>
 
                     <div class="form-group">
                         <label>Phụ đề</label>
-                        <input type="text" name="sub_title" class="form-control" value="{{ $slider->sub_title }}">
+                        <input type="text" name="sub_title" class="form-control" value="<?php echo e($slider->sub_title); ?>">
                     </div>
 
 
                     <div class="form-group">
                         <label>Mô tả ngắn</label>
-                        <textarea name="short_description" class="form-control" >{{ $slider->short_description }}</textarea>
+                        <textarea name="short_description" class="form-control" ><?php echo e($slider->short_description); ?></textarea>
                     </div>
 
                     <div class="form-group">
                         <label>Nút liên kết</label>
-                        <input type="text" name="button_link" class="form-control" value="{{ $slider->button_link }}">
+                        <input type="text" name="button_link" class="form-control" value="<?php echo e($slider->button_link); ?>">
                     </div>
-                    
                     <div class="form-group">
                         <label>Trạng thái</label>
                         <select name="status" class="form-control" id="">
-                            <option @selected($slider->status === 1) value="1">Hoạt động</option>
-                            <option @selected($slider->status === 0) value="0">Ngừng hoạt động</option>
+                            <option <?php if($slider->status === 1): echo 'selected'; endif; ?> value="1">Hoạt động</option>
+                            <option <?php if($slider->status === 0): echo 'selected'; endif; ?> value="0">Ngừng hoạt động</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary">Cập nhật</button>
@@ -63,17 +60,19 @@
         </div>
 
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script>
         $(document).ready(function(){
             $('.image-preview').css({
-                'background-image': 'url({{ asset($slider->image) }})',
+                'background-image': 'url(<?php echo e(asset($slider->image)); ?>)',
                 'background-size': 'cover',
                 'background-position':'center center'
             })
         })
     </script>
 
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/admin/slider/edit.blade.php ENDPATH**/ ?>

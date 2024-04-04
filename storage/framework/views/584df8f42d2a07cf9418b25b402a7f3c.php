@@ -1,6 +1,4 @@
-@extends('admin.layouts.master')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
     <section class="section">
         <div class="section-header">
             <h1>Thanh trượt</h1>
@@ -12,8 +10,8 @@
 
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.slider.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
+                <form action="<?php echo e(route('admin.slider.store')); ?>" method="POST" enctype="multipart/form-data">
+                    <?php echo csrf_field(); ?>
 
                     <div class="form-group">
                         <label>Hình ảnh</label>
@@ -62,4 +60,6 @@
         </div>
 
     </section>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('admin.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/admin/slider/create.blade.php ENDPATH**/ ?>
