@@ -40,7 +40,7 @@
         <div class="fp__menu_item">
             <div class="fp__menu_item_img">
                 <img src="<?php echo e(asset($product->thumb_image)); ?>" alt="<?php echo e($product->name); ?>" class="img-fluid w-100">
-                <a class="category" href="#"><?php echo e($product->category->name); ?></a>
+                <a class="category" href="#"><?php echo e(@$product->category->name); ?></a>
             </div>
             <div class="fp__menu_item_text">
                 <p class="rating">
@@ -51,7 +51,7 @@
                     <i class="far fa-star"></i>
                     <span>145</span>
                 </p>
-                <a class="title" href="menu_details.html"><?php echo e($product->name); ?></a>
+                <a class="title" href="<?php echo e(route('product.show', $product->slug )); ?>"><?php echo e($product->name); ?></a>
                 <h5 class="price">
 
                     <?php if($product->offer_price >0): ?>
