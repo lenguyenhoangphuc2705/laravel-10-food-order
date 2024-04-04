@@ -12,7 +12,7 @@
 
             </div>
             <div class="card-body">
-                <form action="{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
+                <form action = "{{ route('admin.product.update', $product->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="form-group">
@@ -20,7 +20,7 @@
                         <div id="image-preview" class="image-preview">
                             <label for="image-upload" id="image-label">Choose File</label>
                             <input type="file" name="image" id="image-upload" />
-                          </div>
+                        </div>
                     </div>
 
 
@@ -35,7 +35,8 @@
                         <select name="category" class="form-control select2" id="">
                             <option value="">select</option>
                             @foreach ($categories as $category)
-                            <option @selected($product->category_id===$category->id) value="{{ $category->id }}">{{ $category->name }}</option>
+                                <option @selected($product->category_id === $category->id) value="{{ $category->id }}">{{ $category->name }}
+                                </option>
                             @endforeach
                         </select>
                     </div>
@@ -78,38 +79,34 @@
                     <div class="form-group">
                         <label>Show At Home</label>
                         <select name="show_at_home" class="form-control" id="">
-                            <option @selected($product->show_at_home ===1 ) value="1">Yes</option>
-                            <option @selected($product->show_at_home ===0 ) value="0">No</option>
-                        </select
-                    </div>
+                            <option @selected($product->show_at_home === 1) value="1">Yes</option>
+                            <option @selected($product->show_at_home === 0) value="0">No</option>
+                        </select </div>
 
 
-                    <div class="form-group">
-                        <label>Status</label>
-                        <select name="status" class="form-control" id="">
-                            <option @selected($product->status ===1 )value="1">Active</option>
-                            <option @selected($product->status ===0 )value="0">Inactive</option>
-                        </select>
-                    </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select name="status" class="form-control" id="">
+                                <option @selected($product->status === 1) value="1">Active</option>
+                                <option @selected($product->status === 0) value="0">Inactive</option>
+                            </select>
+                        </div>
 
-                    <button type="submit" class="btn btn-primary">Cập nhật</button>
-
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
                 </form>
             </div>
         </div>
-
     </section>
 @endsection
 
 @push('scripts')
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('.image-preview').css({
                 'background-image': 'url({{ asset($product->thumb_image) }})',
                 'background-size': 'cover',
-                'background-position':'center center'
+                'background-position': 'center center'
             })
         })
     </script>
-
 @endpush

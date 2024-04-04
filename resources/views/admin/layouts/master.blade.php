@@ -15,8 +15,10 @@
     <link rel="stylesheet" href="{{ asset('admin/assets/css/bootstrap-iconpicker.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/select2/dist/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/summernote/summernote-bs4.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('admin/assets/modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css') }}">
+    <link rel="stylesheet"
+        href="{{ asset('admin/assets/modules/bootstrap-colorpicker/dist/css/bootstrap-colorpicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 
 
@@ -125,31 +127,40 @@
 
 
                 Swal.fire({
-                    title: "Are you sure?",
-                    text: "You won't be able to revert this!",
+                    title: "Bạn chắc chắn muốn xóa?",
+                    text: "Bạn sẽ không thể hoàn tác điều này!",
                     icon: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#3085d6",
                     cancelButtonColor: "#d33",
-                    confirmButtonText: "Yes, delete it!"
+                    cancelButtonText: "Hủy",
+                    confirmButtonText: "Vâng, tiếp tục xóa!"
                 }).then((result) => {
                     if (result.isConfirmed) {
 
                         $.ajax({
-                            method:'DELETE',
-                            url:url,
-                            data: {_token: "{{ csrf_token() }}"},
-                            success: function(response){
-                                if(response.status === 'success'){
-                                    toastr.success(response.message)
+                            method: 'DELETE',
+                            url: url,
+                            data: {
+                                _token: "{{ csrf_token() }}"
+                            },
+                            success: function(response) {
+                                if (response.status === 'success') {
 
-                                    window.location.reload();
+                                    Swal.fire({
+                                        icon: "success",
+                                        title: "Xóa thành công"
+                                    });
+                                    // toastr.success(response.message)
+                                    setTimeout(function() {
+                                        window.location.reload();
+                                    }, 2000);
 
-                                }else if(response.status === 'error'){
+                                } else if (response.status === 'error') {
                                     toastr.error(response.message)
                                 }
                             },
-                            error:function(error){
+                            error: function(error) {
                                 console.error(error);
                             }
                         })
@@ -160,7 +171,7 @@
     </script>
 
 
-@stack('scripts')
+    @stack('scripts')
 
 </body>
 

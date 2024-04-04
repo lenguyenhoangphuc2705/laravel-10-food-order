@@ -31,4 +31,8 @@ class SliderUpdateRequest extends FormRequest
             'status' => ["boolean"]
         ];
     }
+
+    
+
+
 }

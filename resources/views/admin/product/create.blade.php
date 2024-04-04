@@ -20,7 +20,7 @@
                         <div id="image-preview" class="image-preview">
                             <label for="image-upload" id="image-label">Choose File</label>
                             <input type="file" name="image" id="image-upload" />
-                          </div>
+                        </div>
                     </div>
 
 
@@ -78,8 +78,8 @@
                     <div class="form-group">
                         <label>Show At Home</label>
                         <select name="show_at_home" class="form-control" id="">
-                            <option value="1">Yes</option>
-                            <option selected value="0">No</option>
+                            <option selected value="1">Yes</option>
+                            <option  value="0">No</option>
                         </select>
                     </div>
 
@@ -91,7 +91,6 @@
                             <option value="0">Inactive</option>
                         </select>
                     </div>
-
                     <button type="submit" class="btn btn-primary">Tạo mới</button>
 
                 </form>

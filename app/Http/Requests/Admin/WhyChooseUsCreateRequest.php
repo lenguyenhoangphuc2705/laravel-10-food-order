@@ -36,8 +36,8 @@ class WhyChooseUsCreateRequest extends FormRequest
             'title.max'=>'Tiêu đề không được nhập quá 255 ký tự',
             'short_description.required'=>'Mô tả ngắn không được để trống',
             'short_description.max'=>'Mô tả ngắn không được quá 255 ký tự'
-
         ];
     }
+
 
 }
