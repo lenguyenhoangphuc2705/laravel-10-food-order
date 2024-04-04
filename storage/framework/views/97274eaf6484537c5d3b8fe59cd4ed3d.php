@@ -18,9 +18,9 @@
             <div class="col-12">
                 <div class="menu_filter d-flex flex-wrap justify-content-center">
                     <button class=" active" data-filter="*">all menu</button>
-                    @foreach ($categories as $category)
-                    <button data-filter=".{{ $category->slug }}">{{ $category->name }}</button>
-                    @endforeach
+                    <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <button data-filter=".<?php echo e($category->slug); ?>"><?php echo e($category->name); ?></button>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                 </div>
             </div>
@@ -58,3 +58,4 @@
         </div>
     </div>
 </section>
+<?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/frontend/home/components/menu-item.blade.php ENDPATH**/ ?>
