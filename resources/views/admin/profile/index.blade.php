@@ -3,13 +3,13 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Profile</h1>
+            <h1>Hồ sơ</h1>
         </div>
 
         <div class="section-body">
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>Update User Settings</h4>
+                    <h4>Cập nhật cài đặt người dùng</h4>
 
                 </div>
                 <div class="card-body">
@@ -22,8 +22,9 @@
                                 <input type="file" name="avatar" id="image-upload" />
                             </div>
                         </div>
+
                         <div class="form-group">
-                            <label>Name</label>
+                            <label>Tên</label>
                             <input type="text" class="form-control" name="name" value="{{ auth()->user()->name }}">
                         </div>
 
@@ -32,7 +33,7 @@
                             <input type="text" class="form-control" name="email" value="{{ auth()->user()->email }}">
                         </div>
 
-                        <button class="btn btn-primary" style="submit">Save</button>
+                        <button class="btn btn-primary" style="submit">Lưu</button>
                     </form>
                 </div>
             </div>
@@ -40,7 +41,7 @@
 
             <div class="card card-primary">
                 <div class="card-header">
-                    <h4>Update Password</h4>
+                    <h4>Cập nhật mật khẩu</h4>
 
                 </div>
                 <div class="card-body">
@@ -48,20 +49,20 @@
                         @csrf
                         @method('PUT')
                         <div class="form-group">
-                            <label>Current Password</label>
+                            <label>Mật khẩu hiện tại</label>
                             <input type="password" class="form-control" name="current_password">
                         </div>
 
                         <div class="form-group">
-                            <label>New Password</label>
+                            <label>Mật khẩu mới</label>
                             <input type="password" class="form-control" name="password">
                         </div>
 
                         <div class="form-group">
-                            <label>Confirm Password</label>
+                            <label>Xác nhận mật khẩu</label>
                             <input type="password" class="form-control" name="password_confirmation">
                         </div>
-                        <button class="btn btn-primary" style="submit">Save</button>
+                        <button class="btn btn-primary" style="submit">Lưu</button>
                     </form>
                 </div>
             </div>

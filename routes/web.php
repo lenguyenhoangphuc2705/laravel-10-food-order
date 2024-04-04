@@ -35,7 +35,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('profile/avatar', [ProfileController::class, 'updateAvatar'])->name('profile.avatar.update');
 });
 
-/** Show Home page */
-Route::get('/', [FrontendController::class, 'index'])->name('home');
 
 require __DIR__ . '/auth.php';
+
+/** Show Home page */
+
+Route::get('/', [FrontendController::class, 'index'])->name('home');
+
+/**show product details page */
+
+Route::get('/product/{slug}', [FrontendController::class, 'showProduct'])->name('product.show');

@@ -3,12 +3,12 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Slider</h1>
+            <h1>Thanh trượt</h1>
         </div>
 
         <div class="card card-primary">
             <div class="card-header">
-                <h4>Update Slider</h4>
+                <h4>Cập nhật thanh trượt</h4>
 
             </div>
             <div class="card-body">
@@ -16,46 +16,47 @@
                     @csrf
                     @method('PUT')
                     <div class="form-group">
-                        <label>Image</label>
+                        <label>Hình ảnh</label>
                         <div id="image-preview" class = "image-preview">
-                            <label for="image-upload" id="image-label">Choose File</label>
+                            <label for="image-upload" id="image-label">Chọn ảnh</label>
                             <input type="file" name="image" id="image-upload" />
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label>Offer</label>
+                        <label>Lời đề nghị</label>
                         <input type="text" name="offer" class="form-control" value="{{ $slider->offer }}">
                     </div>
 
                     <div class="form-group">
-                        <label>Title</label>
+                        <label>Tiêu đề</label>
                         <input type="text" name="title" class="form-control" value="{{ $slider->title }}">
                     </div>
 
                     <div class="form-group">
-                        <label>Sub_Title</label>
+                        <label>Phụ đề</label>
                         <input type="text" name="sub_title" class="form-control" value="{{ $slider->sub_title }}">
                     </div>
-                    
+
 
                     <div class="form-group">
-                        <label>Short Description</label>
+                        <label>Mô tả ngắn</label>
                         <textarea name="short_description" class="form-control" >{{ $slider->short_description }}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nút liên kết</label>
+                        <input type="text" name="button_link" class="form-control" value="{{ $slider->button_link }}">
                     </div>
                     
                     <div class="form-group">
-                        <label>Button Link</label>
-                        <input type="text" name="button_link" class="form-control" value="{{ $slider->button_link }}">
-                    </div>
-                    <div class="form-group">
-                        <label>Status</label>
+                        <label>Trạng thái</label>
                         <select name="status" class="form-control" id="">
-                            <option @selected($slider->status === 1) value="1">Active</option>
-                            <option @selected($slider->status === 0) value="0">Inactive</option>
+                            <option @selected($slider->status === 1) value="1">Hoạt động</option>
+                            <option @selected($slider->status === 0) value="0">Ngừng hoạt động</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="submit" class="btn btn-primary">Cập nhật</button>
 
                 </form>
             </div>
@@ -74,5 +75,5 @@
             })
         })
     </script>
-    
+
 @endpush

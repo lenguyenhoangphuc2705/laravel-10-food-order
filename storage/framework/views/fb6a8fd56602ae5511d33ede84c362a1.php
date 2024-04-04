@@ -1,7 +1,7 @@
 <?php $__env->startSection('content'); ?>
     <section class="section">
         <div class="section-header">
-            <h1>Sản Phẩm</h1>
+            <h1>Sản phẩm</h1>
         </div>
 
         <div class="card card-primary">

@@ -27,4 +27,15 @@ class ProfileUpdateRequest extends FormRequest
             'email' => ['required', 'email', 'max:200', 'unique:users,email,'.auth()->user()->id]
         ];
     }
+    public function messages(): array
+    {
+        return [
+            'name.required'=> 'Tên không được để trống',
+            'name.max'=> 'Tên không được dài quá 50 ký tự',
+            'name.unique'=> 'Tên danh mục đã tồn tại',
+            'email.required'=> 'Email không được để trống',
+            'email.max'=> 'Email không được dài quá 200 ký tự',
+            'email.unique'=> 'Email đã tồn tại',
+        ];
+    }
 }

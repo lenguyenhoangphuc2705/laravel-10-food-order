@@ -3,12 +3,12 @@
 @section('content')
     <section class="section">
         <div class="section-header">
-            <h1>Slider</h1>
+            <h1>Thanh trượt</h1>
         </div>
 
         <div class="card card-primary">
             <div class="card-header">
-                <h4>Create Slider</h4>
+                <h4>Thêm mới thanh trượt</h4>
 
             </div>
             <div class="card-body">
@@ -16,46 +16,46 @@
                     @csrf
 
                     <div class="form-group">
-                        <label>Image</label>
+                        <label>Hình ảnh</label>
                         <div id="image-preview" class = "image-preview">
-                            <label for="image-upload" id="image-label">Choose File</label>
+                            <label for="image-upload" id="image-label">Chọn ảnh</label>
                             <input type="file" name="image" id="image-upload" />
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label>Offer</label>
+                        <label>Lời đề nghị</label>
                         <input type="text" name="offer" class="form-control">
                     </div>
 
                     <div class="form-group">
-                        <label>Title</label>
+                        <label>Tiêu đề</label>
                         <input type="text" name="title" class="form-control">
                     </div>
 
                     <div class="form-group">
-                        <label>Sub_Title</label>
+                        <label>Phụ đề</label>
                         <input type="text" name="sub_title" class="form-control">
                     </div>
 
 
                     <div class="form-group">
-                        <label>Short Description</label>
+                        <label>Mô tả ngắn</label>
                         <textarea name="short_description" class="form-control"></textarea>
                     </div>
 
                     <div class="form-group">
-                        <label>Button Link</label>
+                        <label>Nút liên kết</label>
                         <input type="text" name="button_link" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label>Status</label>
+                        <label>Trạng thái</label>
                         <select name="status" class="form-control" id="">
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary">Tạo</button>
 
                 </form>
             </div>

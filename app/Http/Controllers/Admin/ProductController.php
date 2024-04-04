@@ -7,14 +7,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ProductCreateRequest;
 use App\Http\Requests\Admin\ProductUpdateRequest;
 use App\Models\Category;
-use App\Traits\FileUploadTrait;
 use App\Models\Product;
+use App\Traits\FileUploadTrait;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response as HttpResponse;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
-use Response;
+use Str;
 
 class ProductController extends Controller
 {
@@ -117,16 +117,16 @@ return to_route('admin.product.index');
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id) : HttpResponse
+    public function destroy(string $id) : Response
     {
         try{
             $product = Product::findOrFail($id);
             $this->removeImage($product->thumb_image);
             $product->delete();
 
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'success', 'message' => 'Xóa thành công!']);
         }catch(\Exception $e){
-            return response(['status' => 'error', 'message' => 'something went wrong!']);
+            return response(['status' => 'error', 'message' => 'Đã xảy ra sự cố!']);
         }
     }
 }

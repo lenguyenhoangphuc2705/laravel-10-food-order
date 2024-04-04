@@ -10,7 +10,7 @@ use Illuminate\Http\Response;
 
 class ProductOptionController extends Controller
 {
-    
+
     public function store(Request $request) : RedirectResponse
     {
         $request->validate([
@@ -18,10 +18,10 @@ class ProductOptionController extends Controller
             'price' => ['required', 'numeric'],
             'product_id' => ['required', 'integer']
         ],[
-            'name.required' => 'Product option name is required',
-            'name.max' => 'Product option max length is 255',
-            'price.required' => 'Product option price is required',
-            'price.numeric' => 'Product option price have to be a number',
+            'name.required' => 'Tên tùy chọn sản phẩm không được để trống',
+            'name.max' => 'Tên tùy chọn sản phẩm không dài quá 255 ký tự',
+            'price.required' => 'Giá tùy chọn sản phẩm không được để trống',
+            'price.numeric' => 'Giá tùy chọn sản phẩm không hợp lệ',
         ]);
 
         $option = new ProductOption();
@@ -46,7 +46,7 @@ class ProductOptionController extends Controller
 
             return response(['status' => 'success', 'message' => 'Xóa thành công!']);
         }catch(\Exception $e){
-            return response(['status' => 'error', 'message' => 'something went wrong!']);
+            return response(['status' => 'error', 'message' => 'Đã xảy ra sự cố!']);
         }
     }
 }

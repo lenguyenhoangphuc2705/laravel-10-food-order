@@ -83,7 +83,7 @@ class CategoryController extends Controller
     {
         try{
             Category::findOrFail($id)->delete();
-            return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
+            return response(['status' => 'success', 'message' => 'Xóa thành công!']);
         }catch(\Exception $e){
             return response(['status' => 'error', 'message' => 'something went wrong!']);
         }
