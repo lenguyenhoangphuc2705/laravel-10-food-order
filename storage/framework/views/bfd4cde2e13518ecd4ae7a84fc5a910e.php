@@ -8,8 +8,8 @@
                 <div class="fp__breadcrumb_text">
                     <h1>menu Details</h1>
                     <ul>
-                        <li><a href="index.html">home</a></li>
-                        <li><a href="#">menu Details</a></li>
+                        <li><a href="<?php echo e(url('/')); ?>">home</a></li>
+                        <li><a href="javascript:;">menu Details</a></li>
                     </ul>
                 </div>
             </div>
@@ -30,16 +30,14 @@
                     <div class="exzoom hidden" id="exzoom">
                         <div class="exzoom_img_box fp__menu_details_images">
                             <ul class='exzoom_img_ul'>
-                                <li><img class="zoom ing-fluid w-100" src="images/menu1.png" alt="product"></li>
-                                <li><img class="zoom ing-fluid w-100" src="images/menu2.png" alt="product"></li>
-                                <li><img class="zoom ing-fluid w-100" src="images/menu3.png" alt="product"></li>
-                                <li><img class="zoom ing-fluid w-100" src="images/menu4.png" alt="product"></li>
-                                <li><img class="zoom ing-fluid w-100" src="images/menu5.png" alt="product"></li>
-                                <li><img class="zoom ing-fluid w-100" src="images/menu6.png" alt="product"></li>
-                                <li><img class="zoom ing-fluid w-100" src="images/menu7.png" alt="product"></li>
-                                <li><img class="zoom ing-fluid w-100" src="images/menu8.png" alt="product"></li>
-                                <li><img class="zoom ing-fluid w-100" src="images/menu1.png" alt="product"></li>
-                                <li><img class="zoom ing-fluid w-100" src="images/menu2.png" alt="product"></li>
+                                <li><img class="zoom ing-fluid w-100" src="<?php echo e(asset($product->thumb_image)); ?>" alt="product"></li>
+
+
+                                <?php $__currentLoopData = $product->productImages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+
+                                <li><img class="zoom ing-fluid w-100" src="<?php echo e(asset($image->image)); ?>" alt="product"></li>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                             </ul>
                         </div>
                         <div class="exzoom_nav"></div>
