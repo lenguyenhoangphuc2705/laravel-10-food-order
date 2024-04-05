@@ -53,13 +53,12 @@
                 </p>
                 <a class="title" href="<?php echo e(route('product.show', $product->slug )); ?>"><?php echo e($product->name); ?></a>
                 <h5 class="price">
+                    <?php if($product->offer_price > 0): ?>
+                    <?php echo e(currencyPosition($product->offer_price)); ?>
 
-                    <?php if($product->offer_price >0): ?>
-                    $<?php echo e($product->offer_price); ?>
-
-                    <del>$<?php echo e($product->price); ?></del>
+                    <del><?php echo e(currencyPosition($product->price)); ?></del>
                     <?php else: ?>
-                    $<?php echo e($product->price); ?>
+                    <?php echo e(currencyPosition($product->price)); ?>
 
                     <?php endif; ?>
                 </h5>
