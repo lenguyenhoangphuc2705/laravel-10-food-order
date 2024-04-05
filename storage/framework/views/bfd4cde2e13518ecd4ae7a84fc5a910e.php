@@ -62,11 +62,11 @@
                         </p>
                         <h3 class="price">
                             <?php if($product->offer_price >0): ?>
-                              $<?php echo e($product->offer_price); ?>
+                              <?php echo e(currencyPosition($product->offer_price)); ?>
 
-                              <del>$<?php echo e($product->price); ?></del>
+                              <del><?php echo e(currencyPosition($product->price )); ?></del>
                               <?php else: ?>
-                              $<?php echo e($product->price); ?>
+                              <?php echo e(currencyPosition($product->price )); ?>
 
                               <?php endif; ?>
                          </h3>
@@ -280,11 +280,11 @@
                                 <a class="title" href="<?php echo e(route('product.show', $relateProduct->slug )); ?>"><?php echo $relateProduct->name; ?></a>
                                 <h5 class="price">
                                     <?php if($relateProduct->offer_price >0): ?>
-                                        $<?php echo e($relateProduct->offer_price); ?>
+                                        <?php echo e(currencyPosition($relateProduct->offer_price)); ?>
 
-                                        del>$<?php echo e($relateProduct->price); ?></del>
+                                        <del><?php echo e(currencyPosition($relateProduct->price)); ?></del>
                                         <?php else: ?>
-                                        $<?php echo e($relateProduct->price); ?>
+                                        <?php echo e(currencyPosition($relateProduct->price)); ?>
 
                                     <?php endif; ?>
 

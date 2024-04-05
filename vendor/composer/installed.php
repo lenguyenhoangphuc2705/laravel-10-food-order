@@ -3,13 +3,22 @@
         'name' => 'laravel/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'af2c26635ca8fe03e5f6386f33ba32ad1a9070dc',
+        'reference' => '0630ee7bdf9e28e0040a04221da45412f272bc10',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
+        'barryvdh/laravel-debugbar' => array(
+            'pretty_version' => 'v3.13.3',
+            'version' => '3.13.3.0',
+            'reference' => '241e9bddb04ab42a04a5fe8b2b9654374c864229',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../barryvdh/laravel-debugbar',
+            'aliases' => array(),
+            'dev_requirement' => true,
+        ),
         'barryvdh/laravel-ide-helper' => array(
             'pretty_version' => 'v3.0.0',
             'version' => '3.0.0.0',
@@ -445,7 +454,7 @@
         'laravel/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'af2c26635ca8fe03e5f6386f33ba32ad1a9070dc',
+            'reference' => '0630ee7bdf9e28e0040a04221da45412f272bc10',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -594,6 +603,15 @@
             'install_path' => __DIR__ . '/../markbaker/matrix',
             'aliases' => array(),
             'dev_requirement' => false,
+        ),
+        'maximebf/debugbar' => array(
+            'pretty_version' => 'v1.22.3',
+            'version' => '1.22.3.0',
+            'reference' => '7aa9a27a0b1158ed5ad4e7175e8d3aee9a818b96',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../maximebf/debugbar',
+            'aliases' => array(),
+            'dev_requirement' => true,
         ),
         'mockery/mockery' => array(
             'pretty_version' => '1.6.9',
