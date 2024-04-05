@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\ProductOptionController;
 use App\Http\Controllers\Admin\ProductSizeController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\WhyChooseUsController;
 
@@ -47,4 +48,9 @@ Route::resource('product-size',ProductSizeController::class );
 
 /* Product  Option Route*/
 Route::resource('product-option',ProductOptionController::class );
+
+/* Setting Routes*/
+Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');
+
+
 });

@@ -71,6 +71,9 @@
           </ul>
         </li>
 
+        <li><a class="nav-link" href="<?php echo e(route('admin.setting.index')); ?>"><i class="far fa-square"></i> <span>Settings</span></a></li>
+
+
 
             
 
