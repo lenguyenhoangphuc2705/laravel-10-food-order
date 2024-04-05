@@ -37,7 +37,7 @@
                                             <?php echo method_field('PUT'); ?>
                                             <div class="form-group">
                                                 <label for="">Site Name</label>
-                                                <input name="site_name" type="text" class="form-control">
+                                                <input name="site_name" type="text" class="form-control" value="<?php echo e(config('settings.site_name')); ?>">
                                             </div>
 
                                             <div class="form-group">
@@ -51,8 +51,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label for="">Currency Icon</label>
-                                                        <input name="site_currency_icon" type="text"
-                                                            class="form-control">
+                                                        <input name="site_currency_icon" type="text" class="form-control" value="<?php echo e(config('settings.site_currency_icon')); ?>">
                                                     </div>
                                                 </div>
 
@@ -61,8 +60,8 @@
                                                         <label for="">Currency Icon Position</label>
                                                         <select name="site_currency_icon_position" id=""
                                                             class="select2 form-control">
-                                                            <option value="right">Right</option>
-                                                            <option value="left">Left</option>
+                                                            <option <?php if(config('settings.site_currency_icon_position') === 'right'): echo 'selected'; endif; ?> value="right">Right</option>
+                                                            <option <?php if(config('settings.site_currency_icon_position') === 'left'): echo 'selected'; endif; ?> value="left">Left</option>
                                                         </select>
                                                     </div>
                                                 </div>

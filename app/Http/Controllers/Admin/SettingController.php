@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use App\Services\SettingsService;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -28,6 +29,10 @@ class SettingController extends Controller
                 ['value' => $value]
             );
         }
+
+        $settingsService = app(SettingsService::class);
+        $settingsService->clearCachedSettings();
+
         toastr()->success('Cập nhật thành công!');
 
         return redirect()->back();
