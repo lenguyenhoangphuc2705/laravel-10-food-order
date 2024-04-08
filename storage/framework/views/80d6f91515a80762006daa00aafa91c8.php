@@ -142,7 +142,8 @@
             $('.button-click').click();
         })
     </script>
-
+    
+    <?php echo $__env->make('frontend.layouts.global-scripts', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     <?php echo $__env->yieldPushContent('scripts'); ?>
 </body>
 
