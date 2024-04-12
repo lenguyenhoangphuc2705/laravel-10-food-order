@@ -1,10 +1,10 @@
 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
     class="fal fa-times"></i></button>
 <div class="fp__cart_popup_img">
-<img src="images/menu1.png" alt="menu" class="img-fluid w-100">
+<img src="<?php echo e(asset($product->thumb_image)); ?>" alt="<?php echo e($product->name); ?>" class="img-fluid w-100">
 </div>
 <div class="fp__cart_popup_text">
-<a href="#" class="title">Maxican Pizza Test Better</a>
+<a href="<?php echo e(route('product.show', $product->slug)); ?>" class="title"><?php echo $product->name; ?></a>
 <p class="rating">
     <i class="fas fa-star"></i>
     <i class="fas fa-star"></i>
@@ -13,30 +13,33 @@
     <i class="far fa-star"></i>
     <span>(201)</span>
 </p>
-<h4 class="price">$320.00 <del>$350.00</del> </h4>
+<h4 class="price">
+    <?php if($product->offer_price > 0): ?>
+    <?php echo e(currencyPosition($product->offer_price)); ?>
 
+    <del><?php echo e(currencyPosition($product->price)); ?></del>
+    <?php else: ?>
+    <?php echo e(currencyPosition($product->offer_price)); ?>
+
+    <?php endif; ?>
+    
+</h4>
+
+
+<?php if($product->productSizes()->exists()): ?>
 <div class="details_size">
     <h5>select size</h5>
+    <?php $__currentLoopData = $product->productSizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $productSize): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="large"
-            checked>
-        <label class="form-check-label" for="large">
-            large <span>+ $350</span>
+        <input class="form-check-input" type="radio" name="flexRadioDefault" id="size-<?php echo e($productSize->id); ?>">
+        <label class="form-check-label" for="size-<?php echo e($productSize->id); ?>">
+            <?php echo e($productSize->name); ?> <span>+ <?php echo e(currencyPosiion($productSize->price)); ?></span>
         </label>
     </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="medium">
-        <label class="form-check-label" for="medium">
-            medium <span>+ $250</span>
-        </label>
-    </div>
-    <div class="form-check">
-        <input class="form-check-input" type="radio" name="flexRadioDefault" id="small">
-        <label class="form-check-label" for="small">
-            small <span>+ $150</span>
-        </label>
-    </div>
+    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 </div>
+<?php endif; ?>
+
 
 <div class="details_extra_item">
     <h5>select option <span>(optional)</span></h5>
