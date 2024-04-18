@@ -139,9 +139,11 @@
         });
 
         $(document).ready(function() {
-            $('.button-click').click();
+            $('.button-click').click(); 
         })
     </script>
+    
+    @include('frontend.layouts.global-scripts')
 
     @stack('scripts')
 </body>
