@@ -5,7 +5,8 @@
             method: 'GET',
             url: '<?php echo e(route("load-product-modal", ":productId")); ?>'.replace(':productId', productId),
             success: function(response){
-                console.log(response);
+                $(".load_product_modal_body").html(response);
+                $('#cartModal').modal('show');
             },
             error:function(xhr, status, error){
                 console.error(error);
