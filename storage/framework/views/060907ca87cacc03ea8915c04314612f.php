@@ -20,7 +20,7 @@
     <!--=============================
         OFFER ITEM START
     ==============================-->
-    <?php echo $__env->make('frontend.home.components.offer-item', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    
 
 
     <!-- CART POPUT START -->
