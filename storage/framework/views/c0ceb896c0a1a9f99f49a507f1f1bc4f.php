@@ -66,7 +66,11 @@
                     <input type="text" placeholder="1">
                     <button class="btn btn-success"><i class="fal fa-plus"></i></button>
                 </div>
-                <h3>$320.00</h3>
+                <?php if($product->offer_price > 0): ?>
+                <h3 id="total_price"><?php echo e(currencyPosition($product->offer_price)); ?></h3>
+                <?php else: ?>
+                <h3 id="total_price"><?php echo e(currencyPosition($product->price)); ?></h3>
+                <?php endif; ?>
             </div>
         </div>
         <ul class="details_button_area d-flex flex-wrap">
@@ -77,6 +81,10 @@
 <script>
      $(document).ready(function(){
         $('input[name="product_size"]').on('change', function(){
+            updateTotalPrice();
+        });
+
+        $('input[name="product_option[]"]').on('change', function(){
             updateTotalPrice();
         });
 
@@ -91,7 +99,17 @@
             if(selectedSize.length > 0){
                 selectedSizePrice = parseFloat(selectedSize.data("price"));
             }
-            alert(selectedSizePrice);
+            
+            //Calculate selected options price
+            let selectedOptions = $('input[name="product_option[]"]:checked');
+            $(selectedOptions).each(function(){
+                selectedOptionPrice += parseFloat($(this).data("price"));
+            })
+           
+            //Calculate the total price 
+            let totalPrice = basePrice + selectedOptionPrice + selectedSizePrice;
+
+            $('#total_price').text("<?php echo e(config('settings.site_currency_icon')); ?>"+ totalPrice);
         }
      })
 </script><?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/frontend/layouts/ajax-files/product-popup-modal.blade.php ENDPATH**/ ?>
