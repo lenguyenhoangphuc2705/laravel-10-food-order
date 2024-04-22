@@ -1,7 +1,7 @@
 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fal fa-times"></i></button>
 
-<form action="">
-
+<form action="" id="modal_add_to_cart_form">
+<input type="hidden" name="product_id" value="<?php echo e($product->id); ?>">
     <div class="fp__cart_popup_img">
         <img src="<?php echo e(asset($product->thumb_image)); ?>" alt="<?php echo e($product->name); ?>" class="img-fluid w-100">
     </div>
@@ -63,7 +63,7 @@
             <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
                 <div class="quentity_btn">
                     <button class="btn btn-danger decrement"><i class="fal fa-minus"></i></button>
-                    <input type="text" id="quantity" placeholder="1" value="1" readonly>
+                    <input type="text" id="quantity" name="quantity" placeholder="1" value="1" readonly>
                     <button class="btn btn-success increment"><i class="fal fa-plus"></i></button>
                 </div>
                 <?php if($product->offer_price > 0): ?>
@@ -74,7 +74,8 @@
             </div>
         </div>
         <ul class="details_button_area d-flex flex-wrap">
-            <li><a class="common_btn" href="#">add to cart</a></li>
+            
+            <li><button type="submit" class="common_btn"> add to cart</button></li>
         </ul>
     </div>
 </form>
@@ -133,5 +134,21 @@
 
             $('#total_price').text("<?php echo e(config('settings.site_currency_icon')); ?>"+ totalPrice);
         }
+     })
+     // Add to cart function
+     $("#modal_add_to_cart_form").on('submit', function(e){
+        e.preventDefault();
+        let formData = $(this).serialize();
+        $.ajax({
+            method: 'POSt',
+            url: '<?php echo e(route("add-to-cart")); ?>',
+            data: formData,
+            success: function(response){
+
+            },
+            error: function(xhr, status, error){
+                console.error(error);
+            },
+        })
      })
 </script><?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/frontend/layouts/ajax-files/product-popup-modal.blade.php ENDPATH**/ ?>
