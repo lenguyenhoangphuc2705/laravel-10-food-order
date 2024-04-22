@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\FrontendController;
 use App\Http\Controllers\Frontend\ProfileController;
@@ -49,3 +50,6 @@ Route::get('/product/{slug}', [FrontendController::class, 'showProduct'])->name(
 /**Product modal route */
 Route::get('/load-product-modal/{productId}',[FrontendController::class, 'loadProductModal'])
 ->name('load-product-modal');
+
+/**Add to cart route */
+Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
