@@ -1,4 +1,15 @@
 <?php return array (
+  'anayarojo/shoppingcart' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Gloudemans\\Shoppingcart\\ShoppingcartServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Cart' => 'Gloudemans\\Shoppingcart\\Facades\\Cart',
+    ),
+  ),
   'barryvdh/laravel-debugbar' => 
   array (
     'providers' => 
