@@ -136,6 +136,18 @@
      // Add to cart function
      $("#modal_add_to_cart_form").on('submit', function(e){
         e.preventDefault();
+
+        //Validation
+        let selectedSize = $("input[name='product_size']");
+        if(selectedSize.length){
+            if($("input[name='product_size']:checked").val() === undefined){
+            toastr.error('Vui lòng chọn kích thước sản phẩm');
+            console.error('Vui lòng chọn kích thước sản phẩm');
+            return;
+        }
+        }
+        
+
         let formData = $(this).serialize();
         $.ajax({
             method: 'POSt',
