@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Cart;
+use Exception;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -12,6 +13,7 @@ class CartController extends Controller
     //Add product to cart
     function addToCart(Request $request){
         //dd($product->all());
+        try{
         $product = Product::with(['productSizes', 'productOptions'])->findOrFail($request->product_id);
         $productSize = $product->productSizes->where('id', $request->product_size)->first();
         $productOptions = $product->productOptions->whereIn('id',$request->product_option);
@@ -53,7 +55,11 @@ class CartController extends Controller
             'options' => $options,
         ]);
 
-        return response(['status' => 'success', 'message' => 'Product added into cart'], 200);
+        return response(['status' => 'success', 'message' => 'Sản phẩm đã được thêm vào giỏ hàng!'], 200);
+
+    }catch(\Exception $e){
+        return response(['status' => 'error', 'message' => 'Có gì đó không ổn!'], 500);
+    }
 
     }   
 }
