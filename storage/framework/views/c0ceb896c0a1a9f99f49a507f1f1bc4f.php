@@ -1,7 +1,7 @@
 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="fal fa-times"></i></button>
 
 <form action="" id="modal_add_to_cart_form">
-<input type="hidden" name="product_id" value="<?php echo e($product->id); ?>">
+    <input type="hidden" name="product_id" value="<?php echo e($product->id); ?>">
     <div class="fp__cart_popup_img">
         <img src="<?php echo e(asset($product->thumb_image)); ?>" alt="<?php echo e($product->name); ?>" class="img-fluid w-100">
     </div>
@@ -17,12 +17,12 @@
         </p>
         <h4 class="price">
             <?php if($product->offer_price > 0): ?>
-            <input type="hidden" name="base_price" value="<?php echo e($product->offer_price); ?>">
+                <input type="hidden" name="base_price" value="<?php echo e($product->offer_price); ?>">
                 <?php echo e(currencyPosition($product->offer_price)); ?>
 
                 <del><?php echo e(currencyPosition($product->price)); ?></del>
             <?php else: ?>
-            <input type="hidden" name="base_price" value="<?php echo e($product->price); ?>">
+                <input type="hidden" name="base_price" value="<?php echo e($product->price); ?>">
                 <?php echo e(currencyPosition($product->price)); ?>
 
             <?php endif; ?>
@@ -33,7 +33,8 @@
                 <?php $__currentLoopData = $product->productSizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $productSize): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" value="<?php echo e($productSize->id); ?>"
-                           data-price="<?php echo e($productSize->price); ?>" name="product_size" id="size-<?php echo e($productSize->id); ?>">
+                            data-price="<?php echo e($productSize->price); ?>" name="product_size"
+                            id="size-<?php echo e($productSize->id); ?>">
                         <label class="form-check-label" for="size-<?php echo e($productSize->id); ?>">
                             <?php echo e($productSize->name); ?> <span>+ <?php echo e(currencyPosition($productSize->price)); ?></span>
                         </label>
@@ -47,7 +48,8 @@
                 <h5>select option <span>(optional)</span></h5>
                 <?php $__currentLoopData = $product->productOptions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $productOption): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="product_option[]" data-price="<?php echo e($productOption->price); ?>" value="<?php echo e($productOption->id); ?>"
+                        <input class="form-check-input" type="checkbox" name="product_option[]"
+                            data-price="<?php echo e($productOption->price); ?>" value="<?php echo e($productOption->id); ?>"
                             id="option-<?php echo e($productOption->id); ?>">
                         <label class="form-check-label" for="option-<?php echo e($productOption->id); ?>">
                             <?php echo e($productOption->name); ?> <span>+ <?php echo e(currencyPosition($productOption->price)); ?></span>
@@ -67,101 +69,112 @@
                     <button class="btn btn-success increment"><i class="fal fa-plus"></i></button>
                 </div>
                 <?php if($product->offer_price > 0): ?>
-                <h3 id="total_price"><?php echo e(currencyPosition($product->offer_price)); ?></h3>
+                    <h3 id="total_price"><?php echo e(currencyPosition($product->offer_price)); ?></h3>
                 <?php else: ?>
-                <h3 id="total_price"><?php echo e(currencyPosition($product->price)); ?></h3>
+                    <h3 id="total_price"><?php echo e(currencyPosition($product->price)); ?></h3>
                 <?php endif; ?>
             </div>
         </div>
         <ul class="details_button_area d-flex flex-wrap">
-            
-            <li><button type="submit" class="common_btn"> add to cart</button></li>
+            <li><button type="submit" class="common_btn modal_cart_button"> add to cart</button></li>
         </ul>
     </div>
 </form>
 <script>
-     $(document).ready(function(){
-        $('input[name="product_size"]').on('change', function(){
+    $(document).ready(function() {
+        $('input[name="product_size"]').on('change', function() {
             updateTotalPrice();
         });
 
-        $('input[name="product_option[]"]').on('change', function(){
+        $('input[name="product_option[]"]').on('change', function() {
             updateTotalPrice();
         });
 
         //event handler for increment and decrement
-        $('.increment').on('click', function(e){
+        $('.increment').on('click', function(e) {
             e.preventDefault()
             let quantity = $('#quantity');
             let currentQuantity = parseFloat(quantity.val());
-            quantity.val(currentQuantity+1);
+            quantity.val(currentQuantity + 1);
             updateTotalPrice()
         })
 
-        $('.decrement').on('click', function(e){
+        $('.decrement').on('click', function(e) {
             e.preventDefault()
             let quantity = $('#quantity');
             let currentQuantity = parseFloat(quantity.val());
-            if(currentQuantity > 1){
-                quantity.val(currentQuantity-1);
+            if (currentQuantity > 1) {
+                quantity.val(currentQuantity - 1);
                 updateTotalPrice()
             }
-            
+
         })
 
         // function to update the total price base on selected options
-        function updateTotalPrice(){
+        function updateTotalPrice() {
             let basePrice = parseFloat($('input[name="base_price"]').val());
             let selectedSizePrice = 0;
             let selectedOptionPrice = 0;
             let quantity = parseFloat($('#quantity').val());
             //Calculate selected size price
             let selectedSize = $('input[name="product_size"]:checked');
-            if(selectedSize.length > 0){
+            if (selectedSize.length > 0) {
                 selectedSizePrice = parseFloat(selectedSize.data("price"));
             }
-            
+
             //Calculate selected options price
             let selectedOptions = $('input[name="product_option[]"]:checked');
-            $(selectedOptions).each(function(){
+            $(selectedOptions).each(function() {
                 selectedOptionPrice += parseFloat($(this).data("price"));
             })
 
-            
-           
+
+
             //Calculate the total price 
             let totalPrice = quantity * (basePrice + selectedOptionPrice + selectedSizePrice);
 
-            $('#total_price').text("<?php echo e(config('settings.site_currency_icon')); ?>"+ totalPrice);
+            $('#total_price').text("<?php echo e(config('settings.site_currency_icon')); ?>" + totalPrice);
         }
-     })
-     // Add to cart function
-     $("#modal_add_to_cart_form").on('submit', function(e){
+    })
+    // Add to cart function
+    $("#modal_add_to_cart_form").on('submit', function(e) {
         e.preventDefault();
 
         //Validation
         let selectedSize = $("input[name='product_size']");
-        if(selectedSize.length){
-            if($("input[name='product_size']:checked").val() === undefined){
-            toastr.error('Vui lòng chọn kích thước sản phẩm');
-            console.error('Vui lòng chọn kích thước sản phẩm');
-            return;
+        if (selectedSize.length) {
+            if ($("input[name='product_size']:checked").val() === undefined) {
+                toastr.error('Vui lòng chọn kích thước sản phẩm');
+                console.error('Vui lòng chọn kích thước sản phẩm');
+                return;
+            }
         }
-        }
-        
+
 
         let formData = $(this).serialize();
         $.ajax({
-            method: 'POSt',
-            url: '<?php echo e(route("add-to-cart")); ?>',
+            method: 'post', // Changed to lowercase 'post'
+            url: '<?php echo e(route('add-to-cart')); ?>',
             data: formData,
-            success: function(response){
+            beforeSend: function() {
+                $('.modal_cart_button').attr('disabled', true);
+                $('.modal_cart_button').html(
+                    '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span> <span role="status"> Loading... </span>'
+                    );
+            },
+            success: function(response) {
                 toastr.success(response.message);
             },
-            error: function(xhr, status, error){
+            error: function(xhr, status, error) {
                 let errorMessage = xhr.responseJSON.message;
                 toastr.error(errorMessage);
             },
-        })
-     })
-</script><?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/frontend/layouts/ajax-files/product-popup-modal.blade.php ENDPATH**/ ?>
+            complete: function() { // Changed 'completed' to 'complete'
+                $('.modal_cart_button').html('Add to Cart');
+                $('.modal_cart_button').attr('disabled', false);
+            }
+        });
+
+    })
+</script>
+<?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/frontend/layouts/ajax-files/product-popup-modal.blade.php ENDPATH**/ ?>
