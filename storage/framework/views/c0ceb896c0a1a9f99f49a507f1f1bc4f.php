@@ -164,6 +164,7 @@
             },
             success: function(response) {
                 toastr.success(response.message);
+                updateSidebarCart();
             },
             error: function(xhr, status, error) {
                 let errorMessage = xhr.responseJSON.message;

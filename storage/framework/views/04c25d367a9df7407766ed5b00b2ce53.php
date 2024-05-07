@@ -79,28 +79,37 @@
             <h5>total item (05)</h5>
             <span class="close_cart"><i class="fal fa-times"></i></span>
         </div>
-        <ul>
+        <ul class="cart_contents">
             <?php $__currentLoopData = Cart::content(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cartProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-            <li>
-                <div class="menu_cart_img">
-                    <img src="<?php echo e(asset($cartProduct->options->product_info['image'])); ?>" alt="menu" class="img-fluid w-100">
-                </div>
-                <div class="menu_cart_text">
-                    <a class="title" href=<?php echo e(route('product.show', $cartProduct->options->product_info['slug'])); ?>"><?php echo $cartProduct->name; ?> </a>
-                    <p class="size">Qty: <?php echo e($cartProduct->qty); ?></p>
-                    <p class="size"><?php echo e(@$cartProduct->options->product_size['name']); ?></p>
-                    
-                    <p class="price"><?php echo e(currencyPosition($cartProduct->price)); ?></p>
-                </div>
-                <span class="del_icon"><i class="fal fa-times"></i></span>
-            </li> 
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            
+                <li>
+                    <div class="menu_cart_img">
+                        <img src="<?php echo e(asset($cartProduct->options->product_info['image'])); ?>" alt="menu"
+                            class="img-fluid w-100">
+                    </div>
+                    <div class="menu_cart_text">
+                        <a class="title"
+                            href=<?php echo e(route('product.show', $cartProduct->options->product_info['slug'])); ?>"><?php echo $cartProduct->name; ?>
 
-            
-            
+                        </a>
+                        <p class="size">Qty: <?php echo e($cartProduct->qty); ?></p>
+                        <p class="size"><?php echo e(@$cartProduct->options->product_size['name']); ?>
+
+                            <?php echo e(@$cartProduct->options->product_size['price'] ? '('.currencyPosition(@$cartProduct->options->product_size['price']).')' : ''); ?></p>
+
+                        <?php $__currentLoopData = $cartProduct->options->product_options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cartProductOption): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <span class="extra"><?php echo e($cartProductOption['name']); ?> (<?php echo e(currencyPosition($cartProductOption['price'])); ?>)</span>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
+                        <p class="price"><?php echo e(currencyPosition($cartProduct->price)); ?></p>
+                    </div>
+                    <span class="del_icon"><i class="fal fa-times"></i></span>
+                </li>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
+
         </ul>
-        <p class="subtotal">sub total <span>$1220.00</span></p>
+        <p class="subtotal">sub total <span><?php echo e(currencyPosition(cartTotal())); ?></span></p>
         <a class="cart_view" href="cart_view.html"> view cart</a>
         <a class="checkout" href="check_out.html">checkout</a>
     </div>

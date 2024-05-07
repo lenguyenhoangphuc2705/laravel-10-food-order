@@ -8,7 +8,7 @@
             <div class="card-header">
                 <h4>All Settings</h4>
             </div>
-            <div class="card-body">
+            < class="card-body">
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-2">
                         <ul class="nav nav-pills flex-column" id="myTab4" role="tablist">
@@ -89,7 +89,7 @@
                             </div>
                         </div>
                     </div>
-               
+                </div>
             </div>
         </div>
     </section>
