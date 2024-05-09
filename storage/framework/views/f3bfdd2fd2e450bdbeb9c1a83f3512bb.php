@@ -33,6 +33,8 @@
             },
             success: function(response){
                 $('.cart_contents').html(response);
+                let cartTotal = $('#cart_total').val();
+                $('.cart_subtotal').text("<?php echo e(currencyPosition(':cartTotal')); ?>".replace(':cartTotal', cartTotal));
             },
             error:function(xhr, status, error){
                 console.error(error);
