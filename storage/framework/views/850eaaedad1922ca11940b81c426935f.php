@@ -1,3 +1,4 @@
+<input type="hidden" value="<?php echo e(cartTotal()); ?>" id="cart_total">
 <?php $__currentLoopData = Cart::content(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cartProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 <li>
     <div class="menu_cart_img">

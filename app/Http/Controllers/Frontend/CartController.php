@@ -64,7 +64,7 @@ class CartController extends Controller
     }
 
     function getCartProduct() {
-        $products = Cart::content();
+        
         return view('frontend.layouts.ajax-files.sidebar-cart-item')->render();
     }
 }
