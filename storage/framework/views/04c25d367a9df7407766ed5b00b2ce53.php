@@ -50,6 +50,7 @@
             <ul class="menu_icon d-flex flex-wrap">
                 <li>
                     <a href="#" class="menu_search"><i class="far fa-search"></i></a>
+
                     <div class="fp__search_form">
                         <form>
                             <span class="close_search"><i class="far fa-times"></i></span>
@@ -59,7 +60,7 @@
                     </div>
                 </li>
                 <li>
-                    <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span>5</span></a>
+                    <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span class="cart_count"><?php echo e(count(Cart::content())); ?></span></a>
                 </li>
                 <li>
                     <a href="<?php echo e(route('login')); ?>"><i class="fas fa-user"></i></a>
@@ -76,7 +77,7 @@
 <div class="fp__menu_cart_area">
     <div class="fp__menu_cart_boody">
         <div class="fp__menu_cart_header">
-            <h5>total item (05)</h5>
+            <h5>Số lượng sản phẩm (<span class="cart_count" style="font-size: 20px"><?php echo e(count(Cart::content())); ?></span>)</h5>
             <span class="close_cart"><i class="fal fa-times"></i></span>
         </div>
         <ul class="cart_contents">
@@ -91,14 +92,22 @@
                             href=<?php echo e(route('product.show', $cartProduct->options->product_info['slug'])); ?>"><?php echo $cartProduct->name; ?>
 
                         </a>
-                        <p class="size">Qty: <?php echo e($cartProduct->qty); ?></p>
+                        <p class="size">Số lượng: <?php echo e($cartProduct->qty); ?></p>
+
                         <p class="size"><?php echo e(@$cartProduct->options->product_size['name']); ?>
 
-                            <?php echo e(@$cartProduct->options->product_size['price'] ? '('.currencyPosition(@$cartProduct->options->product_size['price']).')' : ''); ?></p>
+                            <?php echo e(@$cartProduct->options->product_size['price'] ? '(' . currencyPosition(@$cartProduct->options->product_size['price']) . ')' : ''); ?>
 
-                        <?php $__currentLoopData = $cartProduct->options->product_options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cartProductOption): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <span class="extra"><?php echo e($cartProductOption['name']); ?> (<?php echo e(currencyPosition($cartProductOption['price'])); ?>)</span>
-                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        </p>
+
+                        <?php if($cartProduct->options && $cartProduct->options->product_options): ?>
+                            <?php $__currentLoopData = $cartProduct->options->product_options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $cartProductOption): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <span class="extra"><?php echo e($cartProductOption['name']); ?>
+
+                                    (<?php echo e(currencyPosition($cartProductOption['price'])); ?>)</span>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                        <?php endif; ?>
+
 
 
                         <p class="price"><?php echo e(currencyPosition($cartProduct->price)); ?></p>
@@ -109,9 +118,9 @@
 
 
         </ul>
-        <p class="subtotal">sub total <span class="cart_subtotal"><?php echo e(currencyPosition(cartTotal())); ?></span></p>
-        <a class="cart_view" href="cart_view.html"> view cart</a>
-        <a class="checkout" href="check_out.html">checkout</a>
+        <p class="subtotal">Tổng phụ <span class="cart_subtotal"><?php echo e(currencyPosition(cartTotal())); ?></span></p>
+        <a class="cart_view" href="cart_view.html">Xem giỏ hàng</a>
+        <a class="checkout" href="check_out.html">Thanh toán</a>
     </div>
 </div>
 
