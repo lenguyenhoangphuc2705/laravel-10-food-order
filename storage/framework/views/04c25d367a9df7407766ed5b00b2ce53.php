@@ -112,7 +112,7 @@
 
                         <p class="price"><?php echo e(currencyPosition($cartProduct->price)); ?></p>
                     </div>
-                    <span class="del_icon"><i class="fal fa-times"></i></span>
+                    <span class="del_icon" onclick="removeProductFromSidebar('<?php echo e($cartProduct->rowId); ?>')"><i class="fal fa-times"></i></span>
                 </li>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
