@@ -38,17 +38,32 @@ if (!function_exists('cartTotal')) {
     function cartTotal()
     {
         $total = 0;
-        foreach(Cart::content() as $item){
-            
-            $productPrice = $item -> price;
-            $sizePrice = $item->options?->product_size['price'] ?? 0;
-            $optionsPrice = 0;
-            foreach($item->options?->product_options as $option){
-                $optionsPrice += $option['price'];
+
+        foreach (Cart::content() as $item) {
+            // Kiểm tra nếu $item có tồn tại và không phải null
+            if ($item) {
+                $productPrice = $item->price;
+
+                // Kiểm tra nếu $item->options và $item->options->product_size có tồn tại và không phải null trước khi truy cập thuộc tính
+                $sizePrice = isset($item->options->product_size['price']) ? $item->options->product_size['price'] : 0;
+
+                $optionsPrice = 0;
+                
+                // Kiểm tra nếu $item->options và $item->options->product_options có tồn tại và không phải null trước khi lặp qua
+                if ($item->options && $item->options->product_options) {
+                    foreach ($item->options->product_options as $option) {
+                        // Kiểm tra nếu $option có tồn tại và không phải null trước khi truy cập thuộc tính
+                        if ($option) {
+                            $optionsPrice += $option['price'];
+                        }
+                    }
+                }
+
+                $total += ($productPrice + $sizePrice + $optionsPrice) * $item->qty;
             }
-            $total += ($productPrice + $sizePrice + $optionsPrice) * $item->qty; 
         }
+
         return $total;
     }
-
 }
+

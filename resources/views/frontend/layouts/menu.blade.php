@@ -50,6 +50,7 @@
             <ul class="menu_icon d-flex flex-wrap">
                 <li>
                     <a href="#" class="menu_search"><i class="far fa-search"></i></a>
+
                     <div class="fp__search_form">
                         <form>
                             <span class="close_search"><i class="far fa-times"></i></span>
@@ -59,7 +60,7 @@
                     </div>
                 </li>
                 <li>
-                    <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span>5</span></a>
+                    <a class="cart_icon"><i class="fas fa-shopping-basket"></i> <span class="cart_count">{{ count(Cart::content()) }}</span></a>
                 </li>
                 <li>
                     <a href="{{ route('login') }}"><i class="fas fa-user"></i></a>
@@ -76,7 +77,7 @@
 <div class="fp__menu_cart_area">
     <div class="fp__menu_cart_boody">
         <div class="fp__menu_cart_header">
-            <h5>total item (05)</h5>
+            <h5>Số lượng sản phẩm (<span class="cart_count" style="font-size: 20px">{{ count(Cart::content()) }}</span>)</h5>
             <span class="close_cart"><i class="fal fa-times"></i></span>
         </div>
         <ul class="cart_contents">
@@ -90,13 +91,19 @@
                         <a class="title"
                             href={{ route('product.show', $cartProduct->options->product_info['slug']) }}">{!! $cartProduct->name !!}
                         </a>
-                        <p class="size">Qty: {{ $cartProduct->qty }}</p>
-                        <p class="size">{{ @$cartProduct->options->product_size['name'] }}
-                            {{ @$cartProduct->options->product_size['price'] ? '('.currencyPosition(@$cartProduct->options->product_size['price']).')' : '' }}</p>
+                        <p class="size">Số lượng: {{ $cartProduct->qty }}</p>
 
-                        @foreach ($cartProduct->options->product_options as $cartProductOption)
-                            <span class="extra">{{ $cartProductOption['name'] }} ({{ currencyPosition($cartProductOption['price']) }})</span>
-                        @endforeach
+                        <p class="size">{{ @$cartProduct->options->product_size['name'] }}
+                            {{ @$cartProduct->options->product_size['price'] ? '(' . currencyPosition(@$cartProduct->options->product_size['price']) . ')' : '' }}
+                        </p>
+
+                        @if ($cartProduct->options && $cartProduct->options->product_options)
+                            @foreach ($cartProduct->options->product_options as $cartProductOption)
+                                <span class="extra">{{ $cartProductOption['name'] }}
+                                    ({{ currencyPosition($cartProductOption['price']) }})</span>
+                            @endforeach
+                        @endif
+
 
 
                         <p class="price">{{ currencyPosition($cartProduct->price) }}</p>
@@ -107,9 +114,9 @@
 
 
         </ul>
-        <p class="subtotal">sub total <span class="cart_subtotal">{{ currencyPosition(cartTotal()) }}</span></p>
-        <a class="cart_view" href="cart_view.html"> view cart</a>
-        <a class="checkout" href="check_out.html">checkout</a>
+        <p class="subtotal">Tổng phụ <span class="cart_subtotal">{{ currencyPosition(cartTotal()) }}</span></p>
+        <a class="cart_view" href="cart_view.html">Xem giỏ hàng</a>
+        <a class="checkout" href="check_out.html">Thanh toán</a>
     </div>
 </div>
 
