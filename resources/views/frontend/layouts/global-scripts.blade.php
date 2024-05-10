@@ -48,4 +48,17 @@
         })
     }
 
+/**Remove card product from sidebar */
+function removeProductFromSidebar($rowId){
+    $.ajax({
+        method: 'GET',
+        url: '{{ route("cart-product-remove", ":rowId") }}'.replace(":rowId", $rowId),
+        success: function(response){
+
+        },
+        error: function(xhr, status, error){
+            console.log(error);
+        }
+    })
+}
 </script>

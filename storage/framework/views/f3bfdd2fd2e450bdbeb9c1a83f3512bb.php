@@ -48,4 +48,17 @@
         })
     }
 
+/**Remove card product from sidebar */
+function removeProductFromSidebar($rowId){
+    $.ajax({
+        method: 'GET',
+        url: '<?php echo e(route("cart-product-remove", ":rowId")); ?>'.replace(":rowId", $rowId),
+        success: function(response){
+
+        },
+        error: function(xhr, status, error){
+            console.log(error);
+        }
+    })
+}
 </script><?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/frontend/layouts/global-scripts.blade.php ENDPATH**/ ?>
