@@ -1,7 +1,7 @@
 <?php $__env->startSection('content'); ?>
-<!--=============================
-        BREADCRUMB START
-    ==============================-->
+    <!--=============================
+                    BREADCRUMB START
+                ==============================-->
     <section class="fp__breadcrumb" style="background: url(<?php echo e(asset('frontend/images/counter_bg.jpg')); ?>);">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -16,13 +16,13 @@
         </div>
     </section>
     <!--=============================
-        BREADCRUMB END
-    ==============================-->
+                    BREADCRUMB END
+                ==============================-->
 
 
     <!--=============================
-        MENU DETAILS START
-    ==============================-->
+                    MENU DETAILS START
+                ==============================-->
     <section class="fp__menu_details mt_115 xs_mt_85 mb_95 xs_mb_65">
         <div class="container">
             <div class="row">
@@ -30,12 +30,13 @@
                     <div class="exzoom hidden" id="exzoom">
                         <div class="exzoom_img_box fp__menu_details_images">
                             <ul class='exzoom_img_ul'>
-                                <li><img class="zoom ing-fluid w-100" src="<?php echo e(asset($product->thumb_image)); ?>" alt="product"></li>
+                                <li><img class="zoom ing-fluid w-100" src="<?php echo e(asset($product->thumb_image)); ?>"
+                                        alt="product"></li>
 
 
                                 <?php $__currentLoopData = $product->productImages; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $image): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-
-                                <li><img class="zoom ing-fluid w-100" src="<?php echo e(asset($image->image)); ?>" alt="product"></li>
+                                    <li><img class="zoom ing-fluid w-100" src="<?php echo e(asset($image->image)); ?>" alt="product">
+                                    </li>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
                             </ul>
@@ -61,55 +62,73 @@
                             <span>(201)</span>
                         </p>
                         <h3 class="price">
-                            <?php if($product->offer_price >0): ?>
-                              <?php echo e(currencyPosition($product->offer_price)); ?>
+                            <?php if($product->offer_price > 0): ?>
+                                <?php echo e(currencyPosition($product->offer_price)); ?>
 
-                              <del><?php echo e(currencyPosition($product->price )); ?></del>
-                              <?php else: ?>
-                              <?php echo e(currencyPosition($product->price )); ?>
+                                <del><?php echo e(currencyPosition($product->price)); ?></del>
+                            <?php else: ?>
+                                <?php echo e(currencyPosition($product->price)); ?>
 
-                              <?php endif; ?>
-                         </h3>
+                            <?php endif; ?>
+                        </h3>
                         <p class="short_description"><?php echo $product->short_description; ?></p>
-                        <?php if($product->productSizes()->exists()): ?>
-                         <div class="details_size">
-                            <h5>select size</h5>
-                            <?php $__currentLoopData = $product->productSizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $productSize): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                              <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="size-<?php echo e($productSize->id); ?>" checked>
-                                <label class="form-check-label" for="size-<?php echo e($productSize->id); ?>">
-                                    <?php echo e($productSize->name); ?> <span>+ $<?php echo e($productSize->price); ?></span>
-                                </label>
-                              </div>
-                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                         </div>
-                        <?php endif; ?>
 
-                        <?php if($product->productOptions()->exists()): ?>
-                           <div class="details_extra_item">
-                              <h5>select option <span>(optional)</span></h5>
-                                <?php $__currentLoopData = $product->productOptions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $productOption): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="option-<?php echo e($productOption->id); ?>">
-                                    <label class="form-check-label" for="option-<?php echo e($productOption->id); ?>">
-                                        <?php echo e($productOption->name); ?> <span>+ $<?php echo e($productOption->price); ?></span>
-                                    </label>
+                        <form action="">
+                            <?php echo csrf_field(); ?>
+                            <input type="hidden" name="base_price" class="v_base_price"
+                                value="<?php echo e($product->offer_price > 0 ? $product->offer_price : $product->price); ?>">
+                            <?php if($product->productSizes()->exists()): ?>
+                                <div class="details_size">
+                                    <h5>select size</h5>
+                                    <?php $__currentLoopData = $product->productSizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $productSize): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <div class="form-check">
+                                            <input class="form-check-input v_product_size" type="radio"
+                                                name="flexRadioDefault" id="size-<?php echo e($productSize->id); ?>"
+                                                data-price="<?php echo e($productSize->price); ?>">
+                                            <label class="form-check-label" for="size-<?php echo e($productSize->id); ?>">
+                                                <?php echo e($productSize->name); ?> <span>+ $<?php echo e($productSize->price); ?></span>
+                                            </label>
+                                        </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                           </div>
-                        <?php endif; ?>
+                            <?php endif; ?>
 
-                        <div class="details_quentity">
-                            <h5>select quentity</h5>
-                            <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
-                                <div class="quentity_btn">
-                                    <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
-                                    <input type="text" placeholder="1">
-                                    <button class="btn btn-success"><i class="fal fa-plus"></i></button>
+                            <?php if($product->productOptions()->exists()): ?>
+                                <div class="details_extra_item">
+                                    <h5>select option <span>(optional)</span></h5>
+                                    <?php $__currentLoopData = $product->productOptions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $productOption): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <div class="form-check">
+                                            <input class="form-check-input v_product_option" type="checkbox" value=""
+                                                id="option-<?php echo e($productOption->id); ?>"
+                                                data-price="<?php echo e($productOption->price); ?>">
+                                            <label class="form-check-label" for="option-<?php echo e($productOption->id); ?>">
+                                                <?php echo e($productOption->name); ?> <span>+ $<?php echo e($productOption->price); ?></span>
+                                            </label>
+                                        </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
-                                <h3>$320.00</h3>
+                            <?php endif; ?>
+
+                            <div class="details_quentity">
+                                <h5>select quentity</h5>
+                                <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
+                                    <div class="quentity_btn">
+                                        <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
+                                        <input type="text" placeholder="1">
+                                        <button class="btn btn-success"><i class="fal fa-plus"></i></button>
+                                    </div>
+                                    <?php if($product->offer_price > 0): ?>
+                                        <h3 id="v_total_price"><?php echo e(currencyPosition($product->offer_price)); ?></h3>
+                                    <?php else: ?>
+                                        <h3 id="v_total_price"><?php echo e(currencyPosition($product->price)); ?></h3>
+                                    <?php endif; ?>
+                                </div>
                             </div>
-                        </div>
+
+                        </form>
+
+
+
                         <ul class="details_button_area d-flex flex-wrap">
                             <li><a class="common_btn" href="#">add to cart</a></li>
                             <li><a class="wishlist" href="#"><i class="far fa-heart"></i></a></li>
@@ -134,7 +153,7 @@
                             <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
                                 aria-labelledby="pills-home-tab" tabindex="0">
                                 <div class="menu_det_description">
-                                   <?php echo $product->long_description; ?>
+                                    <?php echo $product->long_description; ?>
 
                                 </div>
                             </div>
@@ -237,8 +256,7 @@
                                                             <input type="email" placeholder="Email">
                                                         </div>
                                                         <div class="col-xl-12">
-                                                            <textarea rows="3"
-                                                                placeholder="Write your review"></textarea>
+                                                            <textarea rows="3" placeholder="Write your review"></textarea>
                                                         </div>
                                                         <div class="col-12">
                                                             <button class="common_btn" type="submit">submit
@@ -257,52 +275,53 @@
             </div>
 
 
-            <?php if(count($relateProducts ) > 0 ): ?>
-            <div class="fp__related_menu mt_90 xs_mt_60">
-                <h2>related item</h2>
-                <div class="row related_product_slider">
-                    <?php $__currentLoopData = $relateProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $relateProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
-                        <div class="fp__menu_item">
-                            <div class="fp__menu_item_img">
-                                <img src="<?php echo e(asset($relateProduct->thumb_image)); ?>" alt="<?php echo e($relateProduct->name); ?>" class="img-fluid w-100">
-                                <a class="category" href="#"><?php echo e(@$relateProduct->category->name); ?></a>
+            <?php if(count($relateProducts) > 0): ?>
+                <div class="fp__related_menu mt_90 xs_mt_60">
+                    <h2>related item</h2>
+                    <div class="row related_product_slider">
+                        <?php $__currentLoopData = $relateProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $relateProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
+                                <div class="fp__menu_item">
+                                    <div class="fp__menu_item_img">
+                                        <img src="<?php echo e(asset($relateProduct->thumb_image)); ?>"
+                                            alt="<?php echo e($relateProduct->name); ?>" class="img-fluid w-100">
+                                        <a class="category" href="#"><?php echo e(@$relateProduct->category->name); ?></a>
+                                    </div>
+                                    <div class="fp__menu_item_text">
+                                        <p class="rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <i class="far fa-star"></i>
+                                            <span>74</span>
+                                        </p>
+                                        <a class="title"
+                                            href="<?php echo e(route('product.show', $relateProduct->slug)); ?>"><?php echo $relateProduct->name; ?></a>
+                                        <h5 class="price">
+                                            <?php if($relateProduct->offer_price > 0): ?>
+                                                <?php echo e(currencyPosition($relateProduct->offer_price)); ?>
+
+                                                <del><?php echo e(currencyPosition($relateProduct->price)); ?></del>
+                                            <?php else: ?>
+                                                <?php echo e(currencyPosition($relateProduct->price)); ?>
+
+                                            <?php endif; ?>
+
+
+                                        </h5>
+                                        <ul class="d-flex flex-wrap justify-content-center">
+                                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#cartModal"><i
+                                                        class="fas fa-shopping-basket"></i></a></li>
+                                            <li><a href="#"><i class="fal fa-heart"></i></a></li>
+                                            <li><a href="#"><i class="far fa-eye"></i></a></li>
+                                        </ul>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="fp__menu_item_text">
-                                <p class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star-half-alt"></i>
-                                    <i class="far fa-star"></i>
-                                    <span>74</span>
-                                </p>
-                                <a class="title" href="<?php echo e(route('product.show', $relateProduct->slug )); ?>"><?php echo $relateProduct->name; ?></a>
-                                <h5 class="price">
-                                    <?php if($relateProduct->offer_price >0): ?>
-                                        <?php echo e(currencyPosition($relateProduct->offer_price)); ?>
-
-                                        <del><?php echo e(currencyPosition($relateProduct->price)); ?></del>
-                                        <?php else: ?>
-                                        <?php echo e(currencyPosition($relateProduct->price)); ?>
-
-                                    <?php endif; ?>
-
-
-                                </h5>
-                                <ul class="d-flex flex-wrap justify-content-center">
-                                    <li><a href="#" data-bs-toggle="modal" data-bs-target="#cartModal"><i
-                                                class="fas fa-shopping-basket"></i></a></li>
-                                    <li><a href="#"><i class="fal fa-heart"></i></a></li>
-                                    <li><a href="#"><i class="far fa-eye"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
+                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                     </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </div>
-            </div>
-
             <?php endif; ?>
         </div>
     </section>
@@ -333,20 +352,22 @@
                             <div class="details_size">
                                 <h5>select size</h5>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="large01"
-                                        checked>
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="large01" checked>
                                     <label class="form-check-label" for="large01">
                                         large <span>+ $350</span>
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="medium01">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="medium01">
                                     <label class="form-check-label" for="medium01">
                                         medium <span>+ $250</span>
                                     </label>
                                 </div>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="small01">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                        id="small01">
                                     <label class="form-check-label" for="small01">
                                         small <span>+ $150</span>
                                     </label>
@@ -392,8 +413,40 @@
     <!-- CART POPUT END -->
 
     <!--=============================
-        MENU DETAILS END
-    ==============================-->
+                    MENU DETAILS END
+                ==============================-->
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startPush('scripts'); ?>
+    <script>
+        $(document).ready(function() {
+            $('.v_product_size, .v_product_option').on('change', function() {
+                v_updateTotalPrice();
+            });
+
+            // function to update the total price base on selected options
+            function v_updateTotalPrice() {
+                let basePrice = parseFloat($('.v_base_price').val());
+                let selectedSizePrice = 0;
+                let selectedOptionPrice = 0;
+                let quantity = parseFloat($('#quantity').val());
+
+                //Calculate selected size price
+                $('.v_product_size:checked').each(function() {
+                    selectedSizePrice += parseFloat($(this).data("price"));
+                });
+
+                //Calculate selected options price
+                $('.v_product_option:checked').each(function() {
+                    selectedOptionPrice += parseFloat($(this).data("price"));
+                });
+
+                //Calculate the total price 
+                let totalPrice = (basePrice + selectedOptionPrice + selectedSizePrice);
+                $('#v_total_price').text("<?php echo e(config('settings.site_currency_icon')); ?>" + totalPrice.toFixed(2));
+            }
+        });
+    </script>
+<?php $__env->stopPush(); ?>
 
 <?php echo $__env->make('frontend.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/frontend/pages/product-view.blade.php ENDPATH**/ ?>
