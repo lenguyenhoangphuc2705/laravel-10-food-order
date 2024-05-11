@@ -71,9 +71,9 @@ class CartController extends Controller
         try{
             Cart::remove($rowId);
 
-            return response(['status' => 'success', 'message' => 'Sản phẩm đã được loại khỏi giỏ hàng']. 200);
+            return response(['status' => 'success', 'message' => 'Sản phẩm đã được loại khỏi giỏ hàng'], 200);
         }catch(\Exception $e){
-            return response(['status' => 'error', 'message' => 'Xin lỗi có gì đó không ổn']. 500);
+            return response(['status' => 'error', 'message' => 'Xin lỗi có gì đó không ổn'], 500);
         }
     }
 }

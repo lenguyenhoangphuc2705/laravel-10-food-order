@@ -26,7 +26,7 @@
             <?php endif; ?>
             <p class="price"><?php echo e(currencyPosition($cartProduct->price)); ?></p>
         </div>
-        <span class="del_icon"><i class="fal fa-times"></i></span>
+        <span class="del_icon" onclick="removeProductFromSidebar('<?php echo e($cartProduct->rowId); ?>')"><i class="fal fa-times"></i></span>
     </li>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 <?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/frontend/layouts/ajax-files/sidebar-cart-item.blade.php ENDPATH**/ ?>
