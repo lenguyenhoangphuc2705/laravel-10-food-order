@@ -115,7 +115,7 @@
 
         </ul>
         <p class="subtotal">Tổng phụ <span class="cart_subtotal">{{ currencyPosition(cartTotal()) }}</span></p>
-        <a class="cart_view" href="cart_view.html">Xem giỏ hàng</a>
+        <a class="cart_view" href="{{ route('cart.index') }}">Xem giỏ hàng</a>
         <a class="checkout" href="check_out.html">Thanh toán</a>
     </div>
 </div>

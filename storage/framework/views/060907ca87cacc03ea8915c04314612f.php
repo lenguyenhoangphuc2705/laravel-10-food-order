@@ -23,9 +23,7 @@
     
 
 
-    <!-- CART POPUT START -->
-    <?php echo $__env->make('frontend.home.components.cart-popup', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    <!-- CART POPUT END -->
+    
     <!--=============================
         OFFER ITEM END
     ==============================-->
