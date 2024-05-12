@@ -59,6 +59,7 @@ class CartController extends Controller
 
             return response(['status' => 'success', 'message' => 'Sản phẩm đã được thêm vào giỏ hàng!'], 200);
         } catch (\Exception $e) {
+            logger($e);
             return response(['status' => 'error', 'message' => 'Có gì đó không ổn!'], 500);
         }
     }
@@ -73,6 +74,7 @@ class CartController extends Controller
 
             return response(['status' => 'success', 'message' => 'Sản phẩm đã được loại khỏi giỏ hàng'], 200);
         }catch(\Exception $e){
+            
             return response(['status' => 'error', 'message' => 'Xin lỗi có gì đó không ổn'], 500);
         }
     }

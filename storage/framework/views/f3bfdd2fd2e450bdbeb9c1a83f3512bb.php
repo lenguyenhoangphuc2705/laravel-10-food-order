@@ -27,7 +27,7 @@
     function updateSidebarCart(callback = null) {
         $.ajax({
             method: 'GET',
-            url: '<?php echo e(route('get-cart-products')); ?>',
+            url: '<?php echo e(route("get-cart-products")); ?>',
 
             success: function(response) {
                 $('.cart_contents').html(response);

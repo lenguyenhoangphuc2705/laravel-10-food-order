@@ -154,7 +154,7 @@
         let formData = $(this).serialize();
         $.ajax({
             method: 'post', // Changed to lowercase 'post'
-            url: '<?php echo e(route('add-to-cart')); ?>',
+            url: '<?php echo e(route("add-to-cart")); ?>',
             data: formData,
             beforeSend: function() {
                 $('.modal_cart_button').attr('disabled', true);

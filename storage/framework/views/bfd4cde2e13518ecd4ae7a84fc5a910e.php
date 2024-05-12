@@ -1,7 +1,7 @@
 <?php $__env->startSection('content'); ?>
     <!--=============================
-                        BREADCRUMB START
-                    ==============================-->
+                                BREADCRUMB START
+                            ==============================-->
     <section class="fp__breadcrumb" style="background: url(<?php echo e(asset('frontend/images/counter_bg.jpg')); ?>);">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -16,13 +16,13 @@
         </div>
     </section>
     <!--=============================
-                        BREADCRUMB END
-                    ==============================-->
+                                BREADCRUMB END
+                            ==============================-->
 
 
     <!--=============================
-                        MENU DETAILS START
-                    ==============================-->
+                                MENU DETAILS START
+                            ==============================-->
     <section class="fp__menu_details mt_115 xs_mt_85 mb_95 xs_mb_65">
         <div class="container">
             <div class="row">
@@ -73,36 +73,42 @@
                         </h3>
                         <p class="short_description"><?php echo $product->short_description; ?></p>
 
-                        <form action="">
+                        <form action="" id="v_add_to_cart_form">
                             <?php echo csrf_field(); ?>
                             <input type="hidden" name="base_price" class="v_base_price"
                                 value="<?php echo e($product->offer_price > 0 ? $product->offer_price : $product->price); ?>">
+                            <input type="hidden" name="product_id" value="<?php echo e($product->id); ?>">
+
                             <?php if($product->productSizes()->exists()): ?>
                                 <div class="details_size">
-                                    <h5>Chọn kích cỡ</h5>
+                                    <h5>select size</h5>
+
                                     <?php $__currentLoopData = $product->productSizes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $productSize): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <div class="form-check">
                                             <input class="form-check-input v_product_size" type="radio"
-                                                name="flexRadioDefault" id="size-<?php echo e($productSize->id); ?>"
-                                                data-price="<?php echo e($productSize->price); ?>">
+                                                name="product_size" id="size-<?php echo e($productSize->id); ?>"
+                                                data-price="<?php echo e($productSize->price); ?>" value="<?php echo e($productSize->id); ?>">
                                             <label class="form-check-label" for="size-<?php echo e($productSize->id); ?>">
-                                                <?php echo e($productSize->name); ?> <span>+ <?php echo e(currencyPosition($productSize->price)); ?></span>
+                                                <?php echo e($productSize->name); ?> <span>+
+                                                    <?php echo e(currencyPosition($productSize->price)); ?></span>
                                             </label>
                                         </div>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
                                 </div>
                             <?php endif; ?>
 
                             <?php if($product->productOptions()->exists()): ?>
                                 <div class="details_extra_item">
-                                    <h5>Gọi thêm <span>(optional)</span></h5>
+                                    <h5>select option <span>(optional)</span></h5>
                                     <?php $__currentLoopData = $product->productOptions; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $productOption): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                         <div class="form-check">
-                                            <input class="form-check-input v_product_option" type="checkbox" value=""
-                                                id="option-<?php echo e($productOption->id); ?>"
+                                            <input class="form-check-input v_product_option" name="product_option[]"
+                                                type="checkbox" value="<?php echo e($productOption->id); ?>" id="option-<?php echo e($productOption->id); ?>"
                                                 data-price="<?php echo e($productOption->price); ?>">
                                             <label class="form-check-label" for="option-<?php echo e($productOption->id); ?>">
-                                                <?php echo e($productOption->name); ?> <span>+ <?php echo e(currencyPosition($productOption->price)); ?></span>
+                                                <?php echo e($productOption->name); ?> <span>+
+                                                    <?php echo e(currencyPosition($productOption->price)); ?></span>
                                             </label>
                                         </div>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -110,27 +116,27 @@
                             <?php endif; ?>
 
                             <div class="details_quentity">
-                                <h5>Chọn số lượng</h5>
+                                <h5>select quentity</h5>
                                 <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
                                     <div class="quentity_btn">
                                         <button class="btn btn-danger v_decrement"><i class="fal fa-minus"></i></button>
-                                        <input type="text" name="qty" placeholder="1" value="1" readonly id="v_quantity">
+                                        <input type="text" name="quantity" placeholder="1" value="1" readonly
+                                            id="v_quantity">
                                         <button class="btn btn-success v_increment"><i class="fal fa-plus"></i></button>
                                     </div>
-                                    <?php if($product->offer_price > 0): ?>
-                                        <h3 id="v_total_price"><?php echo e(currencyPosition($product->offer_price)); ?></h3>
-                                    <?php else: ?>
-                                        <h3 id="v_total_price"><?php echo e(currencyPosition($product->price)); ?></h3>
-                                    <?php endif; ?>
+                                    <h3 id="v_total_price">
+                                        <?php echo e($product->offer_price > 0 ? currencyPosition($product->offer_price) : currencyPosition($product->price)); ?>
+
+                                    </h3>
                                 </div>
                             </div>
-
                         </form>
 
 
 
+
                         <ul class="details_button_area d-flex flex-wrap">
-                            <li><a class="common_btn" href="#">add to cart</a></li>
+                            <li><a class="common_btn v_submit_button" href="#">Thêm vào giỏ hàng</a></li>
                             <li><a class="wishlist" href="#"><i class="far fa-heart"></i></a></li>
                         </ul>
                     </div>
@@ -140,8 +146,8 @@
                         <ul class="nav nav-pills" id="pills-tab" role="tablist">
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill"
-                                    data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home"
-                                    aria-selected="true">Description</button>
+                                    data-bs-target="#pills-home" type="button" role="tab"
+                                    aria-controls="pills-home" aria-selected="true">Description</button>
                             </li>
                             <li class="nav-item" role="presentation">
                                 <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
@@ -279,13 +285,13 @@
                 <div class="fp__related_menu mt_90 xs_mt_60">
                     <h2>related item</h2>
                     <div class="row related_product_slider">
-                        <?php $__currentLoopData = $relateProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $relateProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <?php $__currentLoopData = $relateProducts; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $relatedProduct): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <div class="col-xl-3 wow fadeInUp" data-wow-duration="1s">
                                 <div class="fp__menu_item">
                                     <div class="fp__menu_item_img">
-                                        <img src="<?php echo e(asset($relateProduct->thumb_image)); ?>"
-                                            alt="<?php echo e($relateProduct->name); ?>" class="img-fluid w-100">
-                                        <a class="category" href="#"><?php echo e(@$relateProduct->category->name); ?></a>
+                                        <img src="<?php echo e(asset($relatedProduct->thumb_image)); ?>"
+                                            alt="<?php echo e($relatedProduct->name); ?>" class="img-fluid w-100">
+                                        <a class="category" href="#"><?php echo e(@$relatedProduct->category->name); ?></a>
                                     </div>
                                     <div class="fp__menu_item_text">
                                         <p class="rating">
@@ -297,21 +303,21 @@
                                             <span>74</span>
                                         </p>
                                         <a class="title"
-                                            href="<?php echo e(route('product.show', $relateProduct->slug)); ?>"><?php echo $relateProduct->name; ?></a>
+                                            href="<?php echo e(route('product.show', $relatedProduct->slug)); ?>"><?php echo $relatedProduct->name; ?></a>
                                         <h5 class="price">
-                                            <?php if($relateProduct->offer_price > 0): ?>
-                                                <?php echo e(currencyPosition($relateProduct->offer_price)); ?>
+                                            <?php if($relatedProduct->offer_price > 0): ?>
+                                                <?php echo e(currencyPosition($relatedProduct->offer_price)); ?>
 
-                                                <del><?php echo e(currencyPosition($relateProduct->price)); ?></del>
+                                                <del><?php echo e(currencyPosition($relatedProduct->price)); ?></del>
                                             <?php else: ?>
-                                                <?php echo e(currencyPosition($relateProduct->price)); ?>
+                                                <?php echo e(currencyPosition($relatedProduct->price)); ?>
 
                                             <?php endif; ?>
 
 
                                         </h5>
                                         <ul class="d-flex flex-wrap justify-content-center">
-                                            <li><a href="#" data-bs-toggle="modal" data-bs-target="#cartModal"><i
+                                            <li><a href="javascript:;" onclick="loadProductModal('<?php echo e($relatedProduct->id); ?>')"><i
                                                         class="fas fa-shopping-basket"></i></a></li>
                                             <li><a href="#"><i class="fal fa-heart"></i></a></li>
                                             <li><a href="#"><i class="far fa-eye"></i></a></li>
@@ -325,96 +331,6 @@
             <?php endif; ?>
         </div>
     </section>
-
-    <!-- CART POPUT START -->
-    <div class="fp__cart_popup">
-        <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
-                                class="fal fa-times"></i></button>
-                        <div class="fp__cart_popup_img">
-                            <img src="images/menu1.png" alt="menu" class="img-fluid w-100">
-                        </div>
-                        <div class="fp__cart_popup_text">
-                            <a href="#" class="title">Maxican Pizza Test Better</a>
-                            <p class="rating">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                                <i class="far fa-star"></i>
-                                <span>(201)</span>
-                            </p>
-                            <h4 class="price">$320.00 <del>$350.00</del> </h4>
-
-                            <div class="details_size">
-                                <h5>select size</h5>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="large01" checked>
-                                    <label class="form-check-label" for="large01">
-                                        large <span>+ $350</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="medium01">
-                                    <label class="form-check-label" for="medium01">
-                                        medium <span>+ $250</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="flexRadioDefault"
-                                        id="small01">
-                                    <label class="form-check-label" for="small01">
-                                        small <span>+ $150</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="details_extra_item">
-                                <h5>select option <span>(optional)</span></h5>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="coca-cola01">
-                                    <label class="form-check-label" for="coca-cola01">
-                                        coca-cola <span>+ $10</span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" id="7up01">
-                                    <label class="form-check-label" for="7up01">
-                                        7up <span>+ $15</span>
-                                    </label>
-                                </div>
-                            </div>
-
-                            <div class="details_quentity">
-                                <h5>select quentity</h5>
-                                <div class="quentity_btn_area d-flex flex-wrapa align-items-center">
-                                    <div class="quentity_btn">
-                                        <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
-                                        <input type="text" placeholder="1">
-                                        <button class="btn btn-success"><i class="fal fa-plus"></i></button>
-                                    </div>
-                                    <h3>$320.00</h3>
-                                </div>
-                            </div>
-                            <ul class="details_button_area d-flex flex-wrap">
-                                <li><a class="common_btn" href="#">add to cart</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- CART POPUT END -->
-
-    <!--=============================
-                        MENU DETAILS END
-                    ==============================-->
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('scripts'); ?>
@@ -422,7 +338,7 @@
         $(document).ready(function() {
 
             $('.v_product_size, .v_product_option').prop('checked', false);
-            
+
 
             $('.v_product_size, .v_product_option').on('change', function() {
                 v_updateTotalPrice();
@@ -469,7 +385,53 @@
                 let totalPrice = (basePrice + selectedOptionPrice + selectedSizePrice) * quantity;
                 $('#v_total_price').text("<?php echo e(config('settings.site_currency_icon')); ?>" + totalPrice);
             }
-        });
+
+            $('.v_submit_button').on('click', function(e) {
+                e.preventDefault();
+                $("#v_add_to_cart_form").submit();
+            })
+            // Add to cart function
+            $("#v_add_to_cart_form").on('submit', function(e) {
+                e.preventDefault();
+
+                //Validation
+                let selectedSize = $(".v_product_size");
+                if (selectedSize.length > 0) {
+                    if ($(".v_product_size:checked").val() === undefined) {
+                        toastr.error('Vui lòng chọn kích thước sản phẩm');
+                        console.error('Vui lòng chọn kích thước sản phẩm');
+                        return;
+                    }
+                }
+
+
+                let formData = $(this).serialize();
+                $.ajax({
+                    method: 'post', // Changed to lowercase 'post'
+                    url: '<?php echo e(route('add-to-cart')); ?>',
+                    data: formData,
+                    beforeSend: function() {
+                        $('.v_submit_button').attr('disabled', true);
+                        $('.v_submit_button').html(
+                            '<span class="spinner-border spinner-border-sm" aria-hidden="true"></span> <span role="status"> Loading... </span>'
+                        );
+                    },
+                    success: function(response) {
+                        toastr.success(response.message);
+                        updateSidebarCart();
+                    },
+                    error: function(xhr, status, error) {
+                        let errorMessage = xhr.responseJSON.message;
+                        toastr.error(errorMessage);
+                    },
+                    complete: function() { // Changed 'completed' to 'complete'
+                        $('.v_submit_button').html('Add to Cart');
+                        $('.v_submit_button').attr('disabled', false);
+                    }
+                })
+
+            })
+        })
     </script>
 <?php $__env->stopPush(); ?>
 
