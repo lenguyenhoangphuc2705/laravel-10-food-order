@@ -2,8 +2,8 @@
 
 <?php $__env->startSection('content'); ?>
     <!--=============================
-            BREADCRUMB START
-        ==============================-->
+                BREADCRUMB START
+            ==============================-->
     <section class="fp__breadcrumb" style="background: url(images/counter_bg.jpg);">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-            BREADCRUMB END
-        ==============================-->
+                BREADCRUMB END
+            ==============================-->
 
 
     <!--============================
-            CART VIEW START
-        ==============================-->
+                CART VIEW START
+            ==============================-->
     <section class="fp__cart_view mt_125 xs_mt_95 mb_100 xs_mb_70">
         <div class="container">
             <div class="row">
@@ -58,131 +58,50 @@
                                             <a class="clear_all" href="#">clear all</a>
                                         </th>
                                     </tr>
-                                    <tr>
-                                        <td class="fp__pro_img"><img src="images/menu1.png" alt="product"
-                                                class="img-fluid w-100">
-                                        </td>
 
-                                        <td class="fp__pro_name">
-                                            <a href="#">Hyderabadi Biryani</a>
-                                            <span>medium</span>
-                                            <p>coca-cola</p>
-                                            <p>7up</p>
-                                        </td>
+                                    <?php $__currentLoopData = Cart::content(); $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $product): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <tr>
+                                            <td class="fp__pro_img"><img
+                                                    src="<?php echo e($product->options->product_info['image']); ?>" alt="product"
+                                                    class="img-fluid w-100">
+                                            </td>
 
-                                        <td class="fp__pro_status">
-                                            <h6>$180.00</h6>
-                                        </td>
+                                            <td class="fp__pro_name">
+                                                <a
+                                                    href="<?php echo e(route('product.show', $product->options->product_info['slug'])); ?>"><?php echo e($product->name); ?></a>
+                                                <span><?php echo e($product->options->product_size['name']); ?>
 
-                                        <td class="fp__pro_select">
-                                            <div class="quentity_btn">
-                                                <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
-                                                <input type="text" placeholder="1">
-                                                <button class="btn btn-success"><i class="fal fa-plus"></i></button>
-                                            </div>
-                                        </td>
+                                                    <?php echo e(currencyPosition($product->options->product_size['price'])); ?></span>
+                                                <?php if(isset($product->options->product_options) && !empty($product->options->product_options)): ?>
+                                                    <?php $__currentLoopData = $product->options->product_options; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $option): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <p><?php echo e($option->name); ?> <?php echo e(currencyPosition($option->price)); ?></p>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                <?php endif; ?>
+                                            </td>
 
-                                        <td class="fp__pro_tk">
-                                            <h6>$180,00</h6>
-                                        </td>
+                                            <td class="fp__pro_status">
+                                                <h6><?php echo e(currencyPosition($product->price)); ?></h6>
+                                            </td>
 
-                                        <td class="fp__pro_icon">
-                                            <a href="#"><i class="far fa-times"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fp__pro_img">
-                                            <img src="images/menu2.png" alt="product" class="img-fluid w-100">
-                                        </td>
+                                            <td class="fp__pro_select">
+                                                <div class="quentity_btn">
+                                                    <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
+                                                    <input type="text" placeholder="1">
+                                                    <button class="btn btn-success"><i class="fal fa-plus"></i></button>
+                                                </div>
+                                            </td>
 
-                                        <td class="fp__pro_name">
-                                            <a href="#">Chicken Masala</a>
-                                            <span>small</span>
-                                        </td>
-                                        <td class="fp__pro_status">
-                                            <h6>$140.00</h6>
-                                        </td>
+                                            <td class="fp__pro_tk">
+                                                <h6>$180,00</h6>
+                                            </td>
 
-                                        <td class="fp__pro_select">
-                                            <div class="quentity_btn">
-                                                <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
-                                                <input type="text" placeholder="1">
-                                                <button class="btn btn-success"><i class="fal fa-plus"></i></button>
-                                            </div>
-                                        </td>
-
-                                        <td class="fp__pro_tk">
-                                            <h6>$140,00</h6>
-                                        </td>
-
-                                        <td class="fp__pro_icon">
-                                            <a href="#"><i class="far fa-times"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fp__pro_img">
-                                            <img src="images/menu3.png" alt="product" class="img-fluid w-100">
-                                        </td>
-
-                                        <td class="fp__pro_name">
-                                            <a href="#">Daria Shevtsova</a>
-                                            <span>large</span>
-                                            <p>coca-cola</p>
-                                            <p>7up</p>
-                                        </td>
+                                            <td class="fp__pro_icon">
+                                                <a href="#"><i class="far fa-times"></i></a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
 
-                                        <td class="fp__pro_status">
-                                            <h6>$220.00</h6>
-                                        </td>
-
-                                        <td class="fp__pro_select">
-                                            <div class="quentity_btn">
-                                                <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
-                                                <input type="text" placeholder="1">
-                                                <button class="btn btn-success"><i class="fal fa-plus"></i></button>
-                                            </div>
-                                        </td>
-
-                                        <td class="fp__pro_tk">
-                                            <h6>$220,00</h6>
-                                        </td>
-
-                                        <td class="fp__pro_icon">
-                                            <a href="#"><i class="far fa-times"></i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="fp__pro_img">
-                                            <img src="images/menu4.png" alt="product" class="img-fluid w-100">
-                                        </td>
-
-                                        <td class="fp__pro_name">
-                                            <a href="#">Hyderabadi Biryani</a>
-                                            <span>medium</span>
-                                            <p>7up</p>
-                                        </td>
-
-                                        <td class="fp__pro_status">
-                                            <h6>$150.00</h6>
-                                        </td>
-
-                                        <td class="fp__pro_select">
-                                            <div class="quentity_btn">
-                                                <button class="btn btn-danger"><i class="fal fa-minus"></i></button>
-                                                <input type="text" placeholder="1">
-                                                <button class="btn btn-success"><i class="fal fa-plus"></i></button>
-                                            </div>
-                                        </td>
-
-                                        <td class="fp__pro_tk">
-                                            <h6>$150.00</h6>
-                                        </td>
-
-                                        <td class="fp__pro_icon">
-                                            <a href="#"><i class="far fa-times"></i></a>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -206,8 +125,8 @@
         </div>
     </section>
     <!--============================
-            CART VIEW END
-        ==============================-->
+                CART VIEW END
+            ==============================-->
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('frontend.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/frontend/pages/cart-view.blade.php ENDPATH**/ ?>
