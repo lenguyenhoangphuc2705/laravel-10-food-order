@@ -83,4 +83,15 @@ class CartController extends Controller
             return response(['status' => 'error', 'message' => 'Xin lỗi có gì đó không ổn'], 500);
         }
     }
+
+    function cartQtyUpdate(Request $request){
+        try{
+            Cart::update($request->rowId, $request ->qty);
+            return response(['status' => 'success', 'message' => 'Cập nhật số lượng thành công']);
+        }catch(\Exception $e){
+            logger($e);
+            return response(['status' => 'error', 'message' => 'Cập nhật số lượng thất bại']);
+        }
+        
+    }
 }
