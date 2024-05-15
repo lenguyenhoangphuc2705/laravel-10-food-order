@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-                BREADCRUMB START
-            ==============================-->
+                        BREADCRUMB START
+                    ==============================-->
     <section class="fp__breadcrumb" style="background: url(images/counter_bg.jpg);">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                BREADCRUMB END
-            ==============================-->
+                        BREADCRUMB END
+                    ==============================-->
 
 
     <!--============================
-                CART VIEW START
-            ==============================-->
+                        CART VIEW START
+                    ==============================-->
     <section class="fp__cart_view mt_125 xs_mt_95 mb_100 xs_mb_70">
         <div class="container">
             <div class="row">
@@ -84,14 +84,17 @@
 
                                             <td class="fp__pro_select">
                                                 <div class="quentity_btn">
-                                                    <button class="btn btn-danger decrement"><i class="fal fa-minus"></i></button>
-                                                    <input type="text" class="quantity" placeholder="1" value="{{ $product->qty }}" readonly>
-                                                    <button class="btn btn-success increment"><i class="fal fa-plus"></i></button>
+                                                    <button class="btn btn-danger decrement"><i
+                                                            class="fal fa-minus"></i></button>
+                                                    <input type="text" class="quantity" data-id="{{ $product->rowId }}"
+                                                        placeholder="1" value="{{ $product->qty }}" readonly>
+                                                    <button class="btn btn-success increment"><i
+                                                            class="fal fa-plus"></i></button>
                                                 </div>
                                             </td>
 
                                             <td class="fp__pro_tk">
-                                                <h6>$180,00</h6>
+                                                <h6 class="product_cart_total">{{ currencyPosition(productTotal($product->rowId)) }}</h6>
                                             </td>
 
                                             <td class="fp__pro_icon">
@@ -124,26 +127,75 @@
         </div>
     </section>
     <!--============================
-                CART VIEW END
-            ==============================-->
+                        CART VIEW END
+                    ==============================-->
 @endsection
 
 @push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.increment').on('click', function() {
+                let inputField = $(this).siblings(".quantity");
+                let currentValue = parseInt(inputField.val());
+                let rowId = inputField.data("id");
+                inputField.val(currentValue + 1);
+                
+                
+                cartQtyUpdate(rowId, inputField.val(), function(response){
+                    let productTotal = response.product_total;
+                    console.log($(this));
+                    inputField.closest("tr")
+                    .find(".product_cart_total")
+                    .text("{{ currencyPosition(":productTotal") }}"
+                    .replace(":productTotal", productTotal));
+                });
+            });
 
-<script>
-    $(document).ready(function(){
-        $('.increment').on('click', function(){
-             let inputField = $(this).siblings(".quantity");
-             let currentValue = parseInt(inputField.val());
-             inputField.val(currentValue + 1);
-        });
+            $('.decrement').on('click', function() {
+                let inputField = $(this).siblings(".quantity");
+                let currentValue = parseInt(inputField.val());
+                let rowId = inputField.data("id");
 
-        $('.decrement').on('click', function(){
-            let inputField = $(this).siblings(".quantity");
-            let currentValue = parseInt(inputField.val());
-            if(inputField.val() > 1)
-            inputField.val(currentValue-1);
+                if (inputField.val() > 1) {
+                    inputField.val(currentValue - 1);
+
+                    cartQtyUpdate(rowId, inputField.val(), function(response){
+                    let productTotal = response.product_total;
+                    console.log($(this));
+                    inputField.closest("tr")
+                    .find(".product_cart_total")
+                    .text("{{ currencyPosition(":productTotal") }}"
+                    .replace(":productTotal", productTotal));
+                });
+                }
+            })
+
+            function cartQtyUpdate(rowId, qty, callback) {
+                $.ajax({
+                    method: 'post',
+                    url: '{{ route('cart.quantity-update') }}',
+                    data: {
+                        'rowId': rowId,
+                        'qty': qty,
+                    },
+                    beforeSend: function() {
+                        showLoader();
+                    },
+                    success: function(response) {
+                        if(callback && typeof callback === 'function'){
+                            callback(response);
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        let errorMessage = xhr.responseJSON.message;
+                        hideLoader();
+                        toastr.error(errorMessage);
+                    },
+                    complete: function() {
+                        hideLoader();
+                    }
+                })
+            }
         })
-    })
-</script>
+    </script>
 @endpush

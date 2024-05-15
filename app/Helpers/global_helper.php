@@ -67,3 +67,35 @@ if (!function_exists('cartTotal')) {
     }
 }
 
+/** Calculate product total price */
+if (!function_exists('productTotal')) {
+    function productTotal($rowId)
+    {
+        $total = 0;
+
+        $product = Cart::get($rowId);
+        
+            // Kiểm tra nếu $item có tồn tại và không phải null
+            
+                $productPrice = $product->price;
+                // Kiểm tra nếu $item->options và $item->options->product_size có tồn tại và không phải null trước khi truy cập thuộc tính
+                $sizePrice = isset($product->options->product_size['price']) ? $product->options->product_size['price'] : 0;
+                $optionsPrice = 0;
+                
+                // Kiểm tra nếu $item->options và $item->options->product_options có tồn tại và không phải null trước khi lặp qua
+                if ($product->options && $product->options->product_options) {
+                    foreach ($product->options->product_options as $option) {
+                        // Kiểm tra nếu $option có tồn tại và không phải null trước khi truy cập thuộc tính
+                        if ($option) {
+                            $optionsPrice += $option['price'];
+                        }
+                    }
+                }
+
+                $total += ($productPrice + $sizePrice + $optionsPrice) * $product->qty;
+            
+        
+
+        return $total;
+    }
+}
