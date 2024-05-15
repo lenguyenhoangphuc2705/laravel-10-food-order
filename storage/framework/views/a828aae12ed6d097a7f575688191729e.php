@@ -2,8 +2,8 @@
 
 <?php $__env->startSection('content'); ?>
     <!--=============================
-                    BREADCRUMB START
-                ==============================-->
+                        BREADCRUMB START
+                    ==============================-->
     <section class="fp__breadcrumb" style="background: url(images/counter_bg.jpg);">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                    BREADCRUMB END
-                ==============================-->
+                        BREADCRUMB END
+                    ==============================-->
 
 
     <!--============================
-                    CART VIEW START
-                ==============================-->
+                        CART VIEW START
+                    ==============================-->
     <section class="fp__cart_view mt_125 xs_mt_95 mb_100 xs_mb_70">
         <div class="container">
             <div class="row">
@@ -87,8 +87,8 @@
                                                 <div class="quentity_btn">
                                                     <button class="btn btn-danger decrement"><i
                                                             class="fal fa-minus"></i></button>
-                                                    <input type="text" class="quantity" data-id="<?php echo e($product->rowId); ?>" placeholder="1"
-                                                        value="<?php echo e($product->qty); ?>" readonly>
+                                                    <input type="text" class="quantity" data-id="<?php echo e($product->rowId); ?>"
+                                                        placeholder="1" value="<?php echo e($product->qty); ?>" readonly>
                                                     <button class="btn btn-success increment"><i
                                                             class="fal fa-plus"></i></button>
                                                 </div>
@@ -128,8 +128,8 @@
         </div>
     </section>
     <!--============================
-                    CART VIEW END
-                ==============================-->
+                        CART VIEW END
+                    ==============================-->
 <?php $__env->stopSection(); ?>
 
 <?php $__env->startPush('scripts'); ?>
@@ -148,7 +148,7 @@
                 let currentValue = parseInt(inputField.val());
                 let rowId = inputField.data("id");
 
-                if (inputField.val() > 1){
+                if (inputField.val() > 1) {
                     inputField.val(currentValue - 1);
                     cartQtyUpdate(rowId, inputField.val());
                 }
@@ -159,20 +159,22 @@
                     method: 'post',
                     url: '<?php echo e(route('cart.quantity-update')); ?>',
                     data: {
-                        'rowId' : rowId,
-                        'qty' : qty,
+                        'rowId': rowId,
+                        'qty': qty,
                     },
                     beforeSend: function() {
-
+                        showLoader();
                     },
                     success: function(response) {
 
                     },
                     error: function(xhr, status, error) {
-
+                        let errorMessage = xhr.responseJSON.message;
+                        hideLoader();
+                        toastr.error(errorMessage);
                     },
                     complete: function() {
-
+                        hideLoader();
                     }
                 })
             }

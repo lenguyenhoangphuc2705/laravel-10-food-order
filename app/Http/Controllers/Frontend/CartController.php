@@ -87,10 +87,10 @@ class CartController extends Controller
     function cartQtyUpdate(Request $request){
         try{
             Cart::update($request->rowId, $request ->qty);
-            return response(['status' => 'success', 'message' => 'Cập nhật số lượng thành công']);
+            return response(['status' => 'success', 'message' => 'Cập nhật số lượng thành công'], 200);
         }catch(\Exception $e){
             logger($e);
-            return response(['status' => 'error', 'message' => 'Cập nhật số lượng thất bại']);
+            return response(['status' => 'error', 'message' => 'Cập nhật số lượng thất bại'], 500);
         }
         
     }
