@@ -4,7 +4,7 @@
     <!--=============================
                         BREADCRUMB START
                     ==============================-->
-    <section class="fp__breadcrumb" style="background: url(images/counter_bg.jpg);">
+    <section class="fp__breadcrumb" style="background: url(<?php echo e(asset('frontend/images/counter_bg.jpg')); ?>);">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
                 <div class="fp__breadcrumb_text">
@@ -35,27 +35,27 @@
                                 <tbody>
                                     <tr>
                                         <th class="fp__pro_img">
-                                            Image
+                                            Hình ảnh
                                         </th>
 
                                         <th class="fp__pro_name">
-                                            details
+                                            Chi tiết
                                         </th>
 
                                         <th class="fp__pro_status">
-                                            price
+                                            Đơn giá
                                         </th>
 
                                         <th class="fp__pro_select">
-                                            quantity
+                                            Số lượng
                                         </th>
 
                                         <th class="fp__pro_tk">
-                                            total
+                                            Tổng cộng
                                         </th>
 
                                         <th class="fp__pro_icon">
-                                            <a class="clear_all" href="#">clear all</a>
+                                            <a class="clear_all" href="<?php echo e(route('cart.destroy')); ?>">Xóa tất cả</a>
                                         </th>
                                     </tr>
 
@@ -103,7 +103,11 @@
                                             </td>
                                         </tr>
                                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
+                                    <?php if(Cart::content()->count() === 0): ?>
+                                        <tr>
+                                            <td colspan="6" class="text-center" style="width: 100%; display: inline;">Giỏ hàng trống</td>
+                                        </tr>
+                                    <?php endif; ?>
 
                                 </tbody>
                             </table>
@@ -214,7 +218,7 @@
                         showLoader();
                     },
                     success: function(response) {
-                        
+                        updateSidebarCart();
                     },
                     error: function(xhr, status, error) {
                         let errorMessage = xhr.responseJSON.message;

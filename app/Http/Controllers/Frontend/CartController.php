@@ -94,4 +94,9 @@ class CartController extends Controller
         }
         
     }
+
+    function cartDestroy(){
+        Cart::destroy();
+        return redirect()->back();
+    }
 }
