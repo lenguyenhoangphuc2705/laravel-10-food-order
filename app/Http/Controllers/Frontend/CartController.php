@@ -7,6 +7,7 @@ use App\Models\Product;
 use Cart;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 class CartController extends Controller
@@ -19,9 +20,11 @@ class CartController extends Controller
     //Add product to cart
     function addToCart(Request $request)
     {
-        //dd($product->all());
+        $product = Product::with(['productSizes', 'productOptions'])->findOrFail($request->product_id);
+        if($product->quantity < $request->quantity){
+            throw ValidationException::withMessages(['Số lượng không tồn tại!']);
+        }
         try {
-            $product = Product::with(['productSizes', 'productOptions'])->findOrFail($request->product_id);
             $productSize = $product->productSizes->where('id', $request->product_size)->first();
             $productOptions = $product->productOptions->whereIn('id', $request->product_option);
 
@@ -70,7 +73,7 @@ class CartController extends Controller
     }
 
     function getCartProduct() {
-        
+
         return view('frontend.layouts.ajax-files.sidebar-cart-item')->render();
     }
     function cartProductRemove($rowId){
@@ -79,20 +82,27 @@ class CartController extends Controller
 
             return response(['status' => 'success', 'message' => 'Sản phẩm đã được loại khỏi giỏ hàng'], 200);
         }catch(\Exception $e){
-            
+
             return response(['status' => 'error', 'message' => 'Xin lỗi có gì đó không ổn'], 500);
         }
     }
 
     function cartQtyUpdate(Request $request){
+
+        $cartItem = Cart::get($request->rowId);
+        $product = Product::findOrFail($cartItem->id);
+
+        if($product->quantity < $request->qty){
+            return response(['status' => 'error', 'message' => 'Số lượng không tồn tại!', 'qty' => $cartItem->qty]);
+        }
         try{
-            Cart::update($request->rowId, $request ->qty);
-            return response(['product_total' => productTotal($request->rowId)], 200);
+            $cart=Cart::update($request->rowId, $request ->qty);
+            return response(['product_total' => productTotal($request->rowId),'qty'=> $cart->qty],200);
         }catch(\Exception $e){
             logger($e);
             return response(['status' => 'error', 'message' => 'Cập nhật số lượng thất bại'], 500);
         }
-        
+
     }
 
     function cartDestroy(){

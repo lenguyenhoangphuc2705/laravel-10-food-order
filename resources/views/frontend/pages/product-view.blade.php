@@ -135,7 +135,12 @@
 
 
                         <ul class="details_button_area d-flex flex-wrap">
+                            @if ($product->quantity===0)
+                            <li><a class="common_btn bg-danger" href="javascript:;">Hết hàng</a></li>
+                            @else
                             <li><a class="common_btn v_submit_button" href="#">Thêm vào giỏ hàng</a></li>
+                            @endif
+
                             <li><a class="wishlist" href="#"><i class="far fa-heart"></i></a></li>
                         </ul>
                     </div>
@@ -377,7 +382,7 @@
                     selectedOptionPrice += parseFloat($(this).data("price"));
                 });
 
-                //Calculate the total price 
+                //Calculate the total price
                 let totalPrice = (basePrice + selectedOptionPrice + selectedSizePrice) * quantity;
                 $('#v_total_price').text("{{ config('settings.site_currency_icon') }}" + totalPrice);
             }

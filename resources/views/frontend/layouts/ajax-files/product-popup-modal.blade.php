@@ -74,7 +74,12 @@
             </div>
         </div>
         <ul class="details_button_area d-flex flex-wrap">
+            @if ($product->quantity===0)
+            <li><button type="button" class="common_btn bg-danger">Hết hàng</button></li>
+            @else
             <li><button type="submit" class="common_btn modal_cart_button"> add to cart</button></li>
+            @endif
+
         </ul>
     </div>
 </form>
@@ -128,7 +133,7 @@
 
 
 
-            //Calculate the total price 
+            //Calculate the total price
             let totalPrice = quantity * (basePrice + selectedOptionPrice + selectedSizePrice);
 
             $('#total_price').text("{{ config('settings.site_currency_icon') }}" + totalPrice);
