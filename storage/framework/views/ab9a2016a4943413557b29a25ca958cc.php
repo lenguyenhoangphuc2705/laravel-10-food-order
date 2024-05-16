@@ -51,6 +51,11 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Quantity</label>
+                        <input type="text" name="quantity" class="form-control" value="<?php echo e($product->quantity); ?>">
+                    </div>
+
+                    <div class="form-group">
                         <label>Short Description</label>
                         <textarea name="short_description" class="form-control" id=""><?php echo $product->short_description; ?></textarea>
                     </div>

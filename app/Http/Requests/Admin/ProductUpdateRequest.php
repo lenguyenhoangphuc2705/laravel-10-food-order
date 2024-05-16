@@ -27,6 +27,7 @@ class ProductUpdateRequest extends FormRequest
             'category' => ['required', 'integer'],
             'price' => ['required', 'numeric','min:0'],
             'offer_price' => ['nullable', 'numeric'],
+            'quantity' => ['required', 'numeric'],
             'short_description' => ['required', 'max:500'],
             'long_description' => ['required'],
             'sku' => ['nullable', 'max:255'],
