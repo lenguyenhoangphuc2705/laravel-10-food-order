@@ -1,1 +1,0 @@
-<?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/frontend/home/components/cart-popup.blade.php ENDPATH**/ ?>
