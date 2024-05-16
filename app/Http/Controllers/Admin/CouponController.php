@@ -4,7 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\DataTables\CouponDataTable;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CouponCreateRequest;
+use App\Models\Coupon;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class CouponController extends Controller
 {
@@ -19,17 +23,29 @@ class CouponController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create() : View
     {
-        //
+        return view('admin.coupon.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CouponCreateRequest $request) : RedirectResponse
     {
-        //
+        $coupon = new Coupon();
+        $coupon->name = $request->name;
+        $coupon->code = $request->code;
+        $coupon->quantity = $request->quantity;
+        $coupon->min_purchase_amount = $request->min_purchase_amount;
+        $coupon->expire_date = $request->expire_date;
+        $coupon->discount_type = $request->discount_type;
+        $coupon->discount = $request->discount;
+        $coupon->status = $request->status;
+        $coupon->save();
+
+        toastr()->success('Thêm mới thành công');
+        return to_route('admin.coupon.index');
     }
 
     /**

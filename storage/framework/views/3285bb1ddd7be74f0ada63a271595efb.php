@@ -8,7 +8,7 @@
             <div class="card-header">
                 <h4>Tất cả phiếu mua hàng</h4>
                 <div class="card-header-action">
-                    <a href="<?php echo e(route('admin.product.create')); ?>" class="btn btn-primary">
+                    <a href="<?php echo e(route('admin.coupon.create')); ?>" class="btn btn-primary">
                         Thêm mới
                     </a>
                 </div>
