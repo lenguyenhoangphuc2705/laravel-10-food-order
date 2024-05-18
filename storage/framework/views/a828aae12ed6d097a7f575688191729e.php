@@ -118,10 +118,24 @@
                 <div class="col-lg-4 wow fadeInUp" data-wow-duration="1s">
                     <div class="fp__cart_list_footer_button">
                         <h6>total cart</h6>
-                        <p>subtotal: <span><?php echo e(currencyPosition(cartTotal())); ?></span></p>
+                        <p>subtotal: <span id="subtotal"><?php echo e(currencyPosition(cartTotal())); ?></span></p>
                         <p>delivery: <span>$00.00</span></p>
-                        <p>discount: <span id="discount"><?php echo e(config('settings.site_currency_icon')); ?> 0</span></p>
-                        <p class="total"><span>total:</span> <span id="final_total"><?php echo e(config('settings.site_currency_icon')); ?> 0</span></p>
+                        <p>discount: <span id="discount">
+                            <?php if(isset(session()->get('coupon')['discount'])): ?>
+                            <?php echo e(config('settings.site_currency_icon')); ?> <?php echo e(session()->get('coupon')['discount']); ?>
+
+                            <?php else: ?>
+                            <?php echo e(config('settings.site_currency_icon')); ?>0
+                            <?php endif; ?>
+                        </span></p>
+                        <p class="total"><span>total:</span> <span id="final_total">
+                            <?php if(isset(session()->get('coupon')['discount'])): ?>
+                            <?php echo e(config('settings.site_currency_icon')); ?> <?php echo e(cartTotal() - session()->get('coupon')['discount']); ?>
+
+                            <?php else: ?>
+                            <?php echo e(config('settings.site_currency_icon')); ?> <?php echo e(cartTotal()); ?>
+
+                            <?php endif; ?>
                         <form id="coupon_form">
                             <input type="text" id="coupon_code" name="code" placeholder="Coupon Code">
                             <button type="submit">apply</button>
@@ -140,6 +154,9 @@
 <?php $__env->startPush('scripts'); ?>
     <script>
         $(document).ready(function() {
+          var cartTotal = parseInt("<?php echo e(cartTotal()); ?>");
+
+
             $('.increment').on('click', function() {
                 let inputField = $(this).siblings(".quantity");
                 let currentValue = parseInt(inputField.val());
@@ -155,7 +172,13 @@
                         inputField.closest("tr")
                             .find(".product_cart_total")
                             .text("<?php echo e(currencyPosition(':productTotal')); ?>"
-                                .replace(":productTotal", productTotal));
+                            .replace(":productTotal", productTotal));
+
+                cartTotal = response.cart_total;
+                $('#subtotal').text("<?php echo e(config('settings.site_currency_icon')); ?>"+ cartTotal );
+                $("#final_total").text("<?php echo e(config('settings.site_currency_icon')); ?>" + response.grand_cart_total)
+
+
                     } else if (response.status === 'error') {
                         inputField.val(response.qty);
                         toastr.error(response.message);
@@ -180,7 +203,11 @@
                             inputField.closest("tr")
                                 .find(".product_cart_total")
                                 .text("<?php echo e(currencyPosition(':productTotal')); ?>"
-                                    .replace(":productTotal", productTotal));
+                                .replace(":productTotal", productTotal));
+
+                cartTotal = response.cart_total;
+                $('#subtotal').text("<?php echo e(config('settings.site_currency_icon')); ?>"+ cartTotal );
+
                         } else if (response.status === 'error') {
                             inputField.val(response.qty);
                             toastr.error(response.message);
@@ -188,6 +215,8 @@
                     });
                 }
             })
+
+
 
             function cartQtyUpdate(rowId, qty, callback) {
                 $.ajax({
@@ -223,6 +252,7 @@
                 $(this).closest('tr').remove();
             })
 
+
             function removeCartProduct(rowId) {
                 $.ajax({
                     method: 'get',
@@ -233,6 +263,10 @@
                     },
                     success: function(response) {
                         updateSidebarCart();
+
+                cartTotal = response.cart_total;
+                $('#subtotal').text("<?php echo e(config('settings.site_currency_icon')); ?>"+ cartTotal );
+                $("#final_total").text("<?php echo e(config('settings.site_currency_icon')); ?>" + response.grand_cart_total)
                     },
                     error: function(xhr, status, error) {
                         let errorMessage = xhr.responseJSON.message;
@@ -247,16 +281,15 @@
 
 
 
-
              $('#coupon_form').on('submit', function(e){
                 e.preventDefault();
                 let code = $("#coupon_code").val();
-                let subtotal = getCartTotal();
-
+                let subtotal = cartTotal;
                 couponApply(code, subtotal);
-
-
              })
+
+
+
 
             function couponApply(code, subtotal){
                 $.ajax({
@@ -285,7 +318,6 @@
                     }
                 })
             }
-
 
         })
     </script>
