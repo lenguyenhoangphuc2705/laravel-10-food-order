@@ -11,7 +11,7 @@
         $('.overlay').removeClass('active');
         $('.overlay-container').addClass('d-none');
     }
-    
+
     /** Load product modal **/
     function loadProductModal(productId) {
         $.ajax({
@@ -88,5 +88,9 @@
         })
     }
 
-    
+    /**get current card total amount */
+    function getCartTotal(){
+        return parseInt("{{ cartTotal() }}");
+    }
+
 </script>

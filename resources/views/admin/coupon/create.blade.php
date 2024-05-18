@@ -43,8 +43,8 @@
                     <div class="form-group">
                         <label>Loại Giảm Giá</label>
                         <select name="discount_type" class="form-control" id="">
-                            <option value="1">Phần trăm</option>
-                            <option value="0">Gía tiền</option> ({{ config('settings.site_currency_icon') }})</option>
+                            <option value="percent">Phần trăm</option>
+                            <option value="amount">Gía tiền</option> ({{ config('settings.site_currency_icon') }})</option>
                         </select>
                     </div>
 
@@ -60,7 +60,7 @@
                             <option value="0">Ngưng hoạt động</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Tạo</button>
+                    <button type="submit" class="btn btn-primary">Tạo mới</button>
 
                 </form>
             </div>
