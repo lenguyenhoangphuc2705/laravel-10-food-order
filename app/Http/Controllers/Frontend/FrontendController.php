@@ -60,13 +60,13 @@ class FrontendController extends Controller
         $coupon = Coupon::where('code', $code)->first();
 
         if(!$coupon) {
-            return response(['message' => 'Invalid Coupon Code.'], 422);
+            return response(['message' => 'Mã phiếu giảm giá không hợp lệ.'], 422);
         }
         if($coupon->quantity <= 0){
             return response(['message' => 'Coupon has been fully redeemed.'], 422);
         }
         if($coupon->expire_date < now()){
-            return response(['message' => 'Coupon hs expired.'], 422);
+            return response(['message' => 'Phiếu giảm giá đã hết hạn.'], 422);
         }
 
 
@@ -80,8 +80,19 @@ if($coupon->discount_type === 'percent') {
 $finalTotal = $subtotal - $discount;
 
 session()->put('coupon', ['code'=>$code, 'discount'=>$discount]);
-return response(['message'=>'Coupon Applied Successfully.', 'discount'=> $discount, 'finalTotal'=> $finalTotal]);
+return response(['message'=>'Phiếu Giảm Giá Được Áp Dụng Thành Công.', 'discount'=> $discount, 'finalTotal'=> $finalTotal, 'coupon_code'=>$code]);
 
+    }
+
+    function destroyCoupon() {
+        try{
+            session()->forget('coupon');
+            return response(['message' => 'Mã Giảm Đã Bị Xóa!', 'grand_cart_total' => grandCartTotal()]);
+        }catch(\Exception $e){
+            logger($e);
+            return response(['message' => 'Something went wrong']);
+
+        }
     }
 
 }
