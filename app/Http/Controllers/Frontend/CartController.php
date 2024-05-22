@@ -80,7 +80,12 @@ class CartController extends Controller
         try{
             Cart::remove($rowId);
 
-            return response(['status' => 'success', 'message' => 'Sản phẩm đã được loại khỏi giỏ hàng'], 200);
+            return response([
+                 'status' => 'success',
+                 'message' => 'Sản phẩm đã được loại khỏi giỏ hàng',
+                 'cart_total'=>cartTotal(),
+                 'grand_cart_total'=> grandCartTotal()
+                ], 200);
         }catch(\Exception $e){
 
             return response(['status' => 'error', 'message' => 'Xin lỗi có gì đó không ổn'], 500);
@@ -97,7 +102,14 @@ class CartController extends Controller
         }
         try{
             $cart=Cart::update($request->rowId, $request ->qty);
-            return response(['product_total' => productTotal($request->rowId),'qty'=> $cart->qty],200);
+            return response([
+                'status'=>'success',
+                'product_total' => productTotal($request->rowId),
+                'qty'=> $cart->qty,
+                'cart_total'=> cartTotal(),
+                'grand_cart_total'=> grandCartTotal()
+            ],200);
+
         }catch(\Exception $e){
             logger($e);
             return response(['status' => 'error', 'message' => 'Cập nhật số lượng thất bại'], 500);
@@ -107,6 +119,7 @@ class CartController extends Controller
 
     function cartDestroy(){
         Cart::destroy();
+        session()->forget('coupon');
         return redirect()->back();
     }
 }

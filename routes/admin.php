@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminAuthController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGalleryController;
 use Illuminate\Support\Facades\Route;
@@ -48,6 +49,10 @@ Route::resource('product-size',ProductSizeController::class );
 
 /* Product  Option Route*/
 Route::resource('product-option',ProductOptionController::class );
+
+/* Coupon  Route*/
+Route::resource('coupon', CouponController::class );
+
 
 /* Setting Routes*/
 Route::get('/setting', [SettingController::class, 'index'])->name('setting.index');

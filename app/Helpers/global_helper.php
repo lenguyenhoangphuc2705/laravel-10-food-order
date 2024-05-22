@@ -48,7 +48,7 @@ if (!function_exists('cartTotal')) {
                 $sizePrice = isset($item->options->product_size['price']) ? $item->options->product_size['price'] : 0;
 
                 $optionsPrice = 0;
-                
+
                 // Kiểm tra nếu $item->options và $item->options->product_options có tồn tại và không phải null trước khi lặp qua
                 if ($item->options && $item->options->product_options) {
                     foreach ($item->options->product_options as $option) {
@@ -74,14 +74,14 @@ if (!function_exists('productTotal')) {
         $total = 0;
 
         $product = Cart::get($rowId);
-        
+
             // Kiểm tra nếu $item có tồn tại và không phải null
-            
+
                 $productPrice = $product->price;
                 // Kiểm tra nếu $item->options và $item->options->product_size có tồn tại và không phải null trước khi truy cập thuộc tính
                 $sizePrice = isset($product->options->product_size['price']) ? $product->options->product_size['price'] : 0;
                 $optionsPrice = 0;
-                
+
                 // Kiểm tra nếu $item->options và $item->options->product_options có tồn tại và không phải null trước khi lặp qua
                 if ($product->options && $product->options->product_options) {
                     foreach ($product->options->product_options as $option) {
@@ -93,9 +93,27 @@ if (!function_exists('productTotal')) {
                 }
 
                 $total += ($productPrice + $sizePrice + $optionsPrice) * $product->qty;
-            
-        
+
+
 
         return $total;
     }
+}
+
+
+/** grand card total price */
+if (!function_exists('grandCartTotal')) {
+function grandCartTotal()
+   {
+      $total=0;
+      $cartTotal= cartTotal();
+      if(session()->has('coupon')){
+        $discount = session()->get('coupon')['discount'];
+         $total = $cartTotal - $discount ;
+         return $total;
+      }else{
+          $total = $cartTotal;
+          return $total;
+      }
+   }
 }
