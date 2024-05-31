@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminAuthController;
 use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\DeliveryAreaController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductGalleryController;
 use Illuminate\Support\Facades\Route;
@@ -52,6 +53,9 @@ Route::resource('product-option',ProductOptionController::class );
 
 /* Coupon  Route*/
 Route::resource('coupon', CouponController::class );
+
+/* Delivery Area  Route*/
+Route::resource('delivery-area', DeliveryAreaController::class );
 
 
 /* Setting Routes*/
