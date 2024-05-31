@@ -75,6 +75,7 @@
             <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Ecommerce</span></a>
             <ul class="dropdown-menu">
               <li><a class="nav-link" href="{{ route('admin.coupon.index') }}">Phiếu mua hàng</a></li>
+              <li><a class="nav-link" href="{{ route('admin.delivery-area.index') }}">Khu vực mua hàng</a></li>
             </ul>
           </li>
 
