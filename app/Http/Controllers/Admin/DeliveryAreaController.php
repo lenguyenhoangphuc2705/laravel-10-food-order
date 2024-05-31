@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\DataTables\DeliveryAreaDataTable;
+use Illuminate\View\View;
+use App\Http\Requests\Admin\DeliveryAreaCreateRequest;
+use App\Models\DeliveryArea;
 
 class DeliveryAreaController extends Controller
 {
@@ -19,17 +22,27 @@ class DeliveryAreaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        return view('admin.delivery-area.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(DeliveryAreaCreateRequest $request)
     {
-        //
+        $area = new DeliveryArea();
+        $area->area_name = $request->area_name;
+        $area->min_delivery_time = $request->min_delivery_time;
+        $area->max_delivery_time = $request->max_delivery_time;
+        $area->delivery_fee = $request->delivery_fee;
+        $area->status = $request->status;
+        $area->save();
+
+        toastr()->success('Thêm mới thành công!');
+
+        return to_route('admin.delivery-area.index');
     }
 
     /**

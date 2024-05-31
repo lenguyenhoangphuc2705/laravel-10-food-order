@@ -8,7 +8,7 @@
             <div class="card-header">
                 <h4>Các Khu Vực Mua Hàng</h4>
                 <div class="card-header-action">
-                    <a href="<?php echo e(route('admin.product.create')); ?>" class="btn btn-primary">
+                    <a href="<?php echo e(route('admin.delivery-area.create')); ?>" class="btn btn-primary">
                         Thêm mới
                     </a>
                 </div>
