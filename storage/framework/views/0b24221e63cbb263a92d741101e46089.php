@@ -1,7 +1,4 @@
-
-@extends('frontend.layouts.master')
-
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!--=============================
         BREADCRUMB START
     ==============================-->
@@ -34,14 +31,14 @@
                         <div class="fp__dashboard_menu">
                             <div class="dasboard_header">
                                 <div class="dasboard_header_img">
-                                    <img src="{{ auth()->user()->avatar }}" alt="user" class="img-fluid w-100">
+                                    <img src="<?php echo e(auth()->user()->avatar); ?>" alt="user" class="img-fluid w-100">
                                     <label for="upload"><i class="far fa-camera"></i></label>
                                     <form action="" id="avatar_form">
                                         <input type="file" id="upload" name="avatar" hidden>
                                     </form>
 
                                 </div>
-                                <h2>{{ auth()->user()->name }}</h2>
+                                <h2><?php echo e(auth()->user()->name); ?></h2>
                             </div>
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
                                 aria-orientation="vertical">
@@ -75,8 +72,8 @@
                                             class="fas fa-user-lock"></i></span> Change Password </button>
 
 
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
+                                    <form method="POST" action="<?php echo e(route('logout')); ?>">
+                                        <?php echo csrf_field(); ?>
                                         <button class="nav-link" onclick="event.preventDefault();
                                         this.closest('form').submit();" type="button"><span> <i class="fas fa-sign-out-alt"></i>
                                         </span> Logout</button>
@@ -88,8 +85,8 @@
                         <div class="fp__dashboard_content">
                             <div class="tab-content" id="v-pills-tabContent">
 
-                                @include('frontend.dashboard.sections.personal-info-section')
-                                @include('frontend.dashboard.sections.address-section')
+                                <?php echo $__env->make('frontend.dashboard.sections.personal-info-section', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+                                <?php echo $__env->make('frontend.dashboard.sections.address-section', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
                                     aria-labelledby="v-pills-profile-tab">
@@ -756,7 +753,7 @@
                                     </div>
                                 </div>
 
-                               @include('frontend.dashboard.change-password')
+                               <?php echo $__env->make('frontend.dashboard.change-password', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
                             </div>
                         </div>
@@ -852,9 +849,9 @@
     <!--=========================
         DASHBOARD END
     ==========================--
-@endsection
+<?php $__env->stopSection(); ?>
 
-@push('scripts')
+<?php $__env->startPush('scripts'); ?>
     <script>
         $(document).ready(function(){
             $('#upload').on('change', function(){
@@ -862,7 +859,7 @@
                 let formData = new FormData(form);
                 $.ajax({
                     method:'POST',
-                    url: "{{ route("profile.avatar.update") }}",
+                    url: "<?php echo e(route("profile.avatar.update")); ?>",
                     data: formData,
                     processData: false,
                     contentType: false,
@@ -878,4 +875,6 @@
             })
         })
     </script>
-@endpush
+<?php $__env->stopPush(); ?>
+
+<?php echo $__env->make('frontend.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/frontend/dashboard/index.blade.php ENDPATH**/ ?>
