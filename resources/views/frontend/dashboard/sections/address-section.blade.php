@@ -57,9 +57,9 @@
                             <div class="fp__check_single_form">
                                 <select id="select_js3" name="area">
                                     <option value="">Select Area</option>
-                                    {{-- @foreach ($deliveryAreas  as $area)
+                                    @foreach ($deliveryAreas  as $area)
                                         <option value="{{ $area->id }}">{{ $area->area_name }}</option>
-                                    @endforeach --}}
+                                    @endforeach
 
                                 </select>
                             </div>
