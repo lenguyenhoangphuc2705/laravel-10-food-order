@@ -3,8 +3,8 @@
         <div class="row wow fadeInUp" data-wow-duration="1s">
             <div class="col-md-8 col-lg-7 col-xl-6 m-auto text-center">
                 <div class="fp__section_heading mb_45">
-                    <h4>food Menu</h4>
-                    <h2>Our Popular Delicious Foods</h2>
+                    <h4>Menu các món ăn</h4>
+                    <h2>Những món ăn phổ biến được khách hàng bình chọn</h2>
                     <span>
                         <img src="images/heading_shapes.png" alt="shapes" class="img-fluid w-100">
                     </span>
@@ -17,7 +17,7 @@
         <div class="row wow fadeInUp" data-wow-duration="1s">
             <div class="col-12">
                 <div class="menu_filter d-flex flex-wrap justify-content-center">
-                    <button class=" active" data-filter="*">all menu</button>
+                    <button class=" active" data-filter="*">Menu tất cả món ăn</button>
                     @foreach ($categories as $category)
                     <button data-filter=".{{ $category->slug }}">{{ $category->name }}</button>
                     @endforeach

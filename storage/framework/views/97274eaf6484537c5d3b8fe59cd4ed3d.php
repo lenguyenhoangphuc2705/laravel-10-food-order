@@ -3,13 +3,12 @@
         <div class="row wow fadeInUp" data-wow-duration="1s">
             <div class="col-md-8 col-lg-7 col-xl-6 m-auto text-center">
                 <div class="fp__section_heading mb_45">
-                    <h4>food Menu</h4>
-                    <h2>Our Popular Delicious Foods</h2>
+                    <h4>Menu các món ăn</h4>
+                    <h2>Những món ăn phổ biến được khách hàng bình chọn</h2>
                     <span>
                         <img src="images/heading_shapes.png" alt="shapes" class="img-fluid w-100">
                     </span>
-                    <p>Objectively pontificate quality models before intuitive information. Dramatically
-                        recaptiualize multifunctional materials.</p>
+                    <p style="text-align: justify">Chúng tôi tự hào mang đến cho khách hàng những món ăn ngon miệng, được chế biến từ những nguyên liệu tươi sạch và chất lượng. Những món ăn này không chỉ được yêu thích vì hương vị tuyệt vời mà còn vì sự tận tâm và tình yêu ẩm thực mà chúng tôi đặt vào từng món ăn. Hãy đến và trải nghiệm, để tự mình cảm nhận những món ăn được khách hàng bình chọn nhiều nhất tại nhà hàng của chúng tôi!</p>
                 </div>
             </div>
         </div>
@@ -17,7 +16,7 @@
         <div class="row wow fadeInUp" data-wow-duration="1s">
             <div class="col-12">
                 <div class="menu_filter d-flex flex-wrap justify-content-center">
-                    <button class=" active" data-filter="*">all menu</button>
+                    <button class=" active" data-filter="*">Menu tất cả món ăn</button>
                     <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $category): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                     <button data-filter=".<?php echo e($category->slug); ?>"><?php echo e($category->name); ?></button>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

@@ -32,6 +32,10 @@ class FrontendController extends Controller
             ));
     }
 
+    // function aboutus(): View{
+    //     return view('frontend.home.components.why-choose');
+    // }
+
     function getSectionTitles(): Collection {
         $keys = [
             'why_choose_top_title',

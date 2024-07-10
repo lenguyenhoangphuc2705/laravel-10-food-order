@@ -25,7 +25,7 @@
 
                                         <ul class="d-flex flex-wrap">
                                             <?php if($slider->button_link): ?>
-                                            <li><a class="common_btn" href="<?php echo e($slider->button_link); ?>">shop now</a></li>
+                                            <li><a class="common_btn" href="<?php echo e($slider->button_link); ?>">Đặt món ngay</a></li>
                                             <?php endif; ?>
                                             
                                         </ul>

@@ -7,7 +7,7 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, target-densityDpi=device-dpi" />
 
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>" />
-    <title>FoodPark || Restaurant Template</title>
+    <title>Nhà Hàng Ẩm Thực MNP</title>
 
     <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="<?php echo e(asset('frontend/css/all.min.css')); ?>">

@@ -27,14 +27,14 @@
         </h4>
         @if ($product->productSizes()->exists())
             <div class="details_size">
-                <h5>select size</h5>
+                <h5>Chọn kích thước</h5>
                 @foreach ($product->productSizes as $productSize)
                     <div class="form-check">
                         <input class="form-check-input" type="radio" value="{{ $productSize->id }}"
                             data-price="{{ $productSize->price }}" name="product_size"
                             id="size-{{ $productSize->id }}">
-                        <label class="form-check-label" for="size-{{ $productSize->id }}">
-                            {{ $productSize->name }} <span>+ {{ currencyPosition($productSize->price) }}</span>
+                        <label class="form-check-label" for="size-{{ $productSize->id }}"> 
+                            {{ $productSize->name }} <span> + {{ ($productSize->price) }}</span>
                         </label>
                     </div>
                 @endforeach
@@ -77,7 +77,7 @@
             @if ($product->quantity===0)
             <li><button type="button" class="common_btn bg-danger">Hết hàng</button></li>
             @else
-            <li><button type="submit" class="common_btn modal_cart_button"> add to cart</button></li>
+            <li><button type="submit" class="common_btn modal_cart_button"> Thêm vào giỏ hàng</button></li>
             @endif
 
         </ul>
@@ -136,7 +136,7 @@
             //Calculate the total price
             let totalPrice = quantity * (basePrice + selectedOptionPrice + selectedSizePrice);
 
-            $('#total_price').text("{{ config('settings.site_currency_icon') }}" + totalPrice);
+            $('#total_price').text(totalPrice + "{{ config('settings.site_currency_icon') }}");
         }
     })
     // Add to cart function
