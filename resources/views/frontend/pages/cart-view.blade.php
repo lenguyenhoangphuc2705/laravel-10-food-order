@@ -2,8 +2,8 @@
 
 @section('content')
     <!--=============================
-                            BREADCRUMB START
-                        ==============================-->
+                                    BREADCRUMB START
+            ==============================-->
     <section class="fp__breadcrumb" style="background: url({{ asset('frontend/images/counter_bg.jpg') }});">
         <div class="fp__breadcrumb_overlay">
             <div class="container">
@@ -18,13 +18,13 @@
         </div>
     </section>
     <!--=============================
-                            BREADCRUMB END
-                        ==============================-->
+                                    BREADCRUMB END
+                                ==============================-->
 
 
     <!--============================
-                            CART VIEW START
-                        ==============================-->
+                                    CART VIEW START
+                                ==============================-->
     <section class="fp__cart_view mt_125 xs_mt_95 mb_100 xs_mb_70">
         <div class="container">
             <div class="row">
@@ -119,57 +119,84 @@
                 <div class="col-lg-4 wow fadeInUp" data-wow-duration="1s">
                     <div class="fp__cart_list_footer_button">
                         <h6>Giỏ Hàng</h6>
-                        <p>Tổng Tiền: <span id="subtotal">{{ currencyPosition(cartTotal()) }}</span></p>
-                        <p>Phí Vận Chuyển: <span>$00.00</span></p>
-                        <p>Gía Giảm: <span id="discount">
+                        <p>Tổng Tiền: <span id="subtotal"> {{ currencyPosition(cartTotal()) }} </span></p>
+                        <p>Phí Vận Chuyển: <span>00.00 {{ config('settings.site_currency_icon') }} </span></p>
+                        <p>Giảm Giá: <span id="discount">
                             @if (isset(session()->get('coupon')['discount']))
-                            {{ config('settings.site_currency_icon') }} {{ session()->get('coupon')['discount'] }}
+                                 {{ session()->get('coupon')['discount'] }} {{ config('settings.site_currency_icon') }}
                             @else
-                            {{ config('settings.site_currency_icon') }}0
+                                0 {{ config('settings.site_currency_icon') }}
                             @endif
                         </span></p>
                         <p class="total"><span>Thành Tiền:</span> <span id="final_total">
                             @if (isset(session()->get('coupon')['discount']))
-                            {{ config('settings.site_currency_icon') }} {{ cartTotal() - session()->get('coupon')['discount'] }}
+                                {{ cartTotal() - session()->get('coupon')['discount'] }} {{ config('settings.site_currency_icon') }}
                             @else
-                            {{ config('settings.site_currency_icon') }} {{ cartTotal() }}
+                                {{ cartTotal() }} {{ config('settings.site_currency_icon') }}
                             @endif
+                        </span></p>
+                        
                         <form id="coupon_form">
-                            <input type="text" id="coupon_code" name="code" placeholder="Mã Giảm Gía">
+                            <input type="text" id="coupon_code" name="code" placeholder="Mã Giảm Giá">
                             <button type="submit">Sử Dụng</button>
                         </form>
-
-
-                      <div class="coupon_card">
-                        @if (session()->has('coupon'))
-                        <div class="card mt-2">
-                            <div class="m-3">
-                                <span><b class="v_coupon_code">Phiếu giảm giá được áp dụng: {{ session()->get('coupon')['code'] }}</b></span>
-                                <span>
-                                    <button id="destroy_coupon"> <i class="far fa-times"></i></button>
-
-                                </span>
+                
+                        <div class="coupon_card">
+                            @if (session()->has('coupon'))
+                            <div class="card mt-2">
+                                <div class="m-3">
+                                    <span><b class="v_coupon_code">Phiếu giảm giá được áp dụng: {{ session()->get('coupon')['code'] }}</b></span>
+                                    <span>
+                                        <button id="destroy_coupon"> <i class="far fa-times"></i></button>
+                                    </span>
+                                </div>
                             </div>
-                          </div>
-                        @endif
-                      </div>
-
-
-                        <a class="common_btn" href=" #">Thanh Toán</a>
+                            @endif
+                        </div>
+                
+                        <style>
+                            .fp__cart_list_footer_button {
+                                /* Đảm bảo định dạng của khung bao quanh nút "Thanh Toán" */
+                                border: 1px solid #ccc;
+                                padding: 10px;
+                                text-align: center;
+                            }
+                
+                            .link-button {
+                                background: none;
+                                border: none;
+                                padding: 0;
+                                color: inherit;
+                                cursor: pointer;
+                                text-decoration: underline;
+                                font: inherit;
+                                white-space: nowrap; /* Đảm bảo không xuống hàng */
+                            }
+                        </style>
+                
+                        <form action={{ url('/vnpay_payment') }} method="POST" style="display: inline;">
+                            @csrf 
+                            <input type="hidden" name="total" value="{{ cartTotal() }}">
+                            <button name="redirect" style="margin-top: 20px" type="submit" class="link-button common_btn">
+                                Thanh Toán
+                            </button>
+                        </form>
                     </div>
                 </div>
+                
+
             </div>
         </div>
     </section>
     <!--============================
-                            CART VIEW END
-                        ==============================-->
+                                    CART VIEW END
+                                ==============================-->
 @endsection
 
 @push('scripts')
     <script>
         $(document).ready(function() {
-          var cartTotal = parseInt("{{ cartTotal() }}");
+            var cartTotal = parseInt("{{ cartTotal() }}");
 
 
             $('.increment').on('click', function() {
@@ -187,11 +214,13 @@
                         inputField.closest("tr")
                             .find(".product_cart_total")
                             .text("{{ currencyPosition(':productTotal') }}"
-                            .replace(":productTotal", productTotal));
+                                .replace(":productTotal", productTotal));
 
-                cartTotal = response.cart_total;
-                $('#subtotal').text("{{ config('settings.site_currency_icon') }}"+ cartTotal );
-                $("#final_total").text("{{ config('settings.site_currency_icon') }}" + response.grand_cart_total)
+                        cartTotal = response.cart_total;
+                        $('#subtotal').text(
+                            cartTotal + "{{ config('settings.site_currency_icon') }}" );
+                        $("#final_total").text(
+                            response.grand_cart_total + "{{ config('settings.site_currency_icon') }}" );
 
 
                     } else if (response.status === 'error') {
@@ -202,14 +231,17 @@
             });
 
             $('.decrement').on('click', function() {
+
+
                 let inputField = $(this).siblings(".quantity");
                 let currentValue = parseInt(inputField.val());
                 let rowId = inputField.data("id");
-                inputField.val(currentValue - 1);
+                if (currentValue > 1) {
+                    inputField.val(currentValue - 1);
+
+                }
 
                 if (inputField.val() > 1) {
-
-
                     cartQtyUpdate(rowId, inputField.val(), function(response) {
                         if (response.status === 'success') {
                             inputField.val(response.qty);
@@ -218,10 +250,11 @@
                             inputField.closest("tr")
                                 .find(".product_cart_total")
                                 .text("{{ currencyPosition(':productTotal') }}"
-                                .replace(":productTotal", productTotal));
+                                    .replace(":productTotal", productTotal));
 
-                cartTotal = response.cart_total;
-                $('#subtotal').text("{{ config('settings.site_currency_icon') }}"+ cartTotal );
+                            cartTotal = response.cart_total;
+                            $('#subtotal').text(
+                                cartTotal + "{{ config('settings.site_currency_icon') }}" );
 
                         } else if (response.status === 'error') {
                             inputField.val(response.qty);
@@ -229,6 +262,7 @@
                         }
                     });
                 }
+
             })
 
 
@@ -236,7 +270,7 @@
             function cartQtyUpdate(rowId, qty, callback) {
                 $.ajax({
                     method: 'post',
-                    url: '{{ route("cart.quantity-update") }}',
+                    url: '{{ route('cart.quantity-update') }}',
                     data: {
                         'rowId': rowId,
                         'qty': qty,
@@ -271,7 +305,7 @@
             function removeCartProduct(rowId) {
                 $.ajax({
                     method: 'get',
-                    url: '{{ route("cart-product-remove", ":rowId") }}'.replace(":rowId", rowId),
+                    url: '{{ route('cart-product-remove', ':rowId') }}'.replace(":rowId", rowId),
 
                     beforeSend: function() {
                         showLoader();
@@ -279,9 +313,10 @@
                     success: function(response) {
                         updateSidebarCart();
 
-                cartTotal = response.cart_total;
-                $('#subtotal').text("{{ config('settings.site_currency_icon') }}"+ cartTotal );
-                $("#final_total").text("{{ config('settings.site_currency_icon') }}" + response.grand_cart_total)
+                        cartTotal = response.cart_total;
+                        $('#subtotal').text(cartTotal + "{{ config('settings.site_currency_icon') }}");
+                        $("#final_total").text(response +"{{ config('settings.site_currency_icon') }}"
+                            .grand_cart_total)
                     },
                     error: function(xhr, status, error) {
                         let errorMessage = xhr.responseJSON.message;
@@ -296,31 +331,33 @@
 
 
 
-             $('#coupon_form').on('submit', function(e){
+            $('#coupon_form').on('submit', function(e) {
                 e.preventDefault();
                 let code = $("#coupon_code").val();
                 let subtotal = cartTotal;
                 couponApply(code, subtotal);
-             })
+            })
 
 
 
 
-             function couponApply(code, subtotal) {
+            function couponApply(code, subtotal) {
                 $.ajax({
                     method: 'POST',
-                    url: '{{ route("apply-coupon") }}',
+                    url: '{{ route('apply-coupon') }}',
                     data: {
                         code: code,
                         subtotal: subtotal
                     },
-                    beforeSend: function(){
+                    beforeSend: function() {
                         showLoader()
                     },
-                    success: function(response){
+                    success: function(response) {
                         $("#coupon_code").val("");
-                        $('#discount').text("{{ config('settings.site_currency_icon') }}"+response.discount);
-                        $('#final_total').text("{{ config('settings.site_currency_icon') }}"+response.finalTotal);
+                        $('#discount').text(  response
+                            .discount + "{{ config('settings.site_currency_icon') }}");
+                        $('#final_total').text( response
+                            .finalTotal + "{{ config('settings.site_currency_icon') }}");
                         $couponCartHtml = `<div class="card mt-2">
                             <div class="m-3">
                                 <span><b class="v_coupon_code">Applied Couppon: ${response.coupon_code}</b></span>
@@ -332,43 +369,44 @@
                         $('.coupon_card').html($couponCartHtml);
                         toastr.success(response.message);
                     },
-                    error: function(xhr, status, error){
+                    error: function(xhr, status, error) {
                         let errorMessage = xhr.responseJSON.message;
                         hideLoader()
 
                         toastr.error(errorMessage);
                     },
-                    complete: function(){
+                    complete: function() {
                         hideLoader()
                     }
                 })
             }
 
-            $(document).on('click', "#destroy_coupon", function(){
+            $(document).on('click', "#destroy_coupon", function() {
                 destroyCoupon();
             });
 
-            function destroyCoupon(){
+            function destroyCoupon() {
                 $.ajax({
                     method: 'GET',
-                    url: '{{ route("destroy-coupon") }}',
-                    beforeSend: function(){
+                    url: '{{ route('destroy-coupon') }}',
+                    beforeSend: function() {
                         showLoader();
                     },
-                    success: function(response){
-                        $('#discount').text("{{ config('settings.site_currency_icon') }}"+0);
-                        $("#final_total").text("{{ config('settings.site_currency_icon') }}" + response.grand_cart_total);
+                    success: function(response) {
+                        $('#discount').text( 0 +"{{ config('settings.site_currency_icon') }}");
+                        $("#final_total").text( response + "{{ config('settings.site_currency_icon') }}"
+                            .grand_cart_total);
                         $('.coupon_card').html("");
 
                         toastr.success(response.message);
                     },
-                    error: function(xhr, status, error){
+                    error: function(xhr, status, error) {
                         let errorMessage = xhr.responseJSON.message;
                         hideLoader()
 
                         toastr.error(errorMessage);
                     },
-                    complete: function(){
+                    complete: function() {
                         hideLoader();
                     }
                 })

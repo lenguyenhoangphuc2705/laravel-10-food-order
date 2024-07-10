@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\DashboardController;
 use App\Http\Controllers\Frontend\FrontendController;
+use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
+| Here is where you can register web routes r your application. These
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
@@ -45,6 +46,8 @@ require __DIR__ . '/auth.php';
 
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 
+
+
 /**show product details page */
 
 Route::get('/product/{slug}', [FrontendController::class, 'showProduct'])->name('product.show');
@@ -64,6 +67,14 @@ Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart-update-qty', [CartController::class, 'cartQtyUpdate'])->name('cart.quantity-update');
 Route::get('/cart-destroy', [CartController::class, 'cartDestroy'])->name('cart.destroy');
 
+
 /**Coupon routes */
 Route::post('/apply-coupon', [FrontendController::class, 'applyCoupon'])->name('apply-coupon');
 Route::get('/destroy-coupon', [FrontendController::class, 'destroyCoupon'])->name('destroy-coupon');
+
+
+    /** Payment Routes */
+    Route::get('payment', [PaymentController::class, 'index'])->name('payment.index');
+    // Cổng thanh toán
+    Route::post('/vnpay_payment',[PaymentController::class, 'vnpay_payment']); //-> name('vnpay_payment.index');
+// });

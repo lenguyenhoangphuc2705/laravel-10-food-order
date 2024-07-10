@@ -81,7 +81,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label>Show At Home</label>
+                        <label>Hiển thị trên trang chủ</label>
                         <select name="show_at_home" class="form-control" id="">
                             <option selected value="1">Yes</option>
                             <option  value="0">No</option>
@@ -90,7 +90,7 @@
 
 
                     <div class="form-group">
-                        <label>Status</label>
+                        <label>Trạng thái</label>
                         <select name="status" class="form-control" id="">
                             <option value="1">Active</option>
                             <option value="0">Inactive</option>

@@ -17,15 +17,15 @@ class WhyChooseUsTitleSeeder extends Seeder
         SectionTitle::insert([
             [
                 'key' => 'why_choose_top_title',
-                'value' => 'why choose us'
+                'value' => 'Tại sao bạn nên chọn chúng tôi'
             ],
             [
                 'key' => 'why_choose_main_title',
-                'value' => 'why choose us'
+                'value' => 'Vì chúng tôi có'
             ],
             [
                 'key' => 'why_choose_sub_title',
-                'value' => 'Objectively pontificate quality models before intuitive information. Dramatically recaptiualize multifunctional materials.'
+                'value' => 'Chúng tôi cam kết sử dụng nguyên liệu tươi ngon và chất lượng nhất để tạo ra những món ăn tinh tế và hấp dẫn. Đội ngũ đầu bếp tài hoa của chúng tôi luôn tìm kiếm và chọn lọc các nguyên liệu tốt nhất, đảm bảo mỗi món ăn đều đạt tiêu chuẩn cao nhất.'
             ]
         ]);
     }

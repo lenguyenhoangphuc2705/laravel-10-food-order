@@ -15,20 +15,20 @@ class CategorySeeder extends Seeder
     {
      Category::insert([
          [
-            'name'=> 'Burger',
-            'slug'=> 'burger',
+            'name'=> 'Các món ăn nhẹ',
+            'slug'=> 'Các món ăn nhẹ',
             'status'=> 1,
             'show_at_home'=>1
          ],
          [
-            'name'=> 'Sandwich',
-            'slug'=> 'sandwich',
+            'name'=> 'Các món heo, bò, gà',
+            'slug'=> 'Các món heo, bò, gà',
             'status'=> 1,
             'show_at_home'=>1
          ],
          [
-            'name'=> 'Taco',
-            'slug'=> 'taco',
+            'name'=> 'Các món hải sản',
+            'slug'=> 'Các món hải sản',
             'status'=> 1,
             'show_at_home'=>1
          ],

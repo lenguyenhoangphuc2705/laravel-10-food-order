@@ -25,7 +25,7 @@
 
                                         <ul class="d-flex flex-wrap">
                                             @if($slider->button_link)
-                                            <li><a class="common_btn" href="{{ $slider->button_link }}">shop now</a></li>
+                                            <li><a class="common_btn" href="{{ $slider->button_link }}">Đặt món ngay</a></li>
                                             @endif
                                             
                                         </ul>
