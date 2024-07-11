@@ -9,35 +9,34 @@
                         </a>
                         <span>There are many variations of Lorem Ipsum available, but the majority have
                             suffered.</span>
-                        <p class="info"><i class="far fa-map-marker-alt"></i> 7232 Broadway Suite 308, Jackson
-                            Heights, 11372, NY, United States</p>
+                        <p class="info"><i class="far fa-map-marker-alt"></i> 200, khu 2, ấp chợ, xã Phước Lợi, Bến Lức, Long An</p>
                         <a class="info" href="callto:1234567890123"><i class="fas fa-phone-alt"></i>
-                            +1347-430-9510</a>
+                            +84 923 748 516</a>
                         <a class="info" href="mailto:websolutionus1@gmail.com"><i class="fas fa-envelope"></i>
-                            websolutionus1@gmail.com</a>
+                            nhahangamthucmnp@gmail.com</a>
                     </div>
                 </div>
                 <div class="col-lg-2 col-sm-4 col-md-6">
                     <div class="fp__footer_content">
-                        <h3>Short Link</h3>
+                        <h3>Liên kết nhanh</h3>
                         <ul>
-                            <li><a href="#">Home</a></li>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Our Service</a></li>
-                            <li><a href="#">gallery</a></li>
+                            <li><a href="#">Trang Chủ</a></li>
+                            <li><a href="#">Về chúng tôi</a></li>
+                            <li><a href="#">Liên hệ</a></li>
+                            <li><a href="#">Dịch vụ</a></li>
+                            <li><a href="#">Gallery</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2 col-sm-4 col-md-6 order-sm-4 order-lg-3">
                     <div class="fp__footer_content">
-                        <h3>Help Link</h3>
+                        <h3>Hỗ trợ</h3>
                         <ul>
-                            <li><a href="#">Terms And Conditions</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Refund Policy</a></li>
-                            <li><a href="#">FAQ</a></li>
-                            <li><a href="#">contact</a></li>
+                            <li><a href="#">Điều khoản và điều kiện</a></li>
+                            <li><a href="#">Chính sách bảo mật</a></li>
+                            <li><a href="#">chính sách đền bù</a></li>
+                            <li><a href="#">Câu hỏi thường gặp</a></li>
+                            <li><a href="#">Liên hệ</a></li>
                         </ul>
                     </div>
                 </div>
