@@ -56,10 +56,10 @@
         <div class="fp__breadcrumb_overlay">
             <div class="container">
                 <div class="fp__breadcrumb_text">
-                    <h1>sign in</h1>
+                    <h1>Đăng nhập</h1>
                     <ul>
-                        <li><a href="index.html">home</a></li>
-                        <li><a href="#">sign in</a></li>
+                        <li><a href="index.html">Trang chủ</a></li>
+                        <li><a href="#">Đăng nhập</a></li>
                     </ul>
                 </div>
             </div>
@@ -79,8 +79,8 @@
                 <div class="row wow fadeInUp" data-wow-duration="1s">
                     <div class="col-xxl-5 col-xl-6 col-md-9 col-lg-7 m-auto">
                         <div class="fp__login_area">
-                            <h2>Welcome back!</h2>
-                            <p>sign in to continue</p>
+                            <h2>Chào mừng trở lại!</h2>
+                            <p>Đăng nhập để tiếp tục</p>
                             <form action="{{ route('login') }}" method="POST">
                                 @csrf
                                 <div class="row">
@@ -93,8 +93,8 @@
 
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
-                                            <label>password</label>
-                                            <input type="password" placeholder="Password" name="password">
+                                            <label>Mật khẩu</label>
+                                            <input type="password" placeholder="Mật khẩu" name="password">
                                         </div>
                                     </div>
 
@@ -104,23 +104,23 @@
                                                 <input class="form-check-input" type="checkbox" value=""
                                                     id="flexCheckDefault" name="remember">
                                                 <label class="form-check-label" for="flexCheckDefault">
-                                                    Remeber Me
+                                                    Nhớ mật khẩu
                                                 </label>
                                             </div>
-                                            <a href="{{ route('password.request') }}">Forgot Password ?</a>
+                                            <a href="{{ route('password.request') }}">Quên mật khẩu ?</a>
                                         </div>
                                     </div>
 
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
-                                            <button type="submit" class="common_btn">login</button>
+                                            <button type="submit" class="common_btn">Đăng nhập</button>
                                         </div>
                                     </div>
                                 </div>
                             </form>
                             <p class="or"><span>or</span></p>
 
-                            <p class="create_account">Dont’t have an aceount ? <a href="{{ route('register') }}">Create Account</a>
+                            <p class="create_account">Chưa có tài khoản ? <a href="{{ route('register') }}">Tạo tài khoản mới</a>
                             </p>
                         </div>
                     </div>

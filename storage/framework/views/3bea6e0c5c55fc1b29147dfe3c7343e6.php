@@ -1,5 +1,4 @@
-@extends('frontend.layouts.master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <!--=============================
         BREADCRUMB START
     ==============================-->
@@ -24,7 +23,7 @@
     <!--=========================
           SIGN UP START
     ==========================-->
-    <section class="fp__signup" style="background: url( {{ asset('frontend/images/login_bg.jpg') }} );">
+    <section class="fp__signup" style="background: url( <?php echo e(asset('frontend/images/login_bg.jpg')); ?> );">
         <div class="fp__signup_overlay pt_125 xs_pt_95 pb_100 xs_pb_70">
             <div class=" container">
                 <div class="row wow fadeInUp" data-wow-duration="1s">
@@ -32,20 +31,20 @@
                         <div class="fp__login_area">
                             <h2>Chào mừng đến với nhà hàng ẩm thực MNP!</h2>
                             <p>Đăng kí</p>
-                            <form method="POST" action = "{{ route('register') }}">
-                                @csrf
+                            <form method="POST" action = "<?php echo e(route('register')); ?>">
+                                <?php echo csrf_field(); ?>
                                 <div class="row">
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
                                             <label>Họ và tên</label>
-                                            <input type="text" placeholder="Họ và tên" name="name" value="{{ old('name') }}">
+                                            <input type="text" placeholder="Họ và tên" name="name" value="<?php echo e(old('name')); ?>">
                                         </div>
                                     </div>
 
                                     <div class="col-xl-12">
                                         <div class="fp__login_imput">
                                             <label>email</label>
-                                            <input type="email" name="email" placeholder="Email" value="{{ old('email') }}">
+                                            <input type="email" name="email" placeholder="Email" value="<?php echo e(old('email')); ?>">
                                         </div>
                                     </div>
 
@@ -73,7 +72,7 @@
                             </form>
                             <p class="or"><span>or</span></p>
 
-                            <p class="create_account">Đã có tài khoản? <a href="{{ route('login') }}">Đăng nhập</a></p>
+                            <p class="create_account">Đã có tài khoản? <a href="<?php echo e(route('login')); ?>">Đăng nhập</a></p>
                         </div>
                     </div>
                 </div>
@@ -83,4 +82,6 @@
     <!--=========================
         SIGN UP END
     ==========================-->
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('frontend.layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\laravel-10-food-order\resources\views/auth/register.blade.php ENDPATH**/ ?>
